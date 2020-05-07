@@ -66,7 +66,6 @@ class UserController extends Controller{
             foreach($request->menu as $data_menu){
 
                 $menu = $this->menu_repo->findByMenuId($data_menu);
-
                 $user_menu = $this->user_menu_repo->store($user, $menu);
 
                 if(!empty($request->submenu)){
@@ -76,9 +75,7 @@ class UserController extends Controller{
                         $submenu = $this->submenu_repo->findBySubmenuId($data_submenu);
 
                         if($menu->menu_id == $submenu->menu_id){
-
                             $this->user_submenu_repo->store($submenu, $user_menu);
-                        
                         }
 
                     }
@@ -126,7 +123,6 @@ class UserController extends Controller{
             foreach($request->menu as $data_menu){
 
                 $menu = $this->menu_repo->findByMenuId($data_menu);
-
                 $user_menu = $this->user_menu_repo->store($user, $menu);
 
                 if(!empty($request->submenu)){
@@ -135,10 +131,8 @@ class UserController extends Controller{
 
                         $submenu = $this->submenu_repo->findBySubmenuId($data_submenu);
 
-                        if($menu->menu_id === $submenu->menu_id){
-
+                        if($menu->menu_id == $submenu->menu_id){
                             $this->user_submenu_repo->store($submenu, $user_menu);
-                        
                         }
 
                     }

@@ -62,7 +62,6 @@ class SubmenuRepository extends BaseRepository implements SubmenuInterface {
     public function getSubmenuIdInc(){
 
         $id = 'SM100001';
-
         $submenu = $this->submenu->select('submenu_id')->orderBy('submenu_id', 'desc')->first();
 
         if($submenu != null){
