@@ -45,7 +45,7 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 	/** EMPLOYEE MEDICAL RECORD **/
 	Route::get('/emp_med_record', 'EmpMedRecordController@index')->name('emp_med_record.index');
 	Route::get('/emp_med_record/{emp_slug}', 'EmpMedRecordController@edit')->name('emp_med_record.edit');
-	Route::post('/emp_med_record/{emp_slug}', 'EmpMedRecordController@update')->name('emp_med_record.update');
+	Route::put('/emp_med_record/{emp_slug}', 'EmpMedRecordController@update')->name('emp_med_record.update');
 	
 });
 
@@ -55,7 +55,7 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 
 /** Testing **/
-Route::get('/dashboard/test', function(){
+// Route::get('/dashboard/test', function(){
 
 	// $emps = App\Models\EmpMaster::get();
 
@@ -81,5 +81,5 @@ Route::get('/dashboard/test', function(){
 
 	//return dd(Illuminate\Support\Str::random(16));
 
-});
+// });
 

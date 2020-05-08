@@ -17,8 +17,7 @@ class EmpMedHistory extends Model{
     protected $attributes = [
 
         'emp_id' => '',
-        'seq_no' => 0,
-        'name' => '',
+        'med_history_id' => '',
         'status' => 0,
         'medication' => '',
         'other_info' => '',
@@ -29,6 +28,11 @@ class EmpMedHistory extends Model{
     public function empMaster() {
     	return $this->belongsTo('App\Models\EmpMaster','emp_id','emp_id');
    	}
+    
+
+    public function medHistory() {
+        return $this->belongsTo('App\Models\MedHistory','med_history_id','med_history_id');
+    }
     
 
 }

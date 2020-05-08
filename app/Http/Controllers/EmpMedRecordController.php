@@ -43,20 +43,20 @@ class EmpMedRecordController extends Controller{
 
 
 
-    // public function update(EmpMedRecordFormRequest $request, $slug){
+    public function update(EmpMedRecordFormRequest $request, $slug){
 
-    //     $emp = $this->emp_master_repo->update($request, $slug);
+        $emp = $this->emp_master_repo->findbySlug($slug);
 
-    //     if(!empty($request->row)){
-    //         foreach ($request->row as $row) {
-    //             $subemp = $this->subemp_master_repo->store($row, $emp);
-    //         }
-    //     }
+        if(!empty($request->row_med_history)){
+            foreach ($request->row_med_history as $row_med_history) {
+                $subemp = $this->subemp_master_repo->store($row, $emp);
+            }
+        }
 
-    //     $this->event->fire('emp.update', $emp);
-    //     return redirect()->route('dashboard.emp.index');
+        $this->event->fire('emp.update', $emp);
+        return redirect()->route('dashboard.emp.index');
 
-    // }
+    }
 
 
 

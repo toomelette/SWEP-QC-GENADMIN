@@ -13,7 +13,6 @@ class ViewComposerServiceProvider extends ServiceProvider{
 
         /** VIEW COMPOSERS  **/
 
-
         // USERMENU
         View::composer('layouts.admin-sidenav', 'App\Core\ViewComposers\UserMenuComposer');
 
@@ -30,6 +29,10 @@ class ViewComposerServiceProvider extends ServiceProvider{
         // SUBMENU
         View::composer(['dashboard.user.create', 
                         'dashboard.user.edit'], 'App\Core\ViewComposers\SubmenuComposer');
+        
+
+        // Med History
+        View::composer(['dashboard.emp_med_record.edit',], 'App\Core\ViewComposers\MedHistoryComposer');
 
         
     }

@@ -18,11 +18,16 @@ class MedHistory extends Model{
     protected $attributes = [
 
         'slug' => '',
-        'med_history_id' => 0,
+        'med_history_id' => '',
         'seq_no' => 0,
         'name' => '',
         
     ];
+
+
+    public function empMedHistory() {
+        return $this->hasMany('App\Models\EmpMedHistory','med_history_id','med_history_id');
+    }
     
 
 }

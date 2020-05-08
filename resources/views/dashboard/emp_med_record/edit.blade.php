@@ -1,3 +1,7 @@
+<?php
+  $old_med_history = old('row_med_history');
+?>
+
 @extends('layouts.admin-master')
 
 @section('content')
@@ -19,213 +23,162 @@
 
         <div class="box-body">
 
+          <input name="_method" value="PUT" type="hidden">
+          
+          @csrf    
+
           <div class="col-md-12">
-
-            <input name="_method" value="PUT" type="hidden">
-            
-            @csrf    
-
-            <div class="col-md-12">
-              <span>Employee No. : {{ $emp->emp_no }}</span> 
-            </div>
-
-            <div class="col-md-12">
-              <span>Fullname : {{ $emp->fullname() }}</span> 
-            </div>
-
-            <div class="col-md-3">
-              <span>Birthday : {{ $emp->birthday->format('F d, Y') }}</span> 
-            </div>
-
-            <div class="col-md-3">
-              <span>Age : {{ $emp->birthday->age }}</span> 
-            </div>
-
-            <div class="col-md-3">
-              <span>Sex : {{ $emp->sex }}</span> 
-            </div>
-
-            <div class="col-md-3">
-              <span>Civil Status : {{ $emp->civil_status }}</span> 
-            </div>
-
-            <div class="col-md-3">
-              <span>Height : {{ $emp->height }}</span> 
-            </div>
-
-            <div class="col-md-3">
-              <span>Weight : {{ $emp->weight }}</span> 
-            </div>
-
-            <div class="col-md-6"></div>
-
-            <div class="col-md-12">
-              <span>Position : {{ $emp->position }}</span>
-            </div>
-
-            <div class="col-md-12">
-              <span>First day in Office : {{ $emp->firstday->format('F d, Y') }}</span>
-            </div>
-
+            <span>Employee No. : {{ $emp->emp_no }}</span> 
           </div>
 
-        </div>
+          <div class="col-md-12">
+            <span>Fullname : {{ $emp->fullname() }}</span> 
+          </div>
+
+          <div class="col-md-3">
+            <span>Birthday : {{ $emp->birthday->format('F d, Y') }}</span> 
+          </div>
+
+          <div class="col-md-3">
+            <span>Age : {{ $emp->birthday->age }}</span> 
+          </div>
+
+          <div class="col-md-3">
+            <span>Sex : {{ $emp->sex }}</span> 
+          </div>
+
+          <div class="col-md-3">
+            <span>Civil Status : {{ $emp->civil_status }}</span> 
+          </div>
+
+          <div class="col-md-3">
+            <span>Height : {{ $emp->height }}</span> 
+          </div>
+
+          <div class="col-md-3">
+            <span>Weight : {{ $emp->weight }}</span> 
+          </div>
+
+          <div class="col-md-6"></div>
+
+          <div class="col-md-12">
+            <span>Position : {{ $emp->position }}</span>
+          </div>
+
+          <div class="col-md-12">
+            <span>First day in Office : {{ $emp->firstday->format('F d, Y') }}</span>
+          </div>
 
 
 
-        {{-- USER MENU DYNAMIC TABLE GRID --}}
-          {{-- <div class="col-md-12" style="padding-top:10px;">
+          {{-- Medical History --}}
+          <div class="col-md-12" style="padding-top:30px;">
             <div class="box box-solid">
               <div class="box-header with-border">
-                <h3 class="box-title">Submenus:</h3>
-                <button id="add_row" type="button" class="btn btn-sm bg-green pull-right">Add Row &nbsp;<i class="fa fw fa-plus"></i></button>
+                <h3>Medical History</h3>
               </div>
               
               <div class="box-body no-padding">
+
+                @if ($errors->any())
+                  <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    Please fill up required fields.
+                  </div>
+                @endif
                 
                 <table class="table table-bordered">
-
-                  <tr>
-                    <th>Submenu ID *</th>
-                    <th>Name *</th>
-                    <th>Nav Name</th>
-                    <th>Route *</th>
-                    <th>Is Nav *</th>
-                    <th style="width: 40px"></th>
-                  </tr>
-
+                  
+                  <thead>
+                    <td style="width:320px;">Name</td>
+                    <td style="width:50px; text-align: center;">Yes</td>
+                    <td style="width:50px; text-align: center;">No</td>
+                    <td style="width:400px;">Medication</td>
+                    <td>Specify / Other Information</td>
+                  </thead>
+                  
                   <tbody id="table_body">
 
+                    @foreach ($global_med_history_all as $key => $data)
 
-                    @if(old('row'))
+                      <?php
 
-                      @foreach(old('row') as $key => $value)
+                        $error_style = "";
 
-                        <tr>
+                        $selected_yes = "";
+                        $selected_no = "";
+                        $medication = "";
+                        $other_info = "";
 
+                        if($errors->first('row_med_history.'. $key .'.status') || 
+                          $errors->first('row_med_history.'. $key .'.medication') ||  
+                          $errors->first('row_med_history.'. $key .'.other_info')){
 
-                          <td>
-                            <div class="form-group">
-                              <input type="text" name="row[{{ $key }}][sub_submenu_id]" class="form-control" placeholder="Submenu ID" value="{{ $value['sub_submenu_id'] }}">
-                              <small class="text-danger">{{ $errors->first('row.'. $key .'.sub_submenu_id') }}</small>
-                            </div>
-                          </td>
+                          $error_style = "background-color:#fae3e3;";
 
+                        }
 
-                          <td>
-                            <div class="form-group">
-                              <input type="text" name="row[{{ $key }}][sub_name]" class="form-control" placeholder="Name" value="{{ $value['sub_name'] }}">
-                              <small class="text-danger">{{ $errors->first('row.'. $key .'.sub_name') }}</small>
-                            </div>
-                          </td>
+                        if(old('row_med_history')){
+                          
+                          if (isset($old_med_history[$key]['status'])) {
+                            if ($old_med_history[$key]['status'] == 'true') {
+                              $selected_yes = "checked";
+                            }elseif($old_med_history[$key]['status'] == 'false'){
+                              $selected_no = "checked";
+                            }
+                          }
+                            
+                          if (isset($old_med_history[$key]['medication'])) {
+                            $medication = $old_med_history[$key]['medication'];
+                          }
+                            
+                          if (isset($old_med_history[$key]['other_info'])) {
+                            $other_info = $old_med_history[$key]['other_info'];
+                          }
 
+                        }
 
-                          <td>
-                            <div class="form-group">
-                              <input type="text" name="row[{{ $key }}][sub_nav_name]" class="form-control" placeholder="Nav Name" value="{{ $value['sub_nav_name'] }}">
-                              <small class="text-danger">{{ $errors->first('row.'. $key .'.sub_nav_name') }}</small>
-                            </div>
-                          </td>
+                      ?>
+                      
+                      <input type="hidden" name="row_med_history[{{ $key }}][med_history_id]" value="{{ $data->med_history_id }}">
 
+                      <tr style="{!! $error_style !!}">
 
-                          <td>
-                            <div class="form-group">
-                              <input type="text" name="row[{{ $key }}][sub_route]" class="form-control" placeholder="Route" value="{{ $value['sub_route'] }}">
-                              <small class="text-danger">{{ $errors->first('row.'. $key .'.sub_route') }}</small>
-                            </div>
-                          </td>
-
-
-                          <td>
-                            <div class="form-group">
-                              <select name="row[{{ $key }}][sub_is_nav]" class="form-control">
-                                <option value="">Select</option>
-                                  <option value="true" {!! $value['sub_is_nav'] == "true" ? 'selected' : '' !!}>1</option>
-                                  <option value="false" {!! $value['sub_is_nav'] == "false" ? 'selected' : '' !!}>0</option>
-                              </select>
-                              <small class="text-danger">{{ $errors->first('row.'. $key .'.sub_is_nav') }}</small>
-                            </div>
-                          </td>
-
-
-                          <td>
-                              <button id="delete_row" type="button" class="btn btn-sm bg-red"><i class="fa fa-times"></i></button>
-                          </td>
-
-                        </tr>
-
-                      @endforeach
-
-
-                  @else
-
-
-                    @foreach($menu->submenu as $key => $value)
-
-                      <tr>
-
-                        <td>
-                          <div class="form-group">
-                            <input type="text" name="row[{{ $key }}][sub_submenu_id]" class="form-control" placeholder="Submenu ID" value="{{ $value->submenu_id }}">
-                            <small class="text-danger">{{ $errors->first('row.'. $key .'.sub_submenu_id') }}</small>
-                          </div>
+                        <td id="mid-vert">
+                          {{ $data->seq_no }}. {{ $data->name }}
                         </td>
 
-
-                        <td>
-                          <div class="form-group">
-                            <input type="text" name="row[{{ $key }}][sub_name]" class="form-control" placeholder="Name" value="{{ $value->name }}">
-                            <small class="text-danger">{{ $errors->first('row.'. $key .'.sub_name') }}</small>
-                          </div>
+                        <td id="mid-vert" style="text-align: center;">
+                          <input type="checkbox" class="minimal" name="row_med_history[{{ $key }}][status]" value="true" {!! $selected_yes !!}>
                         </td>
 
-
-                        <td>
-                          <div class="form-group">
-                            <input type="text" name="row[{{ $key }}][sub_nav_name]" class="form-control" placeholder="Nav Name" value="{{ $value->nav_name }}">
-                            <small class="text-danger">{{ $errors->first('row.'. $key .'.sub_nav_name') }}</small>
-                          </div>
+                        <td id="mid-vert" style="text-align: center;">
+                          <input type="checkbox" class="minimal" name="row_med_history[{{ $key }}][status]" value="false" {!! $selected_no !!}>
                         </td>
 
-
-                        <td>
-                          <div class="form-group">
-                            <input type="text" name="row[{{ $key }}][sub_route]" class="form-control" placeholder="Route" value="{{ $value->route }}">
-                            <small class="text-danger">{{ $errors->first('row.'. $key .'.sub_route') }}</small>
-                          </div>
+                        <td id="mid-vert">
+                          <textarea name="row_med_history[{{ $key }}][medication]" class="form-control" placeholder="Medication">{!! $medication !!}</textarea>
                         </td>
 
-
-                        <td>
-                          <div class="form-group">
-                            <select name="row[{{ $key }}][sub_is_nav]" class="form-control">
-                              <option value="">Select</option>
-                                <option value="true" {!! __dataType::boolean_to_string($value->is_nav) == "true" ? 'selected' : '' !!}>1</option>
-                                <option value="false" {!! __dataType::boolean_to_string($value->is_nav) == "false" ? 'selected' : '' !!}>0</option>
-                            </select>
-                            <small class="text-danger">{{ $errors->first('row.'. $key .'.sub_is_nav') }}</small>
-                          </div>
-                        </td>
-
-
-                        <td>
-                            <button id="delete_row" type="button" class="btn btn-sm bg-red"><i class="fa fa-times"></i></button>
+                        <td id="mid-vert">
+                          <textarea name="row_med_history[{{ $key }}][other_info]" class="form-control" placeholder="Specify / Other Information">{!! $other_info !!}</textarea>
                         </td>
 
                       </tr>
-
+                      
                     @endforeach
 
-                    @endif
+                  </tbody>
 
-                    </tbody>
                 </table>
                
               </div>
 
             </div>
-          </div> --}}
 
+          </div>
+
+        </div>
 
 
         <div class="box-footer">
@@ -245,54 +198,6 @@
 @section('scripts')
 
   <script type="text/javascript">
-
-    {{-- ADD ROW --}}
-    $(document).ready(function() {
-      $("#add_row").on("click", function() {
-        var i = $("#table_body").children().length;
-        var content ='<tr>' +
-                        '<td>' +
-                          '<div class="form-group">' +
-                            '<input type="text" name="row[' + i + '][sub_submenu_id]" class="form-control" placeholder="Submenu ID">' +
-                          '</div>' +
-                        '</td>' +
-
-                        '<td>' +
-                          '<div class="form-group">' +
-                            '<input type="text" name="row[' + i + '][sub_name]" class="form-control" placeholder="Name">' +
-                          '</div>' +
-                        '</td>' +
-
-                        '<td>' +
-                          '<div class="form-group">' +
-                            '<input type="text" name="row[' + i + '][sub_nav_name]" class="form-control" placeholder="Nav Name">' +
-                          '</div>' +
-                        '</td>' +
-
-                        '<td>' +
-                          '<div class="form-group">' +
-                            '<input type="text" name="row[' + i + '][sub_route]" class="form-control" placeholder="Route">' +
-                          '</div>' +
-                        '</td>' +
-
-                        '<td>' +
-                          '<div class="form-group">' +
-                            '<select name="row[' + i + '][sub_is_nav]" class="form-control">' +
-                              '<option value="">Select</option>' +
-                              '<option value="true">1</option>' +
-                              '<option value="false">0</option>' +
-                            '</select>' +
-                          '</div>' +
-                        '</td>' +
-
-                        '<td>' +
-                            '<button id="delete_row" type="button" class="btn btn-sm bg-red"><i class="fa fa-times"></i></button>' +
-                        '</td>' +
-
-                      '</tr>';
-        $("#table_body").append($(content));
-      });
-    });
 
   </script>
     
