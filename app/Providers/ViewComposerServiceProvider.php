@@ -30,11 +30,6 @@ class ViewComposerServiceProvider extends ServiceProvider{
         View::composer(['dashboard.user.create', 
                         'dashboard.user.edit'], 'App\Core\ViewComposers\SubmenuComposer');
         
-
-        // Med History
-        View::composer(['dashboard.emp_med_record.edit',], 'App\Core\ViewComposers\MedHistoryComposer');
-
-        
     }
 
     

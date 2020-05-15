@@ -40,12 +40,6 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 	/** MENU **/
 	Route::resource('menu', 'MenuController');
-
-
-	/** EMPLOYEE MEDICAL RECORD **/
-	Route::get('/emp_med_record', 'EmpMedRecordController@index')->name('emp_med_record.index');
-	Route::get('/emp_med_record/{emp_slug}', 'EmpMedRecordController@edit')->name('emp_med_record.edit');
-	Route::put('/emp_med_record/{emp_slug}', 'EmpMedRecordController@update')->name('emp_med_record.update');
 	
 });
 
