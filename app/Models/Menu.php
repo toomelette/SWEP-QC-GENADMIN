@@ -9,19 +9,10 @@ use Kyslik\ColumnSortable\Sortable;
 class Menu extends Model{
 
 
-
-
-
     use Sortable;
-
     protected $table = 'su_menus';
-
     protected $dates = ['created_at', 'updated_at'];
-    
 	public $timestamps = false;
-
-
-
 
 
     protected $attributes = [
@@ -44,23 +35,14 @@ class Menu extends Model{
 
 
 
-
-
     /** RELATIONSHIPS **/
     public function user() {
     	return $this->belongsTo('App\Models\User','user_id','user_id');
    	}
 
-
-
-
     public function submenu() {
     	return $this->hasMany('App\Models\Submenu','menu_id','menu_id');
    	}
-
-    
-
-
 
 
 

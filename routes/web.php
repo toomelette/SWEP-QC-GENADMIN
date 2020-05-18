@@ -40,6 +40,11 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 	/** MENU **/
 	Route::resource('menu', 'MenuController');
+
+
+	/** EMPLOYEE HEALTH **/
+	Route::get('/emp_health/print/{slug}', 'EmpHealthController@print')->name('emp_health.print');
+	Route::resource('emp_health', 'EmpHealthController');
 	
 });
 

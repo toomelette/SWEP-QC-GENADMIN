@@ -4,7 +4,7 @@
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SRA PORTAL | GUARD</title>
+  <title>SRA PORTAL | General Admin</title>
   <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <meta name="csrf-token" content="{{ csrf_token() }}">
