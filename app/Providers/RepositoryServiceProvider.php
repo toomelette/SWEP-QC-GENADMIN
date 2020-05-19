@@ -23,6 +23,10 @@ class RepositoryServiceProvider extends ServiceProvider {
 		$this->app->bind('App\Core\Interfaces\SubmenuInterface', 'App\Core\Repositories\SubmenuRepository');
 
 		$this->app->bind('App\Core\Interfaces\ProfileInterface', 'App\Core\Repositories\ProfileRepository');
+
+		$this->app->bind('App\Core\Interfaces\EmpHealthInterface', 'App\Core\Repositories\EmpHealthRepository');
+
+		$this->app->bind('App\Core\Interfaces\EmpHealthMedHistoryInterface', 'App\Core\Repositories\EmpHealthMedHistoryRepository');
 		
 	}
 

@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
 
 
-// use App\Core\Interfaces\EmpHealthInterface;
-// use App\Core\Interfaces\EmpHealthMedHistoryInterface;
-// use App\Http\Requests\EmpHealth\EmpHealthFormRequest;
-// use App\Http\Requests\EmpHealth\EmpHealthFilterRequest;
+use App\Core\Interfaces\EmpHealthInterface;
+use App\Core\Interfaces\EmpHealthMedHistoryInterface;
+use App\Http\Requests\EmpHealth\EmpHealthFormRequest;
+use App\Http\Requests\EmpHealth\EmpHealthFilterRequest;
 
 
 class EmpHealthController extends Controller{
 
 
-    // protected $emp_health_repo;
-    // protected $emp_health_mh_repo;
+    protected $emp_health_repo;
+    protected $emp_health_mh_repo;
 
 
-    // public function __construct(EmpHealthInterface $emp_health_repo, EmpHealthMedHistoryInterface $emp_health_mh_repo){
-    //     $this->emp_health_repo = $emp_health_repo;
-    //     $this->emp_health_mh_repo = $emp_health_mh_repo;
-    //     parent::__construct();
-    // }
+    public function __construct(EmpHealthInterface $emp_health_repo, EmpHealthMedHistoryInterface $emp_health_mh_repo){
+        $this->emp_health_repo = $emp_health_repo;
+        $this->emp_health_mh_repo = $emp_health_mh_repo;
+        parent::__construct();
+    }
 
 
 
@@ -44,20 +44,20 @@ class EmpHealthController extends Controller{
 
    
 
-    // public function store(EmpHealthFormRequest $request){
+    public function store(EmpHealthFormRequest $request){
 
-    //     $emp_health = $this->emp_health_repo->store($request);
+        // $emp_health = $this->emp_health_repo->store($request);
 
-    //     if(!empty($request->row)){
-    //         foreach ($request->row as $row) {
-    //             $emp_health_mh = $this->emp_health_mh_repo->store($row, $emp_health);
-    //         }
-    //     }
+        // if(!empty($request->row)){
+        //     foreach ($request->row as $row) {
+        //         $emp_health_mh = $this->emp_health_mh_repo->store($row, $emp_health);
+        //     }
+        // }
         
-    //     $this->event->fire('emp_health.store');
-    //     return redirect()->back();
+        $this->event->fire('emp_health.store');
+        return redirect()->back();
 
-    // }
+    }
  
 
 
