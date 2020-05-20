@@ -43,7 +43,7 @@
       if ($old_value[$id]['is_checked'] == 'true') {
         $txt = 'checked';
       }
-    }elseif(!empty($mh_list)){
+    }elseif(isset($mh_list[$id]->is_checked)){
       if ($mh_list[$id]->is_checked == true) {
         $txt = 'checked';
       }
@@ -62,7 +62,7 @@
 
     if (isset($old_value[$id]['medication'])) {
       $value = $old_value[$id]['medication'];
-    }elseif(!empty($mh_list)){
+    }elseif(isset($mh_list[$id]->medication)){
       $value = $mh_list[$id]->medication;
     }
 
