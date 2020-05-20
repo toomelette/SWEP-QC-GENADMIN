@@ -65,21 +65,16 @@ class EmpHealthFormRequest extends FormRequest{
         ];
 
         if(!empty($rows)){
-
             foreach($rows as $key => $value){
-                
                 $rules['row.'.$key.'.mc_id'] = 'required|string|max:11';
                 $rules['row.'.$key.'.is_checked'] = 'nullable|string|max:5';
                 $rules['row.'.$key.'.medication'] = 'nullable|string|max:255';
-
             } 
-
         }
 
         return $rules;
 
     }
-
 
 
 }

@@ -6,7 +6,7 @@ namespace App\Core\Interfaces;
 
 interface EmpHealthInterface {
 
-	// public function fetch($request);
+	public function fetch($request);
 
 	public function store($request);
 
@@ -14,7 +14,7 @@ interface EmpHealthInterface {
 
 	// public function destroy($slug);
 
-	// public function findBySlug($menu_id);
+	public function findBySlug($menu_id);
 
 	// public function findByMenuId($menu_id);
 

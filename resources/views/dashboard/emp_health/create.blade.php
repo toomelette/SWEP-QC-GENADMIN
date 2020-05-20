@@ -17,7 +17,7 @@
 @section('content')
 
 <section class="content">
-            
+
   <div class="box box-solid">
       
     <div class="box-header with-border">
@@ -27,7 +27,7 @@
       </div> 
     </div>
     
-    <form method="POST" autocomplete="off" action="{{ route('dashboard.emp_health.store') }}">
+    <form method="POST" action="{{ route('dashboard.emp_health.store') }}">
 
       <div class="box-body">
                 
@@ -229,8 +229,9 @@
                           <input type="checkbox" 
                                  class="minimal" 
                                  name="row[{{ $i }}][is_checked]" 
-                                 value="true" {{ !empty($rows[$i]['is_checked']) ? 'checked' : '' }}>
+                                 value="true" {{ isset($rows[$i]['is_checked']) ? 'checked' : '' }}>
                         </label>&nbsp;
+
                         <small class="text-danger">{{ $errors->first('row.'. $i .'.mc_id') }}</small>
 
                         {{ $global_medical_history_all[$i]['name'] }}
@@ -532,8 +533,8 @@
 
   <script type="text/javascript">
 
-    @if(Session::has('EMP_HEALTH_SUCCESS'))
-      {!! __js::toast(Session::get('EMP_HEALTH_SUCCESS')) !!}
+    @if(Session::has('EMP_HEALTH_CREATE_SUCCESS'))
+      {!! __js::toast(Session::get('EMP_HEALTH_CREATE_SUCCESS')) !!}
     @endif
 
     function checkboxTick(c){

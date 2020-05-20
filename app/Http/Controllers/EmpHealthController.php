@@ -26,13 +26,13 @@ class EmpHealthController extends Controller{
 
 
     
-    // public function index(EmpHealthFilterRequest $request){
+    public function index(EmpHealthFilterRequest $request){
 
-    //     $emp_healths = $this->emp_health_repo->fetch($request);
-    //     $request->flash();
-    //     return view('dashboard.emp_health.index')->with('emp_healths', $emp_healths);
+        $emp_health = $this->emp_health_repo->fetch($request);
+        $request->flash();
+        return view('dashboard.emp_health.index')->with('emp_health', $emp_health);
 
-    // }
+    }
 
     
 
@@ -46,13 +46,14 @@ class EmpHealthController extends Controller{
 
     public function store(EmpHealthFormRequest $request){
 
-        // $emp_health = $this->emp_health_repo->store($request);
+        $emp_health = $this->emp_health_repo->store($request);
 
-        // if(!empty($request->row)){
-        //     foreach ($request->row as $row) {
-        //         $emp_health_mh = $this->emp_health_mh_repo->store($row, $emp_health);
-        //     }
-        // }
+        if(!empty($request->row)){
+            foreach ($request->row as $data) {
+                $is_checked = isset($data['is_checked']) ? true : false;
+                $emp_health_mh = $this->emp_health_mh_repo->store($emp_health, $is_checked, $data);
+            }
+        }
         
         $this->event->fire('emp_health.store');
         return redirect()->back();
@@ -62,41 +63,41 @@ class EmpHealthController extends Controller{
 
 
 
-    // public function edit($slug){
+    public function edit($slug){
 
-    //     $emp_health = $this->emp_health_repo->findbySlug($slug);
-    //     return view('dashboard.emp_health.edit')->with('emp_health', $emp_health);
+        $emp_health = $this->emp_health_repo->findbySlug($slug);
+        return view('dashboard.emp_health.edit')->with('emp_health', $emp_health);
 
-    // }
-
-
+    }
 
 
-    // public function update(EmpHealthFormRequest $request, $slug){
 
-    //     $emp_health = $this->emp_health_repo->update($request, $slug);
 
-    //     if(!empty($request->row)){
-    //         foreach ($request->row as $row) {
-    //             $emp_health_mh = $this->emp_health_mh_repo->store($row, $emp_health);
-    //         }
-    //     }
+    public function update(EmpHealthFormRequest $request, $slug){
 
-    //     $this->event->fire('emp_health.update', $emp_health);
-    //     return redirect()->route('dashboard.emp_health.index');
+        // $emp_health = $this->emp_health_repo->update($request, $slug);
 
-    // }
+        // if(!empty($request->row)){
+        //     foreach ($request->row as $row) {
+        //         $emp_health_mh = $this->emp_health_mh_repo->store($row, $emp_health);
+        //     }
+        // }
+
+        // $this->event->fire('emp_health.update', $emp_health);
+        // return redirect()->route('dashboard.emp_health.index');
+
+    }
 
     
 
 
-    // public function destroy($slug){
+    public function destroy($slug){
 
-    //     $emp_health = $this->emp_health_repo->destroy($slug);
-    //     $this->event->fire('emp_health.destroy', $emp_health);
-    //     return redirect()->back();
+        $emp_health = $this->emp_health_repo->destroy($slug);
+        $this->event->fire('emp_health.destroy', $emp_health);
+        return redirect()->back();
 
-    // }
+    }
 
 
 

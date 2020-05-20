@@ -21,24 +21,18 @@ class EmpHealthMedHistoryRepository extends BaseRepository implements EmpHealthM
     }
 
 
+    public function store($emp_health, $is_checked, $data){
 
-    // public function store($data, $menu){
-
-    //     $emp_health_mh = new EmpHealthMedHistory;
-    //     $emp_health_mh->slug = $this->str->random(16);
-    //     $emp_health_mh->emp_health_mh_id = $data['sub_emp_health_mh_id'];
-    //     $emp_health_mh->menu_id = $menu->menu_id;
-    //     $emp_health_mh->name = $data['sub_name'];
-    //     $emp_health_mh->nav_name = $data['sub_nav_name'];
-    //     $emp_health_mh->route = $data['sub_route'];
-    //     $emp_health_mh->is_nav = $this->__dataType->string_to_boolean($data['sub_is_nav']);  
-    //     $emp_health_mh->save();
+        $emp_health_mh = new EmpHealthMedHistory;
+        $emp_health_mh->emp_health_id = $emp_health->emp_health_id; 
+        $emp_health_mh->mc_id = $data['mc_id']; 
+        $emp_health_mh->is_checked = $is_checked; 
+        $emp_health_mh->medication = $data['medication']; 
+        $emp_health_mh->save();
         
-    //     return $emp_health_mh;
+        return $emp_health_mh;
 
-    // }
-
-
+    }
 
 
 }
