@@ -42,7 +42,7 @@
             <th>@sortablelink('fullname', 'Fullname')</th>
             <th>@sortablelink('position', 'Position')</th>
             <th>@sortablelink('department_text', 'Department')</th>
-            <th style="width: 150px">Action</th>
+            <th style="width: 200px">Action</th>
           </tr>
           @foreach($emp_health as $data) 
             <tr {!! __html::table_highlighter($data->slug, $table_sessions) !!} >
@@ -52,11 +52,21 @@
               <td id="mid-vert">{{ $data->department_text }}</td>
               <td id="mid-vert">
                 <div class="btn-group">
-                  <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.emp_health.edit', $data->slug) }}">
-                    <i class="fa fa-pencil"></i></a>
-                  <a type="button" class="btn btn-default" id="delete_button" data-action="delete" data-url="{{ route('dashboard.emp_health.destroy', $data->slug) }}">
-                    <i class="fa fa-trash"></i>
-                  </a>
+                  @if(in_array('dashboard.emp_health.show', $global_user_submenus))
+                    <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.emp_health.show', $data->slug) }}">
+                      <i class="fa fa-print"></i>
+                    </a>
+                  @endif
+                  @if(in_array('dashboard.emp_health.edit', $global_user_submenus))
+                    <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.emp_health.edit', $data->slug) }}">
+                      <i class="fa fa-pencil"></i>
+                    </a>
+                  @endif
+                  @if(in_array('dashboard.emp_health.destroy', $global_user_submenus))
+                    <a type="button" class="btn btn-default" id="delete_button" data-action="delete" data-url="{{ route('dashboard.emp_health.destroy', $data->slug) }}">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                  @endif
                 </div>
               </td>
             </tr>

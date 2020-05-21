@@ -63,6 +63,26 @@ class EmpHealthController extends Controller{
 
 
 
+    public function show($slug){
+
+        $emp_health = $this->emp_health_repo->findbySlug($slug);
+        return view('dashboard.emp_health.show')->with('emp_health', $emp_health);
+
+    }
+ 
+
+
+
+    public function print($slug){
+
+        $emp_health = $this->emp_health_repo->findbySlug($slug);
+        return view('printables.emp_health.declaration_form')->with('emp_health', $emp_health);
+
+    }
+ 
+
+
+
     public function edit($slug){
 
         $emp_health = $this->emp_health_repo->findbySlug($slug);
@@ -75,16 +95,17 @@ class EmpHealthController extends Controller{
 
     public function update(EmpHealthFormRequest $request, $slug){
 
-        // $emp_health = $this->emp_health_repo->update($request, $slug);
+        $emp_health = $this->emp_health_repo->update($request, $slug);
 
-        // if(!empty($request->row)){
-        //     foreach ($request->row as $row) {
-        //         $emp_health_mh = $this->emp_health_mh_repo->store($row, $emp_health);
-        //     }
-        // }
+        if(!empty($request->row)){
+            foreach ($request->row as $data) {
+                $is_checked = isset($data['is_checked']) ? true : false;
+                $emp_health_mh = $this->emp_health_mh_repo->store($emp_health, $is_checked, $data);
+            }
+        }
 
-        // $this->event->fire('emp_health.update', $emp_health);
-        // return redirect()->route('dashboard.emp_health.index');
+        $this->event->fire('emp_health.update', $emp_health);
+        return redirect()->route('dashboard.emp_health.index');
 
     }
 

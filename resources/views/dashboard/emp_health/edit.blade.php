@@ -175,7 +175,7 @@
         ) !!}
 
         {!! __form::textbox(
-          '4', 'contact_person', 'text', 'Contact Person and Mobile No., in case of emergency *', 'Contact Person', old('contact_person') ? old('contact_person') : $emp_health->contact_person, $errors->has('contact_person'), $errors->first('contact_person'), ''
+          '4', 'contact_person', 'text', 'Contact Person and Mobile No., in case of emergency', 'Contact Person', old('contact_person') ? old('contact_person') : $emp_health->contact_person, $errors->has('contact_person'), $errors->first('contact_person'), ''
         ) !!}
 
         <div class="col-md-12"></div>

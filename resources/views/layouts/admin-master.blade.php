@@ -7,9 +7,8 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    @include('layouts.css-plugins')
-
+    @include('layouts.css-plugins')  
+    @yield('utils')
   </head>
   <body class="hold-transition {!! Auth::check() ? __sanitize::html_encode(Auth::user()->color) : '' !!}" style="zoom:97%;">
 
