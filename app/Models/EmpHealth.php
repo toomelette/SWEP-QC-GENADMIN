@@ -11,7 +11,7 @@ class EmpHealth extends Model{
 
     use Sortable;
     protected $table = 'emp_health';
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = ['birthday', 'created_at', 'updated_at'];
     public $timestamps = false;
 
 
@@ -19,6 +19,7 @@ class EmpHealth extends Model{
 
         'slug' => '',
         'emp_health_id' => '',
+        'category' => '',
         'emp_no' => '',
         'fullname' => '',
         'department_text' => '',
@@ -64,6 +65,44 @@ class EmpHealth extends Model{
         'user_updated' => '',
 
     ];
+    
+
+    public function displaySex(){
+        
+        $txt = '';
+
+        if ($this->sex == 'M') {
+            $txt = 'Male';
+        }elseif($this->sex == 'F'){
+            $txt = 'Female';
+        }
+
+        return $txt;
+
+    }
+    
+
+    public function displayCivilStatus(){
+        
+        $civil_status = [
+
+            1 => 'Single' ,
+            2 => 'Married' ,
+            3 => 'Widowed' ,
+            4 => 'Seperated' ,
+            5 => 'Others' ,
+            
+        ];
+
+        $txt = '';
+
+        if (isset($civil_status[$this->civil_status])) {
+            $txt = $civil_status[$this->civil_status];
+        }
+
+        return $txt;
+
+    }
 
 
 

@@ -97,6 +97,13 @@
         <input name="_method" value="PUT" type="hidden">
                 
         @csrf    
+        @csrf    
+
+        {!! __form::select_static(
+          '4', 'category', 'Category *', old('category') ? old('category') : $emp_health->category, ['Permanent' => 'PERM', 'Contract of Service' => 'COS'], $errors->has('category'), $errors->first('category'), '', ''
+        ) !!}
+
+        <div class="col-md-12"></div>
 
         {!! __form::textbox(
           '4', 'emp_no', 'text', 'Employee No. *', 'Employee No.', old('emp_no') ? old('emp_no') : $emp_health->emp_no, $errors->has('emp_no'), $errors->first('emp_no'), ''

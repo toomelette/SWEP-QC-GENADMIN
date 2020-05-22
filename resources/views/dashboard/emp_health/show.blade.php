@@ -134,6 +134,7 @@
               {!! displayCheckbox($emp_health->is_has_fever_history, false) !!} No
             </div>
           </div>
+          
           <div class=" col-md-12 border" style="text-align: center;">
             <span>MEDICAL HISTORY</span><br>
             <span>Have you ever had the following medical condition(s)? Please put a CHECK in the box(es) below:</span>

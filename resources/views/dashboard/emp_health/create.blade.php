@@ -33,6 +33,12 @@
                 
         @csrf    
 
+        {!! __form::select_static(
+          '4', 'category', 'Category *', old('category'), ['Permanent' => 'PERM', 'Contract of Service' => 'COS'], $errors->has('category'), $errors->first('category'), '', ''
+        ) !!}
+
+        <div class="col-md-12"></div>
+        
         {!! __form::textbox(
           '4', 'emp_no', 'text', 'Employee No. *', 'Employee No.', old('emp_no'), $errors->has('emp_no'), $errors->first('emp_no'), ''
         ) !!}

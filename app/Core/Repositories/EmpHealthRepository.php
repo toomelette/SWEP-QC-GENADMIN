@@ -62,7 +62,7 @@ class EmpHealthRepository extends BaseRepository implements EmpHealthInterface {
         $emp_health = new EmpHealth;
         $emp_health->slug = $this->str->random(16);
         $emp_health->emp_health_id = $this->getEmpHealthIdInc();
-
+        $emp_health->category = $request->category;
         $emp_health->emp_no = $request->emp_no;
         $emp_health->fullname = $request->fullname;
         $emp_health->department_text = $request->department_text;
@@ -123,7 +123,7 @@ class EmpHealthRepository extends BaseRepository implements EmpHealthInterface {
     public function update($request, $slug){
 
         $emp_health = $this->findBySlug($slug);
-
+        $emp_health->category = $request->category;
         $emp_health->emp_no = $request->emp_no;
         $emp_health->fullname = $request->fullname;
         $emp_health->department_text = $request->department_text;
