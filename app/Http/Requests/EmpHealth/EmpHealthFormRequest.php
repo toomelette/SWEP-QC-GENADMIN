@@ -20,6 +20,7 @@ class EmpHealthFormRequest extends FormRequest{
 
         $rules = [
 
+            'category'=>'required|string|max:11',
             'emp_no'=>'required|string|max:45',
             'fullname'=>'required|string|max:255',
             'department_text'=>'required|string|max:90',

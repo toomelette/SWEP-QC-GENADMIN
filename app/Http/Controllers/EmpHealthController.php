@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
+use Hash;
 use App\Core\Interfaces\EmpHealthInterface;
 use App\Core\Interfaces\EmpHealthMedHistoryInterface;
 use App\Http\Requests\EmpHealth\EmpHealthFormRequest;
+use App\Http\Requests\EmpHealth\EmpHealthPrintConfirmFormRequest;
 use App\Http\Requests\EmpHealth\EmpHealthFilterRequest;
 
 
@@ -63,11 +64,28 @@ class EmpHealthController extends Controller{
 
 
 
+    public function printConfirm(EmpHealthPrintConfirmFormRequest $request, $slug){
+
+        if (Hash::check($request->password, $this->auth->user()->password)) {
+
+            $emp_health = $this->emp_health_repo->findbySlug($slug);
+            return view('dashboard.emp_health.show')->with('emp_health', $emp_health);
+            
+        }else{
+
+            $this->session->flash('PRINT_CONFIRMATION_FAIL', 'User Confirmation Failed!');
+            return redirect()->back();
+
+        }
+
+    }
+ 
+
+
+
     public function show($slug){
 
-        $emp_health = $this->emp_health_repo->findbySlug($slug);
-        return view('dashboard.emp_health.show')->with('emp_health', $emp_health);
-
+        return abort(404);
     }
  
 

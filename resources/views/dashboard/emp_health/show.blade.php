@@ -73,7 +73,7 @@
       <h2 class="box-title" style="padding-top: 5px;">Personnel Health Declaration Details</h2>
       <div class="pull-right">
           {!! __html::back_button(['dashboard.emp_health.index']) !!}
-          <a href="{{ route('dashboard.emp_health.print', $emp_health->slug) }}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+          <a href="{{ route('dashboard.emp_health.print', $emp_health->slug) }}" target="_blank" class="btn btn-sm btn-default"><i class="fa fa-print"></i> Print</a>
       </div> 
     </div>
 
@@ -99,6 +99,43 @@
           <div class=" col-md-12 border">
             <span>ADDRESS: {{ $emp_health->address }}</span>
           </div>
+
+          <div class=" col-md-2 border">
+            <span>Birthday: {{ $emp_health->birthday->format('F d,Y') }}</span>
+          </div>
+          <div class=" col-md-2 border">
+            <span>Age: {{ $emp_health->birthday->age }}</span>
+          </div>
+          <div class=" col-md-2 border">
+            <span>Sex: {{ $emp_health->displaySex() }}</span>
+          </div>
+          <div class=" col-md-2 border">
+            <span>Civil Status: {{ $emp_health->displayCivilStatus() }}</span>
+          </div>
+          <div class=" col-md-2 border">
+            <span>Height: {{ $emp_health->height }}</span>
+          </div>
+          <div class=" col-md-2 border">
+            <span>Weight: {{ $emp_health->weight }}</span>
+          </div>
+
+          <div class=" col-md-2 border">
+            <span>PHILHEALTH:</span><br>
+            <span>&nbsp;{{ $emp_health->philhealth_no }}</span>
+          </div>
+          <div class=" col-md-2 border">
+            <span>BLOOD TYPE:</span><br>
+            <span>&nbsp;{{ $emp_health->bloodtype }}</span>
+          </div>
+          <div class=" col-md-3 border">
+            <span>Family Doctor, if any:</span><br>
+            <span>&nbsp;{{ $emp_health->family_doctor }}</span>
+          </div>
+          <div class=" col-md-5 border">
+            <span>CONTACT PERSON and Mobile No. #, incase of emergency:</span><br>
+            <span>&nbsp;{{ $emp_health->contact_person }}</span>
+          </div>
+
           <div class=" col-md-12 border">
             <span>Cities in the Philippines you have worked, visited, transited in the past 14 days / ECQ Period:</span><br>
             &nbsp;<span>{{ $emp_health->travel_history }}</span>
@@ -323,57 +360,62 @@
           </div>
 
           <div class="col-md-12 border">
-            <div class="col-md-12">
+            <div class="col-md-4">
               <span>
                 Are you currently being treated for any underlying medical conditions?
-                (ie. Diabetes, hypertension, cancer, COPD, etc.)
+                <br>(ie. Diabetes, hypertension, cancer, COPD, etc.)
               </span>
+            </div>
+            <div class="col-md-8">
               &nbsp;&nbsp;&nbsp;&nbsp;
               {!! displayCheckbox($emp_health->is_treating_medical_condition, true) !!} Yes 
               &nbsp;&nbsp;&nbsp;&nbsp;
               {!! displayCheckbox($emp_health->is_treating_medical_condition, false) !!} No
               <br>
-            </div>
-            <div class="col-md-2">
-              <span>If YES, how specify</span>
-            </div>
-            <div class="col-md-10" style="border-bottom: solid 1px;">
-              &nbsp;<span>{{ $emp_health->is_treating_medical_condition_medicines }}</span>
-            </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-10">
-              <span>(Name, dose and frequency of any medicines)</span>
+              <div class="col-md-3">
+                <span>If YES, specify</span>
+              </div>
+              <div class="col-md-9" style="border-bottom: solid 1px;">
+                &nbsp;<span>{{ $emp_health->is_treating_medical_condition_medicines }}</span>
+              </div>
+              <div class="col-md-3"></div>
+              <div class="col-md-9">
+                <span>(Name, dose and frequency of any medicines)</span>
+              </div>
             </div>
           </div>
 
           <div class="col-md-12 border">
-            <div class="col-md-12">
+            <div class="col-md-4">
               <span>
                 Do you have any chronic illness or injuries that must be pointed out?
               </span>
+            </div>
+            <div class="col-md-8">
               &nbsp;&nbsp;&nbsp;&nbsp;
               {!! displayCheckbox($emp_health->is_has_chronic_illness, true) !!} Yes 
               &nbsp;&nbsp;&nbsp;&nbsp;
               {!! displayCheckbox($emp_health->is_has_chronic_illness, false) !!} No
               <br>
-            </div>
-            <div class="col-md-2">
-              <span>If YES, how specify</span>
-            </div>
-            <div class="col-md-10" style="border-bottom: solid 1px;">
-              &nbsp;<span>{{ $emp_health->is_has_chronic_illness_details }}</span>
-            </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-10">
-              <span>(Give details of illness or injuries and their treatment details)</span>
+              <div class="col-md-3">
+                <span>If YES, specify</span>
+              </div>
+              <div class="col-md-9" style="border-bottom: solid 1px;">
+                &nbsp;<span>{{ $emp_health->is_has_chronic_illness_details }}</span>
+              </div>
+              <div class="col-md-3"></div>
+              <div class="col-md-9">
+                <span>(Give details of illness or injuries and their treatment details)</span>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 
       <div class="row no-print" style="margin-top: 20px;">
-        <div class="col-xs-12">
-          <a href="{{ route('dashboard.emp_health.print', $emp_health->slug) }}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+        <div class="col-md-12">
+          <a href="{{ route('dashboard.emp_health.print', $emp_health->slug) }}" target="_blank" class="btn btn-sm btn-default"><i class="fa fa-print"></i> Print</a>
         </div>
       </div>
 

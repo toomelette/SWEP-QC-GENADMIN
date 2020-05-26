@@ -85,7 +85,7 @@
   </style>
 
 </head>
-<body {{-- onload="window.print();" onafterprint="window.close()" --}} style="font-size:11px;">
+<body onload="window.print();" onafterprint="window.close()" style="font-size:11px;">
 
 	<section class="invoice">
 

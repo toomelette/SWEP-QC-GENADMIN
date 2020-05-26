@@ -43,6 +43,8 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 
 	/** EMPLOYEE HEALTH **/
+	Route::patch('/emp_health/print_confirm/{slug}', 'EmpHealthController@printConfirm')->name('emp_health.print_confirm');
+	Route::get('/emp_health/print_confirm/{slug}');
 	Route::get('/emp_health/print/{slug}', 'EmpHealthController@print')->name('emp_health.print');
 	Route::resource('emp_health', 'EmpHealthController');
 	
