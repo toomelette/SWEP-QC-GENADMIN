@@ -34,10 +34,10 @@ class ApiSubmenuController extends Controller{
 
 
 
-	public function selectSubmenuByMenuId(Request $request, $menu_id){
+	public function selectSubmenuByMenuId(Request $request, $slug){
 
     	if($request->Ajax()){
-    		$response_submenu = $this->submenu_repo->getByMenuId($menu_id);
+    		$response_submenu = $this->submenu_repo->getBySlug($menu_id);
 	    	return json_encode($response_submenu);
 	    }
 

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Hash;
 use App\Core\Interfaces\EmpHealthInterface;
 use App\Core\Interfaces\EmpHealthMedHistoryInterface;
+use App\Core\Interfaces\EmpHealthWeeklyPEInterface;
 use App\Http\Requests\EmpHealth\EmpHealthFormRequest;
 use App\Http\Requests\EmpHealth\EmpHealthPrintConfirmFormRequest;
 use App\Http\Requests\EmpHealth\EmpHealthFilterRequest;
+use Illuminate\Http\Request;
 
 
 class EmpHealthController extends Controller{
@@ -15,12 +17,18 @@ class EmpHealthController extends Controller{
 
     protected $emp_health_repo;
     protected $emp_health_mh_repo;
+    protected $emp_health_w_pe_repo;
 
 
-    public function __construct(EmpHealthInterface $emp_health_repo, EmpHealthMedHistoryInterface $emp_health_mh_repo){
+    public function __construct(EmpHealthInterface $emp_health_repo, 
+                                EmpHealthMedHistoryInterface $emp_health_mh_repo, 
+                                EmpHealthWeeklyPEInterface $emp_health_w_pe_repo){
+
         $this->emp_health_repo = $emp_health_repo;
         $this->emp_health_mh_repo = $emp_health_mh_repo;
+        $this->emp_health_w_pe_repo = $emp_health_w_pe_repo;
         parent::__construct();
+
     }
 
 
@@ -135,6 +143,31 @@ class EmpHealthController extends Controller{
         $emp_health = $this->emp_health_repo->destroy($slug);
         $this->event->fire('emp_health.destroy', $emp_health);
         return redirect()->back();
+
+    }
+ 
+
+
+
+    public function weeklyPE($slug, Request $request){
+
+        $emp_health = $this->emp_health_repo->findbySlug($slug);
+        $emp_health_weekly_pe_list = $this->emp_health_w_pe_repo->fetchByEmpHealthId($emp_health->emp_health_id, $request);
+
+        return view('dashboard.emp_health.weekly_pe')->with([
+            'emp_health' => $emp_health,
+            'emp_health_weekly_pe_list' => $emp_health_weekly_pe_list,
+        ]);
+
+    }
+ 
+
+
+
+    public function annualPE($slug){
+
+        $emp_health = $this->emp_health_repo->findbySlug($slug);
+        return view('dashboard.emp_health.annual_pe')->with('emp_health', $emp_health);
 
     }
 

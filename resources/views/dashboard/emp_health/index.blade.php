@@ -42,7 +42,7 @@
             <th>@sortablelink('fullname', 'Fullname')</th>
             <th>@sortablelink('position', 'Position')</th>
             <th>@sortablelink('department_text', 'Department')</th>
-            <th style="width: 200px">Action</th>
+            <th style="width: 350px">Action</th>
           </tr>
           @foreach($emp_health as $data) 
             <tr {!! __html::table_highlighter($data->slug, $table_sessions) !!} >
@@ -52,6 +52,16 @@
               <td id="mid-vert">{{ $data->department_text }}</td>
               <td id="mid-vert">
                 <div class="btn-group">
+                  @if(in_array('dashboard.emp_health.weekly_pe', $global_user_submenus))
+                    <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.emp_health.weekly_pe', $data->slug) }}">
+                      Weekly PE
+                    </a>
+                  @endif
+                  @if(in_array('dashboard.emp_health.annual_pe', $global_user_submenus))
+                    <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.emp_health.annual_pe', $data->slug) }}">
+                      Annual PE
+                    </a>
+                  @endif
                   @if(in_array('dashboard.emp_health.show', $global_user_submenus))
                     <a type="button" class="btn btn-default" id="print_button" data-action="print" data-url="{{ route('dashboard.emp_health.print_confirm', $data->slug) }}">
                       <i class="fa fa-print"></i>

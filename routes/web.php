@@ -46,7 +46,13 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 	Route::patch('/emp_health/print_confirm/{slug}', 'EmpHealthController@printConfirm')->name('emp_health.print_confirm');
 	Route::get('/emp_health/print_confirm/{slug}');
 	Route::get('/emp_health/print/{slug}', 'EmpHealthController@print')->name('emp_health.print');
+	Route::get('/emp_health/weekly_pe/{slug}', 'EmpHealthController@weeklyPE')->name('emp_health.weekly_pe');
+	Route::get('/emp_health/annual_pe/{slug}', 'EmpHealthController@annualPE')->name('emp_health.annual_pe');
 	Route::resource('emp_health', 'EmpHealthController');
+
+
+	/** EMPLOYEE HEALTH WEEKLY PE **/
+	Route::resource('emp_health_weekly_pe', 'EmpHealthWeeklyPEController');
 	
 });
 
