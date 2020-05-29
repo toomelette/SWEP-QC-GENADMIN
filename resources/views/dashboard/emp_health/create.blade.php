@@ -62,7 +62,7 @@
         ) !!}
 
         {!! __form::textbox(
-          '4', 'address', 'text', 'Address *', 'Address', old('address'), $errors->has('address'), $errors->first('address'), ''
+          '4', 'address', 'text', 'Address', 'Address', old('address'), $errors->has('address'), $errors->first('address'), ''
         ) !!}
 
         <div class="col-md-12"></div>

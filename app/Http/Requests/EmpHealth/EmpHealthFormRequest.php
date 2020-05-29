@@ -21,12 +21,12 @@ class EmpHealthFormRequest extends FormRequest{
         $rules = [
 
             'category'=>'required|string|max:11',
-            'emp_no'=>'required|string|max:45',
+            'emp_no'=>'required|string|max:45|unique:emp_health,emp_no,'.$this->route('emp_health').',slug',
             'fullname'=>'required|string|max:255',
             'department_text'=>'required|string|max:90',
             'position'=>'required|string|max:90',
             'contact_no'=>'nullable|string|max:255',
-            'address'=>'required|string|max:255',
+            'address'=>'nullable|string|max:255',
             'birthday' => 'required|date_format:"m/d/Y"',
             'sex' => 'required|string|max:11',
             'civil_status' => 'required|string|max:11',
