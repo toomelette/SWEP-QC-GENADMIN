@@ -6,6 +6,7 @@ use Hash;
 use App\Core\Interfaces\EmpHealthInterface;
 use App\Core\Interfaces\EmpHealthMedHistoryInterface;
 use App\Core\Interfaces\EmpHealthWeeklyPEInterface;
+use App\Core\Interfaces\EmpHealthAnnualPEInterface;
 use App\Http\Requests\EmpHealth\EmpHealthFormRequest;
 use App\Http\Requests\EmpHealth\EmpHealthPrintConfirmFormRequest;
 use App\Http\Requests\EmpHealth\EmpHealthFilterRequest;
@@ -18,15 +19,18 @@ class EmpHealthController extends Controller{
     protected $emp_health_repo;
     protected $emp_health_mh_repo;
     protected $emp_health_w_pe_repo;
+    protected $emp_health_a_pe_repo;
 
 
     public function __construct(EmpHealthInterface $emp_health_repo, 
                                 EmpHealthMedHistoryInterface $emp_health_mh_repo, 
-                                EmpHealthWeeklyPEInterface $emp_health_w_pe_repo){
+                                EmpHealthWeeklyPEInterface $emp_health_w_pe_repo, 
+                                EmpHealthAnnualPEInterface $emp_health_a_pe_repo){
 
         $this->emp_health_repo = $emp_health_repo;
         $this->emp_health_mh_repo = $emp_health_mh_repo;
         $this->emp_health_w_pe_repo = $emp_health_w_pe_repo;
+        $this->emp_health_a_pe_repo = $emp_health_a_pe_repo;
         parent::__construct();
 
     }
@@ -164,10 +168,15 @@ class EmpHealthController extends Controller{
 
 
 
-    public function annualPE($slug){
+    public function annualPE($slug, Request $request){
 
         $emp_health = $this->emp_health_repo->findbySlug($slug);
-        return view('dashboard.emp_health.annual_pe')->with('emp_health', $emp_health);
+        $emp_health_annual_pe_list = $this->emp_health_a_pe_repo->fetchByEmpHealthId($emp_health->emp_health_id, $request);
+
+        return view('dashboard.emp_health.annual_pe')->with([
+            'emp_health' => $emp_health,
+            'emp_health_annual_pe_list' => $emp_health_annual_pe_list,
+        ]);
 
     }
 

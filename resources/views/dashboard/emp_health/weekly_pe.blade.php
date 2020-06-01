@@ -155,7 +155,7 @@
                     </tr>
                     @foreach($emp_health_weekly_pe_list as $data) 
                       <tr {!! __html::table_highlighter($data->slug, $table_sessions) !!} >
-                        <td id="mid-vert">{{ optional($data->date)->format('F d, Y') }}</td>
+                        <td id="mid-vert">{{ $data->date }}</td>
                         <td id="mid-vert">{{ $data->blood_pressure }}</td>
                         <td id="mid-vert">{{ $data->pulse_rate }}</td>
                         <td id="mid-vert">{{ $data->temperature }}</td>

@@ -29,6 +29,8 @@ class RepositoryServiceProvider extends ServiceProvider {
 		$this->app->bind('App\Core\Interfaces\EmpHealthMedHistoryInterface', 'App\Core\Repositories\EmpHealthMedHistoryRepository');
 
 		$this->app->bind('App\Core\Interfaces\EmpHealthWeeklyPEInterface', 'App\Core\Repositories\EmpHealthWeeklyPERepository');
+
+		$this->app->bind('App\Core\Interfaces\EmpHealthAnnualPEInterface', 'App\Core\Repositories\EmpHealthAnnualPERepository');
 		
 	}
 

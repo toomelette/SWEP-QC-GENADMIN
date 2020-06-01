@@ -4,9 +4,9 @@ namespace App\Core\Interfaces;
  
 
 
-interface EmpHealthInterface {
+interface EmpHealthAnnualPEInterface {
 
-	public function fetch($request);
+	public function fetchByEmpHealthId($emp_health_id, $request);
 
 	public function store($request);
 
@@ -14,6 +14,6 @@ interface EmpHealthInterface {
 
 	public function destroy($slug);
 
-	public function findBySlug($menu_id);
+	public function getBySlug($slug);
 		
 }

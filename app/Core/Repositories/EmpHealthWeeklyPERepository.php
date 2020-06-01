@@ -29,7 +29,7 @@ class EmpHealthWeeklyPERepository extends BaseRepository implements EmpHealthWee
         $key = str_slug($request->fullUrl(), '_');
         $entries = isset($request->e) ? $request->e : 20;
 
-        $emp_health_weekly_pes = $this->cache->remember('emp_health_weekly_pe:fetchByEmpHealthId:'. $emp_health_id .':' . $key, 240, function() use ($emp_health_id, $entries){
+        $emp_health_weekly_pe_list = $this->cache->remember('emp_health_weekly_pe:fetchByEmpHealthId:'. $emp_health_id .':' . $key, 240, function() use ($emp_health_id, $entries){
 
             $emp_health_weekly_pe = $this->emp_health_weekly_pe->newQuery();
 
@@ -41,7 +41,7 @@ class EmpHealthWeeklyPERepository extends BaseRepository implements EmpHealthWee
 
         });
 
-        return $emp_health_weekly_pes;
+        return $emp_health_weekly_pe_list;
 
     }
 

@@ -7,11 +7,11 @@ use Kyslik\ColumnSortable\Sortable;
 use Carbon;
 
 
-class EmpHealthWeeklyPE extends Model{
+class EmpHealthAnnualPE extends Model{
 	
 
     use Sortable;
-    protected $table = 'emp_health_weekly_pe';
+    protected $table = 'emp_health_annual_pe';
     protected $dates = ['date', 'created_at', 'updated_at'];
     public $timestamps = false;
 
@@ -21,12 +21,15 @@ class EmpHealthWeeklyPE extends Model{
         'slug' => '',
         'emp_health_id' => '',
         'date' => null,
-        'blood_pressure' => '',
-        'pulse_rate' => '',
-        'temperature' => '',
-        'condition' => '',
-        'medication' => '',
-        'recommendation' => '',
+        'pe' => '',
+        'cbc' => '',
+        'chem' => '',
+        'urinalysis' => '',
+        'xray' => '',
+        'ecg' => '',
+        'ultrasound' => '',
+        'drug_test' => '',
+        'company_cond' => '',
         'created_at' => null,
         'updated_at' => null,
         'ip_created' => '',
@@ -48,6 +51,7 @@ class EmpHealthWeeklyPE extends Model{
     public function empHealth() {
     	return $this->belongsTo('App\Models\EmpHealth','emp_health_id','emp_health_id');
    	}
+
 
 
 }

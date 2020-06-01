@@ -53,6 +53,10 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 	/** EMPLOYEE HEALTH WEEKLY PE **/
 	Route::resource('emp_health_weekly_pe', 'EmpHealthWeeklyPEController');
+
+
+	/** EMPLOYEE HEALTH ANNUAL PE **/
+	Route::resource('emp_health_annual_pe', 'EmpHealthAnnualPEController');
 	
 });
 
