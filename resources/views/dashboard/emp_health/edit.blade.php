@@ -100,27 +100,27 @@
         @csrf    
 
         {!! __form::select_static(
-          '4', 'category', 'Category *', old('category') ? old('category') : $emp_health->category, ['Permanent' => 'PERM', 'Contract of Service' => 'COS'], $errors->has('category'), $errors->first('category'), '', ''
+          '4', 'category', 'Category', old('category') ? old('category') : $emp_health->category, ['Permanent' => 'PERM', 'Contract of Service' => 'COS'], $errors->has('category'), $errors->first('category'), '', ''
         ) !!}
 
         <div class="col-md-12"></div>
 
         {!! __form::textbox(
-          '4', 'emp_no', 'text', 'Employee No. *', 'Employee No.', old('emp_no') ? old('emp_no') : $emp_health->emp_no, $errors->has('emp_no'), $errors->first('emp_no'), ''
+          '4', 'emp_no', 'text', 'Employee No.', 'Employee No.', old('emp_no') ? old('emp_no') : $emp_health->emp_no, $errors->has('emp_no'), $errors->first('emp_no'), ''
         ) !!}
 
         {!! __form::textbox(
-          '4', 'fullname', 'text', 'Fullname *', 'Fullname', old('fullname') ? old('fullname') : $emp_health->fullname, $errors->has('fullname'), $errors->first('fullname'), ''
+          '4', 'fullname', 'text', 'Fullname', 'Fullname', old('fullname') ? old('fullname') : $emp_health->fullname, $errors->has('fullname'), $errors->first('fullname'), ''
         ) !!}
 
         {!! __form::textbox(
-          '4', 'department_text', 'text', 'Department / Division / Section *', 'Department / Division / Section', old('department_text') ? old('department_text') : $emp_health->department_text, $errors->has('department_text'), $errors->first('department_text'), ''
+          '4', 'department_text', 'text', 'Department / Division / Section', 'Department / Division / Section', old('department_text') ? old('department_text') : $emp_health->department_text, $errors->has('department_text'), $errors->first('department_text'), ''
         ) !!}
 
         <div class="col-md-12"></div>
 
         {!! __form::textbox(
-          '4', 'position', 'text', 'Position *', 'Position', old('position') ? old('position') : $emp_health->position, $errors->has('position'), $errors->first('position'), ''
+          '4', 'position', 'text', 'Position', 'Position', old('position') ? old('position') : $emp_health->position, $errors->has('position'), $errors->first('position'), ''
         ) !!}
 
         {!! __form::textbox(
@@ -134,12 +134,12 @@
         <div class="col-md-12"></div>
 
         {!! __form::datepicker(
-          '4', 'birthday',  'Birthday *', old('birthday') ? old('birthday') : $emp_health->birthday, $errors->has('birthday'), $errors->first('birthday')
+          '4', 'birthday',  'Birthday', old('birthday') ? old('birthday') : $emp_health->birthday, $errors->has('birthday'), $errors->first('birthday')
         ) !!}
 
         <div class="form-group col-md-4">
           <div class="checkbox">
-            <span>Sex *</span><br>
+            <span>Sex</span><br>
             <label>
               <input type="checkbox" class="minimal sex" name="sex" value="M" {{ checkboxVal(old('sex'), 'M', $emp_health->sex, 'M') }}>
               Male
@@ -154,7 +154,7 @@
         </div>
 
         {!! __form::select_static(
-          '4', 'civil_status', 'Civil Status *', old('civil_status') ? old('civil_status') : $emp_health->civil_status , $civil_status, $errors->has('civil_status'), $errors->first('civil_status'), '', ''
+          '4', 'civil_status', 'Civil Status', old('civil_status') ? old('civil_status') : $emp_health->civil_status , $civil_status, $errors->has('civil_status'), $errors->first('civil_status'), '', ''
         ) !!}
 
         <div class="col-md-12"></div>
