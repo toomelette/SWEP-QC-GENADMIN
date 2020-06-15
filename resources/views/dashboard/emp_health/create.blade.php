@@ -27,11 +27,17 @@
       </div> 
     </div>
     
-    <form method="POST" action="{{ route('dashboard.emp_health.store') }}">
+    <form method="POST" action="{{ route('dashboard.emp_health.store') }}" enctype="multipart/form-data">
 
       <div class="box-body">
                 
-        @csrf    
+        @csrf  
+
+        {!! __form::file(
+          '4', 'doc_file', 'Upload File', $errors->has('doc_file'), $errors->first('doc_file'), ''
+        ) !!}   
+
+        <div class="col-md-12"></div>
 
         {!! __form::select_static(
           '4', 'category', 'Category', old('category'), ['Permanent' => 'PERM', 'Contract of Service' => 'COS'], $errors->has('category'), $errors->first('category'), '', ''
@@ -560,6 +566,8 @@
     checkboxTick('.is_exercising');
     checkboxTick('.is_treating_medical_condition');
     checkboxTick('.is_has_chronic_illness');
+
+    {!! __js::pdf_upload('doc_file', 'fa', '') !!}
 
   </script>
     

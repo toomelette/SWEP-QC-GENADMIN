@@ -67,6 +67,11 @@
                       <i class="fa fa-print"></i>
                     </a>
                   @endif
+                  @if(in_array('dashboard.emp_health.view_doc', $global_user_submenus))
+                    <a type="button" class="btn btn-default" id="view_doc_button" href="{{ route('dashboard.emp_health.view_doc', $data->slug) }}" target="_blank">
+                      <i class="fa fa-file-pdf-o"></i>
+                    </a>
+                  @endif
                   @if(in_array('dashboard.emp_health.edit', $global_user_submenus))
                     <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.emp_health.edit', $data->slug) }}">
                       <i class="fa fa-pencil"></i>

@@ -20,6 +20,7 @@ class EmpHealthFormRequest extends FormRequest{
 
         $rules = [
 
+            'doc_file' => 'nullable|mimes:pdf|max:50000',
             'category'=>'nullable|string|max:11',
             'emp_no'=>'nullable|string|max:45|unique:emp_health,emp_no,'.$this->route('emp_health').',slug',
             'fullname'=>'nullable|string|max:255',

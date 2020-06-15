@@ -101,10 +101,10 @@
           </div>
 
           <div class=" col-md-2 border">
-            <span>Birthday: {{ $emp_health->birthday->format('F d,Y') }}</span>
+            <span>Birthday: {{ __dataType::date_parse($emp_health->birthday, 'F d, Y') }}</span>
           </div>
           <div class=" col-md-2 border">
-            <span>Age: {{ $emp_health->birthday->age }}</span>
+            <span>Age: {{ optional($emp_health->birthday)->age }}</span>
           </div>
           <div class=" col-md-2 border">
             <span>Sex: {{ $emp_health->displaySex() }}</span>

@@ -31,4 +31,15 @@ class __static{
     }
 
 
+
+
+    // File Directories
+    public static function archive_dir(){
+
+        return '/swep_qc_genadmin';
+    
+    }
+
+
+
 }

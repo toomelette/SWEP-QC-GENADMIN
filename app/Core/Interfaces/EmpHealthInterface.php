@@ -8,9 +8,9 @@ interface EmpHealthInterface {
 
 	public function fetch($request);
 
-	public function store($request);
+	public function store($request, $file_location);
 
-	public function update($request, $slug);
+	public function update($request, $file_location, $emp_health);
 
 	public function destroy($slug);
 

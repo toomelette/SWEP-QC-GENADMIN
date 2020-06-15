@@ -21,6 +21,7 @@ class EmpHealth extends Model{
         'emp_health_id' => '',
         'category' => '',
         'emp_no' => '',
+        'file_location' => '',
         'fullname' => '',
         'department_text' => '',
         'position' => '',

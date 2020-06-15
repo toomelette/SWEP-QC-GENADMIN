@@ -90,14 +90,19 @@
       </div> 
     </div>
     
-    <form method="POST" action="{{ route('dashboard.emp_health.update', $emp_health->slug) }}">
+    <form method="POST" action="{{ route('dashboard.emp_health.update', $emp_health->slug) }}"  enctype="multipart/form-data">
 
       <div class="box-body">
 
         <input name="_method" value="PUT" type="hidden">
-                
+                 
         @csrf    
-        @csrf    
+
+        {!! __form::file(
+          '4', 'doc_file', 'Upload File', $errors->has('doc_file'), $errors->first('doc_file'), ''
+        ) !!}   
+
+        <div class="col-md-12"></div>
 
         {!! __form::select_static(
           '4', 'category', 'Category', old('category') ? old('category') : $emp_health->category, ['Permanent' => 'PERM', 'Contract of Service' => 'COS'], $errors->has('category'), $errors->first('category'), '', ''
@@ -622,6 +627,8 @@
     checkboxTick('.is_exercising');
     checkboxTick('.is_treating_medical_condition');
     checkboxTick('.is_has_chronic_illness');
+
+    {!! __js::pdf_upload('doc_file', 'fa',  route('dashboard.emp_health.view_doc', $emp_health->slug)) !!}
 
   </script>
     

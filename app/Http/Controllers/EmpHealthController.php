@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Hash;
+use File;
 use App\Core\Interfaces\EmpHealthInterface;
 use App\Core\Interfaces\EmpHealthMedHistoryInterface;
 use App\Core\Interfaces\EmpHealthWeeklyPEInterface;
@@ -59,7 +60,20 @@ class EmpHealthController extends Controller{
 
     public function store(EmpHealthFormRequest $request){
 
-        $emp_health = $this->emp_health_repo->store($request);
+        $file_location = "";
+
+        if(!is_null($request->file('doc_file'))){
+
+            $filename = $this->__dataType::fileFilterReservedChar($this->str->random(8), '.pdf');
+            $dir = $this->__dataType->date_parse($this->carbon->now(), 'Y') .'/HEALTH-DECLARATION';
+
+            $request->file('doc_file')->storeAs($dir, $filename);
+
+            $file_location = $dir .'/'. $filename;
+
+        }
+
+        $emp_health = $this->emp_health_repo->store($request, $file_location);
 
         if(!empty($request->row)){
             foreach ($request->row as $data) {
@@ -125,7 +139,29 @@ class EmpHealthController extends Controller{
 
     public function update(EmpHealthFormRequest $request, $slug){
 
-        $emp_health = $this->emp_health_repo->update($request, $slug);
+        $emp_health = $this->emp_health_repo->findbySlug($slug);
+        
+        $new_filename = $this->__dataType::fileFilterReservedChar($this->str->random(8), '.pdf');
+        $dir = $this->__dataType->date_parse($this->carbon->now(), 'Y') .'/HEALTH-DECLARATION';
+
+        $old_file_location = $emp_health->file_location;
+        $new_file_location = $dir .'/'. $new_filename;
+
+        $file_location = $old_file_location;
+
+        // if doc_file has value
+        if(!is_null($request->file('doc_file'))){
+
+            if ($this->storage->disk('local')->exists($old_file_location)) {
+                $this->storage->disk('local')->delete($old_file_location);
+            }
+            
+            $request->file('doc_file')->storeAs($dir, $new_filename);
+            $file_location = $new_file_location;
+            
+        }
+
+        $emp_health = $this->emp_health_repo->update($request, $file_location, $emp_health);
 
         if(!empty($request->row)){
             foreach ($request->row as $data) {
@@ -178,6 +214,36 @@ class EmpHealthController extends Controller{
             'emp_health_annual_pe_list' => $emp_health_annual_pe_list,
         ]);
 
+    }
+
+
+
+
+
+
+
+    public function viewDoc($slug){
+
+        $emp_health = $this->emp_health_repo->findBySlug($slug);
+
+        if(!empty($emp_health->file_location)){
+
+            $path = $this->__static->archive_dir() .'/'. $emp_health->file_location;
+
+            if (!File::exists($path)) { return "Cannot Detect File!"; }
+
+            $file = File::get($path);
+            $type = File::mimeType($path);
+
+            $response = response()->make($file, 200);
+            $response->header("Content-Type", $type);
+
+            return $response;
+
+        }
+
+        return "Cannot Detect File!";;
+        
     }
 
 
