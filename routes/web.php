@@ -58,6 +58,10 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 	/** EMPLOYEE HEALTH ANNUAL PE **/
 	Route::resource('emp_health_annual_pe', 'EmpHealthAnnualPEController');
+
+
+	/** Purchase Request **/
+	Route::resource('pr', 'PRController');
 	
 });
 
