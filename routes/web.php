@@ -62,6 +62,10 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 	/** Purchase Request **/
 	Route::resource('pr', 'PRController');
+
+
+	/** Purchase Request **/
+	Route::resource('department', 'DepartmentController');
 	
 });
 
