@@ -37,6 +37,11 @@ class ViewComposerServiceProvider extends ServiceProvider{
                         'dashboard.emp_health.edit', 
                         'dashboard.emp_health.show', 
                         'printables.emp_health.declaration_form'], 'App\Core\ViewComposers\MedicalHistoryComposer');
+        
+
+        // Departments
+        View::composer(['dashboard.division.create', 
+                        'dashboard.division.edit'], 'App\Core\ViewComposers\DepartmentComposer');
          
     }
 

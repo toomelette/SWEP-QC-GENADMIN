@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
 
-class Department extends Model{
+class Division extends Model{
 
 
     use Sortable;
-    protected $table = 'departments';
+    protected $table = 'divisions';
     protected $dates = ['created_at', 'updated_at'];
 	public $timestamps = false;
 
@@ -18,6 +18,7 @@ class Department extends Model{
     protected $attributes = [
 
         'slug' => '',
+        'div_id' => '',
         'dept_id' => '',
         'name' => '',
         'acronym' => '',
@@ -33,8 +34,8 @@ class Department extends Model{
 
 
     /** RELATIONSHIPS **/
-    public function division() {
-    	return $this->hasMany('App\Models\Division','dept_id','dept_id');
+    public function department() {
+    	return $this->belongsTo('App\Models\Department','dept_id','dept_id');
    	}
 
 

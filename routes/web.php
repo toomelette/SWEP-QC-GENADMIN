@@ -60,12 +60,16 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 	Route::resource('emp_health_annual_pe', 'EmpHealthAnnualPEController');
 
 
+	/** Department **/
+	Route::resource('department', 'DepartmentController');
+
+
+	/** Division **/
+	Route::resource('division', 'DivisionController');
+
+
 	/** Purchase Request **/
 	Route::resource('pr', 'PRController');
-
-
-	/** Purchase Request **/
-	Route::resource('department', 'DepartmentController');
 	
 });
 

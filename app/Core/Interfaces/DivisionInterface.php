@@ -4,7 +4,7 @@ namespace App\Core\Interfaces;
  
 
 
-interface DepartmentInterface {
+interface DivisionInterface {
 
 	public function fetch($request);
 

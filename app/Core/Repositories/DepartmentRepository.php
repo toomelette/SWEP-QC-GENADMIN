@@ -139,17 +139,15 @@ class DepartmentRepository extends BaseRepository implements DepartmentInterface
 
 
 
-    // public function getAll(){
+    public function getAll(){
 
-    //     $departments = $this->cache->remember('departments:getAll', 240, function(){
-    //         return $this->department->select('dept_id', 'name')
-    //                           ->with('submenu')
-    //                           ->get();
-    //     });
+        $departments = $this->cache->remember('departments:getAll', 240, function(){
+            return $this->department->select('dept_id', 'name')->get();
+        });
         
-    //     return $departments;
+        return $departments;
 
-    // }
+    }
 
 
 
