@@ -47,7 +47,7 @@
           @foreach($divisions as $data) 
             <tr {!! __html::table_highlighter($data->slug, $table_sessions) !!} >
               <td id="mid-vert">{{ $data->name }}</td>
-              <td id="mid-vert">{{ $data->department->name }}</td>
+              <td id="mid-vert">{{ optional($data->department)->name }}</td>
               <td id="mid-vert">
                 <div class="btn-group">
                   <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.division.edit', $data->slug) }}">
