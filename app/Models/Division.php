@@ -39,5 +39,10 @@ class Division extends Model{
    	}
 
 
+    public function user() {
+        return $this->hasMany('App\Models\User','div_id','div_id');
+    }
+
+
 
 }

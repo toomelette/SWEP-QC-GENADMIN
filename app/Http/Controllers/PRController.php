@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Core\Interfaces\PRInterface;
+use App\Core\Interfaces\PRParameterInterface;
 use App\Http\Requests\PR\PRFormRequest;
 use App\Http\Requests\PR\PRFilterRequest;
 
@@ -11,13 +12,15 @@ use App\Http\Requests\PR\PRFilterRequest;
 class PRController extends Controller{
 
 
-    // protected $pr_repo;
+    protected $pr_repo;
+    protected $pr_parameter_repo;
 
 
-    // public function __construct(PRInterface $pr_repo){
-    //     $this->pr_repo = $pr_repo;
-    //     parent::__construct();
-    // }
+    public function __construct(PRInterface $pr_repo, PRParameterInterface $pr_parameter_repo){
+        $this->pr_repo = $pr_repo;
+        $this->pr_parameter_repo = $pr_parameter_repo;
+        parent::__construct();
+    }
 
 
 
@@ -33,20 +36,27 @@ class PRController extends Controller{
     
 
 
-    // public function create(){
-    //     return view('dashboard.pr.create');
-    // }
+    public function create(){
+        return view('dashboard.pr.create');
+    }
 
 
    
 
-    // public function store(PRFormRequest $request){
+    public function store(PRFormRequest $request){
 
-    //     $pr = $this->pr_repo->store($request);
-    //     $this->event->fire('pr.store');
-    //     return redirect()->back();
+        $pr = $this->pr_repo->store($request);
 
-    // }
+        if(!empty($request->row)){
+            foreach ($request->row as $row) {
+                $pr_parameter = $this->pr_parameter_repo->store($row, $pr);
+            }
+        }
+
+        $this->event->fire('pr.store');
+        return redirect()->back();
+
+    }
  
 
 

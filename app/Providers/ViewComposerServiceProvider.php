@@ -41,7 +41,18 @@ class ViewComposerServiceProvider extends ServiceProvider{
 
         // Departments
         View::composer(['dashboard.division.create', 
-                        'dashboard.division.edit'], 'App\Core\ViewComposers\DepartmentComposer');
+                        'dashboard.division.edit', 
+                        'dashboard.user.create', 
+                        'dashboard.user.edit', 
+                        'dashboard.pr.create', 
+                        'dashboard.pr.edit'], 'App\Core\ViewComposers\DepartmentComposer');
+        
+
+        // Divisions
+        View::composer(['dashboard.user.create', 
+                        'dashboard.user.edit', 
+                        'dashboard.pr.create', 
+                        'dashboard.pr.edit'], 'App\Core\ViewComposers\DivisionComposer');
          
     }
 

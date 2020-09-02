@@ -38,5 +38,10 @@ class Department extends Model{
    	}
 
 
+    public function user() {
+        return $this->hasMany('App\Models\User','dept_id','dept_id');
+    }
+
+
 
 }

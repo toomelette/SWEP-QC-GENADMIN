@@ -145,7 +145,7 @@ class DivisionRepository extends BaseRepository implements DivisionInterface {
     public function getAll(){
 
         $divisions = $this->cache->remember('divisions:getAll', 240, function(){
-            return $this->division->select('dept_id', 'name')->get();
+            return $this->division->select('div_id', 'name')->get();
         });
         
         return $divisions;

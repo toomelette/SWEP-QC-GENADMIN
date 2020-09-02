@@ -27,6 +27,8 @@ class UserFormRequest extends FormRequest{
             'lastname'=>'required|string|max:90',
             'email'=>'required|string|email|max:90',
             'position'=>'required|string|max:90',
+            'dept_id'=>'nullable|string|max:11',
+            'div_id'=>'nullable|string|max:11',
             'username'=>'required|string|max:45|unique:users,username,'.$this->route('user').',slug',
             'password'=>'sometimes|required|string|min:6|max:45|confirmed',
 

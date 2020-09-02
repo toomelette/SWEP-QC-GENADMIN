@@ -75,6 +75,8 @@ class UserRepository extends BaseRepository implements UserInterface {
         $user->lastname = $request->lastname;
         $user->email = $request->email;
         $user->position = $request->position;
+        $user->dept_id = $request->dept_id;
+        $user->div_id = $request->div_id;
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
         $user->created_at = $this->carbon->now();
@@ -100,6 +102,8 @@ class UserRepository extends BaseRepository implements UserInterface {
         $user->lastname = $request->lastname;
         $user->email = $request->email;
         $user->position = $request->position;
+        $user->dept_id = $request->dept_id;
+        $user->div_id = $request->div_id;
         $user->username = $request->username;
         $user->updated_at = $this->carbon->now();
         $user->ip_updated = request()->ip();

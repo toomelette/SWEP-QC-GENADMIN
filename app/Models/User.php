@@ -24,6 +24,8 @@ class User extends Authenticatable{
 
         'slug' => '',
         'user_id' => '', 
+        'dept_id' => '', 
+        'div_id' => '', 
         'email' => '', 
         'username' => '', 
         'password' => '', 
@@ -55,6 +57,14 @@ class User extends Authenticatable{
 
     public function userSubmenu() {
         return $this->hasMany('App\Models\UserSubmenu','user_id','user_id');
+    }
+
+    public function department() {
+        return $this->belongsTo('App\Models\Department','dept_id','dept_id');
+    }
+
+    public function division() {
+        return $this->belongsTo('App\Models\Division','div_id','div_id');
     }
     
 

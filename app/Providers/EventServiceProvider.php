@@ -37,6 +37,7 @@ class EventServiceProvider extends ServiceProvider{
         'App\Core\Subscribers\EmpHealthAnnualPESubscriber',
         'App\Core\Subscribers\DepartmentSubscriber',
         'App\Core\Subscribers\DivisionSubscriber',
+        'App\Core\Subscribers\PRSubscriber',
         
     ];
 

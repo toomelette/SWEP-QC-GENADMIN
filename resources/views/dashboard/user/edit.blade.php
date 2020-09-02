@@ -53,6 +53,14 @@
                   '12', 'position', 'text', 'Position / Plantilla *', 'Position / Plantilla', old('position') ? old('position') : $user->position, $errors->has('position'), $errors->first('position'), 'data-transform="uppercase"'
                 ) !!}
 
+                {!! __form::select_dynamic(
+                  '12', 'dept_id', 'Department', old('dept_id') ? old('dept_id') : $user->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
+                ) !!}
+
+                {!! __form::select_dynamic(
+                  '12', 'div_id', 'Division', old('div_id') ? old('div_id') : $user->div_id, $global_divisions_all, 'div_id', 'name', $errors->has('div_id'),  $errors->first('div_id'), 'select2', ''
+                ) !!}
+
                 {!! __form::textbox(
                   '12', 'email', 'email', 'Email *', 'Email', old('email') ? old('email') : $user->email, $errors->has('email'), $errors->first('email'), ''
                 ) !!}
