@@ -29,8 +29,7 @@ class PRSubscriber extends BaseSubscriber{
 
     public function onStore(){
         
-        // $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:fetch:*');
-        // $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:getAll');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:fetch:*');
 
         $this->session->flash('PR_CREATE_SUCCESS', 'The PR has been successfully created!');
 
@@ -40,9 +39,8 @@ class PRSubscriber extends BaseSubscriber{
 
     public function onUpdate($pr){
 
-        // $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:fetch:*');
-        // $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:getAll');
-        // $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:findBySlug:'. $pr->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:fetch:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:findBySlug:'. $pr->slug .'');
 
         $this->session->flash('PR_UPDATE_SUCCESS', 'The PR has been successfully updated!');
         $this->session->flash('PR_UPDATE_SUCCESS_SLUG', $pr->slug);
@@ -53,9 +51,8 @@ class PRSubscriber extends BaseSubscriber{
 
     public function onDestroy($pr){
 
-        // $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:fetch:*');
-        // $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:getAll');
-        // $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:findBySlug:'. $pr->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:fetch:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:pr:findBySlug:'. $pr->slug .'');
 
         $this->session->flash('PR_DELETE_SUCCESS', 'The PR has been successfully deleted!');
         $this->session->flash('PR_DELETE_SUCCESS_SLUG', $pr->slug);

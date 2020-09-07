@@ -44,5 +44,10 @@ class Division extends Model{
     }
 
 
+    public function pr() {
+        return $this->hasMany('App\Models\PR','div_id','div_id');
+    }
+
+
 
 }

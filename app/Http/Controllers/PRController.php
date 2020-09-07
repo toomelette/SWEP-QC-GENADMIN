@@ -25,13 +25,13 @@ class PRController extends Controller{
 
 
     
-    // public function index(PRFilterRequest $request){
+    public function index(PRFilterRequest $request){
 
-    //     $pr_list = $this->pr_repo->fetch($request);
-    //     $request->flash();
-    //     return view('dashboard.pr.index')->with('pr_list', $pr_list);
+        $pr_list = $this->pr_repo->fetch($request);
+        $request->flash();
+        return view('dashboard.pr.index')->with('pr_list', $pr_list);
 
-    // }
+    }
 
     
 
@@ -61,34 +61,41 @@ class PRController extends Controller{
 
 
 
-    // public function edit($slug){
+    public function edit($slug){
 
-    //     $pr = $this->pr_repo->findbySlug($slug);
-    //     return view('dashboard.pr.edit')->with('pr', $pr);
+        $pr = $this->pr_repo->findbySlug($slug);
+        return view('dashboard.pr.edit')->with('pr', $pr);
 
-    // }
-
-
+    }
 
 
-    // public function update(PRFormRequest $request, $slug){
 
-    //     $pr = $this->pr_repo->update($request, $slug);
-    //     $this->event->fire('pr.update', $pr);
-    //     return redirect()->route('dashboard.pr.index');
 
-    // }
+    public function update(PRFormRequest $request, $slug){
+
+        $pr = $this->pr_repo->update($request, $slug);
+
+        if(!empty($request->row)){
+            foreach ($request->row as $row) {
+                $pr_parameter = $this->pr_parameter_repo->store($row, $pr);
+            }
+        }
+        
+        $this->event->fire('pr.update', $pr);
+        return redirect()->route('dashboard.pr.index');
+
+    }
 
     
 
 
-    // public function destroy($slug){
+    public function destroy($slug){
 
-    //     $pr = $this->pr_repo->destroy($slug);
-    //     $this->event->fire('pr.destroy', $pr);
-    //     return redirect()->back();
+        $pr = $this->pr_repo->destroy($slug);
+        $this->event->fire('pr.destroy', $pr);
+        return redirect()->back();
 
-    // }
+    }
 
 
 

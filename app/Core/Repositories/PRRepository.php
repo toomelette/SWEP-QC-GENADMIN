@@ -24,30 +24,31 @@ class PRRepository extends BaseRepository implements PRInterface {
 
 
 
-    // public function fetch($request){
+    public function fetch($request){
 
-    //     $key = str_slug($request->fullUrl(), '_');
-    //     $entries = isset($request->e) ? $request->e : 20;
+        $key = str_slug($request->fullUrl(), '_');
+        $entries = isset($request->e) ? $request->e : 20;
 
-    //     $pr_list = $this->cache->remember('pr:fetch:' . $key, 240, function() use ($request, $entries){
+        $pr_list = $this->cache->remember('pr:fetch:' . $key, 240, function() use ($request, $entries){
 
-    //         $pr = $this->pr->newQuery();
+            $pr = $this->pr->newQuery();
             
-    //         if(isset($request->q)){
-    //             $pr->where('name', 'LIKE', '%'. $request->q .'%')
-    //                        ->orWhere('acronym', 'LIKE', '%'. $request->q .'%');
-    //         }
+            if(isset($request->q)){
+                $pr->where('pr_no', 'LIKE', '%'. $request->q .'%')
+                   ->orWhere('sai_no', 'LIKE', '%'. $request->q .'%');
+            }
 
-    //         return $pr->select('name', 'slug')
-    //                     ->sortable()
-    //                     ->orderBy('updated_at', 'asc')
-    //                     ->paginate($entries);
+            return $pr->select('dept_id', 'div_id', 'pr_no', 'created_at', 'slug')
+                      ->with('department', 'division')
+                      ->sortable()
+                      ->orderBy('updated_at', 'asc')
+                      ->paginate($entries);
 
-    //     });
+        });
 
-    //     return $pr_list;
+        return $pr_list;
 
-    // }
+    }
 
 
 
@@ -83,48 +84,59 @@ class PRRepository extends BaseRepository implements PRInterface {
 
 
 
-    // public function update($request, $slug){
+    public function update($request, $slug){
 
-    //     $pr = $this->findBySlug($slug);
-    //     $pr->name = $request->name;
-    //     $pr->acronym = $request->acronym;
-    //     $pr->updated_at = $this->carbon->now();
-    //     $pr->ip_updated = request()->ip();
-    //     $pr->user_updated = $this->auth->user()->user_id;
-    //     $pr->save();
+        $pr = $this->findBySlug($slug);
+        $pr->pr_no = $request->pr_no;
+        $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
+        $pr->sai_no = $request->sai_no;
+        $pr->sai_no_date = $this->__dataType->date_parse($request->sai_no_date);
+        $pr->purpose = $request->purpose;
+        $pr->req_by_name = $request->req_by_name;
+        $pr->req_by_designation = $request->req_by_designation;
+        $pr->appr_by_name = $request->appr_by_name;
+        $pr->appr_by_designation = $request->appr_by_designation;
+        $pr->updated_at = $this->carbon->now();
+        $pr->ip_updated = request()->ip();
+        $pr->user_updated = $this->auth->user()->user_id;
+        $pr->save();
+
+        $pr->prParameter()->delete();
         
-    //     return $pr;
+        return $pr;
 
-    // }
-
-
-
-
-    // public function destroy($slug){
-
-    //     $pr = $this->findBySlug($slug);
-    //     $pr->delete();
-
-    //     return $pr;
-
-    // }
+    }
 
 
 
 
-    // public function findBySlug($slug){
+    public function destroy($slug){
 
-    //     $pr = $this->cache->remember('pr:findBySlug:' . $slug, 240, function() use ($slug){
-    //         return $this->pr->where('slug', $slug)->first();
-    //     }); 
+        $pr = $this->findBySlug($slug);
+        $pr->delete();
+
+        $pr->prParameter()->delete();
+
+        return $pr;
+
+    }
+
+
+
+
+    public function findBySlug($slug){
+
+        $pr = $this->cache->remember('pr:findBySlug:' . $slug, 240, function() use ($slug){
+            return $this->pr->where('slug', $slug)->with('prParameter')->first();
+        }); 
         
-    //     if(empty($pr)){
-    //         abort(404);
-    //     }
+        if(empty($pr)){
+            abort(404);
+        }
 
-    //     return $pr;
+        return $pr;
 
-    // }
+    }
 
 
 

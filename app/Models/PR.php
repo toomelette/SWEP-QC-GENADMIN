@@ -45,5 +45,15 @@ class PR extends Model{
     }
 
 
+    public function department() {
+        return $this->belongsTo('App\Models\Department','dept_id','dept_id');
+    }
+
+
+    public function division() {
+        return $this->belongsTo('App\Models\Division','div_id','div_id');
+    }
+
+
 
 }
