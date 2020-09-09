@@ -64,7 +64,7 @@ class PRRepository extends BaseRepository implements PRInterface {
         $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
         $pr->sai_no = $request->sai_no;
         $pr->sai_no_date = $this->__dataType->date_parse($request->sai_no_date);
-        $pr->purpose = $request->purpose;
+        $pr->purpose = nl2br($request->purpose);
         $pr->req_by_name = $request->req_by_name;
         $pr->req_by_designation = $request->req_by_designation;
         $pr->appr_by_name = $request->appr_by_name;
@@ -91,7 +91,7 @@ class PRRepository extends BaseRepository implements PRInterface {
         $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
         $pr->sai_no = $request->sai_no;
         $pr->sai_no_date = $this->__dataType->date_parse($request->sai_no_date);
-        $pr->purpose = $request->purpose;
+        $pr->purpose = nl2br($request->purpose);
         $pr->req_by_name = $request->req_by_name;
         $pr->req_by_designation = $request->req_by_designation;
         $pr->appr_by_name = $request->appr_by_name;
@@ -127,7 +127,9 @@ class PRRepository extends BaseRepository implements PRInterface {
     public function findBySlug($slug){
 
         $pr = $this->cache->remember('pr:findBySlug:' . $slug, 240, function() use ($slug){
-            return $this->pr->where('slug', $slug)->with('prParameter')->first();
+            return $this->pr->where('slug', $slug)
+                            ->with('prParameter', 'department', 'division')
+                            ->first();
         }); 
         
         if(empty($pr)){

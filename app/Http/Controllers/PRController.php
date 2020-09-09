@@ -53,7 +53,7 @@ class PRController extends Controller{
             }
         }
 
-        $this->event->fire('pr.store');
+        $this->event->fire('pr.store', $pr);
         return redirect()->back();
 
     }
@@ -65,6 +65,26 @@ class PRController extends Controller{
 
         $pr = $this->pr_repo->findbySlug($slug);
         return view('dashboard.pr.edit')->with('pr', $pr);
+
+    }
+ 
+
+
+
+    public function show($slug){
+
+        $pr = $this->pr_repo->findbySlug($slug);
+        return view('dashboard.pr.show')->with('pr', $pr);
+
+    }
+ 
+
+
+
+    public function print($slug){
+
+        $pr = $this->pr_repo->findbySlug($slug);
+        return view('printables.pr.pr_form')->with('pr', $pr);
 
     }
 

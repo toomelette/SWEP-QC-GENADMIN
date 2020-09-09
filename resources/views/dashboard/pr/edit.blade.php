@@ -62,9 +62,9 @@
                       <th style="width:120px;">Stock No.</th>
                       <th style="width:120px;">Unit</th>
                       <th>Item Description</th>
-                      <th style="width:200px;">Qty</th>
-                      <th style="width:200px;">Unit Cost</th>
-                      <th style="width:200px;">Total Cost</th>
+                      <th style="width:150px;">Qty</th>
+                      <th style="width:150px;">Unit Cost</th>
+                      <th style="width:150px;">Total Cost</th>
                       <th style="width: 40px"></th>
                     </tr>
 
@@ -94,7 +94,7 @@
 
                             <td>
                               <div class="form-group">
-                                <textarea name="row[{{ $key }}][pp_description]" class="form-control" value="{{ $value['pp_description'] }}" rows="5">{{ $value['pp_description'] }}</textarea>
+                                <textarea name="row[{{ $key }}][pp_description]" class="form-control" value="{{ $value['pp_description'] }}" rows="7">{{ $value['pp_description'] }}</textarea>
                                 <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_description') }}</small>
                               </div>
                             </td>
@@ -158,7 +158,7 @@
 
                             <td>
                               <div class="form-group">
-                                <textarea name="row[{{ $key }}][pp_description]" class="form-control" value="{{ $data->pp_description }}" rows="5">{{ $data->description }}</textarea>
+                                <textarea name="row[{{ $key }}][pp_description]" class="form-control" value="{!! $data->pp_description !!}" rows="7">{{ str_replace('<br />', '', $data->description) }}</textarea>
                                 <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_description') }}</small>
                               </div>
                             </td>
@@ -212,7 +212,7 @@
 
             <div class="form-group col-md-12" style="margin-top:40px;">
               <label for="purpose">Purpose:</label>
-              <textarea name="purpose" class="form-control" value="{{ old('purpose') ? old('purpose') : $pr->purpose }}" rows="5">{{ old('purpose') ? old('purpose') : $pr->purpose }}</textarea>
+              <textarea name="purpose" class="form-control" value="{{ old('purpose') ? old('purpose') : $pr->purpose }}" rows="7">{{ old('purpose') ? old('purpose') : str_replace('<br />', '', $pr->purpose) }}</textarea>
               <small class="text-danger">{{ $errors->first('purpose') }}</small>
             </div>
 
@@ -324,7 +324,7 @@
 
                         '<td>' +
                           '<div class="form-group">' +
-                            '<textarea type="text" name="row[' + i + '][pp_description]" class="form-control" rows="5"></textarea>' +
+                            '<textarea type="text" name="row[' + i + '][pp_description]" class="form-control" rows="7"></textarea>' +
                           '</div>' +
                         '</td>' +
 

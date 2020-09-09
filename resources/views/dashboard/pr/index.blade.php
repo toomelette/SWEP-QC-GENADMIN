@@ -53,8 +53,12 @@
               
               <td id="mid-vert">
                 <div class="btn-group">
+                  <a type="button" class="btn btn-default" id="show_button" href="{{ route('dashboard.pr.show', $data->slug) }}">
+                    <i class="fa fa-print"></i>
+                  </a>
                   <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.pr.edit', $data->slug) }}">
-                    <i class="fa fa-pencil"></i></a>
+                    <i class="fa fa-pencil"></i>
+                  </a>
                   <a type="button" class="btn btn-default" id="delete_button" data-action="delete" data-url="{{ route('dashboard.pr.destroy', $data->slug) }}">
                     <i class="fa fa-trash"></i>
                   </a>
@@ -89,6 +93,12 @@
 
   {!! __html::modal_delete('pr_delete') !!}
 
+  @if(Session::has('PR_UPDATE_SUCCESS'))
+    {!! __html::modal_print(
+    'pr_update', '<i class="fa fa-fw fa-check"></i> Updated!', Session::get('PR_UPDATE_SUCCESS'), route('dashboard.pr.show', Session::get('PR_UPDATE_SUCCESS_SLUG'))
+    ) !!}
+  @endif
+
 @endsection 
 
 
@@ -96,12 +106,12 @@
 @section('scripts')
 
   <script type="text/javascript">
+  
+    @if(Session::has('PR_UPDATE_SUCCESS'))
+      $('#pr_update').modal('show');
+    @endif
 
     {!! __js::button_modal_confirm_delete_caller('pr_delete') !!}
-
-    @if(Session::has('PR_UPDATE_SUCCESS'))
-      {!! __js::toast(Session::get('PR_UPDATE_SUCCESS')) !!}
-    @endif
 
     @if(Session::has('PR_DELETE_SUCCESS'))
       {!! __js::toast(Session::get('PR_DELETE_SUCCESS')) !!}

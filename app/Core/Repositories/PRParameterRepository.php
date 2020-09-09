@@ -31,7 +31,7 @@ class PRParameterRepository extends BaseRepository implements PRParameterInterfa
         $pr_parameter->pr_param_id = $this->getPRParamIdInc();
         $pr_parameter->stock_no = $data['pp_stock_no']; 
         $pr_parameter->unit = $data['pp_unit']; 
-        $pr_parameter->description = $data['pp_description']; 
+        $pr_parameter->description = nl2br($data['pp_description']); 
         $pr_parameter->qty = $this->__dataType->string_to_num($data['pp_qty']); 
         $pr_parameter->unit_cost = $this->__dataType->string_to_num($data['pp_unit_cost']); 
         $pr_parameter->total_cost = $this->__dataType->string_to_num($data['pp_total_cost']); 
