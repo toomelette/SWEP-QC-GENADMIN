@@ -218,7 +218,12 @@
 
             <div class="col-sm-1"><p>{{ $data->stock_no }}</p></div>
             <div class="col-sm-1 no-padding"><p>{{ $data->unit }}</p></div>
-            <div class="col-sm-5 no-padding"><p>{!! strip_tags($data->description, '<br>') !!}</p></div>
+            <div class="col-sm-5 no-padding">
+              <p>
+                <b>{{ $data->item_name }}</b><br>
+                {!! strip_tags($data->item_description, '<br>') !!}
+              </p>
+            </div>
             <div class="col-sm-1 no-padding"><p>{{ number_format($data->qty) }}</p></div>
             <div class="col-sm-2 no-padding" style="text-align:center;"><p>{{ number_format($data->unit_cost, 2) }}</p></div>
             <div class="col-sm-2 no-padding" style="text-align:center;"><p>{{ number_format($data->total_cost, 2) }}</p></div>

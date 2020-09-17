@@ -69,7 +69,7 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 
 	/** Purchase Request **/
-	Route::get('/pr/print/{slug}', 'PRController@print')->name('pr.print');
+	Route::get('/pr/print/{slug}/{page}', 'PRController@print')->name('pr.print');
 	Route::resource('pr', 'PRController');
 	
 });

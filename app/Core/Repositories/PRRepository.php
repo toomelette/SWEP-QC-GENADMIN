@@ -35,11 +35,14 @@ class PRRepository extends BaseRepository implements PRInterface {
             
             if(isset($request->q)){
                 $pr->where('pr_no', 'LIKE', '%'. $request->q .'%')
-                   ->orWhere('sai_no', 'LIKE', '%'. $request->q .'%');
+                   ->orWhere('sai_no', 'LIKE', '%'. $request->q .'%')
+                   ->orwhereHas('prParameter', function ($model) use ($request) {
+                        $model->where('item_name', 'LIKE', '%'. $request->q .'%');
+                   });
             }
 
-            return $pr->select('dept_id', 'div_id', 'pr_no', 'created_at', 'slug')
-                      ->with('department', 'division')
+            return $pr->select('pr_id', 'dept_id', 'div_id', 'pr_no', 'created_at', 'slug')
+                      ->with('department', 'division', 'prParameter')
                       ->sortable()
                       ->orderBy('updated_at', 'asc')
                       ->paginate($entries);
@@ -139,19 +142,6 @@ class PRRepository extends BaseRepository implements PRInterface {
         return $pr;
 
     }
-
-
-
-
-    // public function getAll(){
-
-    //     $pr_list = $this->cache->remember('pr:getAll', 240, function(){
-    //         return $this->pr->select('pr_id', 'name')->get();
-    //     });
-        
-    //     return $pr_list;
-
-    // }
 
 
 

@@ -24,8 +24,11 @@
       <h2 class="box-title" style="padding-top: 5px;">Purchase Request Details</h2>
       <div class="pull-right">
           {!! __html::back_button(['dashboard.pr.index', 'dashboard.pr.edit']) !!}
-          <a href="{{ route('dashboard.pr.print', $pr->slug) }}" target="_blank" class="btn btn-sm btn-default">
-          	<i class="fa fa-print"></i> Print
+          <a href="{{ route('dashboard.pr.print', [$pr->slug, 'FRONT']) }}" target="_blank" class="btn btn-sm btn-default">
+          	<i class="fa fa-print"></i> Print Front
+          </a>
+          <a href="{{ route('dashboard.pr.print', [$pr->slug, 'BACK']) }}" target="_blank" class="btn btn-sm btn-default">
+            <i class="fa fa-print"></i> Print Back
           </a>
       </div> 
     </div>
@@ -73,14 +76,17 @@
 
               <tbody>
                 @foreach($pr->prParameter as $data)
-                    <tr>
-                      <td>{{ $data->stock_no }}</td>
-                      <td>{{ $data->unit }}</td>
-                      <td>{!! strip_tags($data->description, '<br>') !!}</td>
-                      <td>{{ number_format($data->qty) }}</td>
-                      <td>{{ number_format($data->unit_cost, 3) }}</td>
-                      <td>{{ number_format($data->total_cost, 3) }}</td>
-                    </tr>
+                  <tr>
+                    <td>{{ $data->stock_no }}</td>
+                    <td>{{ $data->unit }}</td>
+                    <td>
+                      {{ $data->item_name }}<br>
+                      {!! strip_tags($data->item_description, '<br>') !!}
+                    </td>
+                    <td>{{ number_format($data->qty) }}</td>
+                    <td>{{ number_format($data->unit_cost, 3) }}</td>
+                    <td>{{ number_format($data->total_cost, 3) }}</td>
+                  </tr>
                 @endforeach
               </tbody>
 

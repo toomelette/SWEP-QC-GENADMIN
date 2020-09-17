@@ -81,10 +81,15 @@ class PRController extends Controller{
 
 
 
-    public function print($slug){
+    public function print($slug, $page){
 
         $pr = $this->pr_repo->findbySlug($slug);
-        return view('printables.pr.pr_form')->with('pr', $pr);
+
+        if ($page == 'FRONT') {
+            return view('printables.pr.pr_form_front')->with('pr', $pr);
+        }elseif ($page == 'BACK') {
+            return view('printables.pr.pr_form_back');
+        }
 
     }
 

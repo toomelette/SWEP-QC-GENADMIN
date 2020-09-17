@@ -94,8 +94,12 @@
 
                             <td>
                               <div class="form-group">
-                                <textarea name="row[{{ $key }}][pp_description]" class="form-control" value="{{ $value['pp_description'] }}" rows="7">{{ $value['pp_description'] }}</textarea>
-                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_description') }}</small>
+                                <input type="text" name="row[{{ $key }}][pp_item_name]" class="form-control" placeholder="Item Name" value="{{ $value['pp_item_name'] }}">
+                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_item_name') }}</small>
+                              </div>
+                              <div class="form-group">
+                                <textarea name="row[{{ $key }}][pp_item_description]" class="form-control" value="{{ $value['pp_item_description'] }}" rows="7">{{ $value['pp_item_description'] }}</textarea>
+                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_item_description') }}</small>
                               </div>
                             </td>
 
@@ -158,8 +162,12 @@
 
                             <td>
                               <div class="form-group">
-                                <textarea name="row[{{ $key }}][pp_description]" class="form-control" value="{!! $data->pp_description !!}" rows="7">{{ str_replace('<br />', '', $data->description) }}</textarea>
-                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_description') }}</small>
+                                <input type="text" name="row[{{ $key }}][pp_item_name]" class="form-control" placeholder="Item Name" value="{{ $data->item_name }}">
+                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_item_name') }}</small>
+                              </div>
+                              <div class="form-group">
+                                <textarea name="row[{{ $key }}][pp_item_description]" class="form-control" value="{!! $data->item_description !!}" rows="7">{{ str_replace('<br />', '', $data->item_description) }}</textarea>
+                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_item_description') }}</small>
                               </div>
                             </td>
 
@@ -324,7 +332,10 @@
 
                         '<td>' +
                           '<div class="form-group">' +
-                            '<textarea type="text" name="row[' + i + '][pp_description]" class="form-control" rows="7"></textarea>' +
+                            '<input type="text" name="row[' + i + '][pp_item_name]" class="form-control" placeholder="Item Name">' +
+                          '</div>' +
+                          '<div class="form-group">' +
+                            '<textarea type="text" name="row[' + i + '][pp_item_description]" class="form-control" rows="7"></textarea>' +
                           '</div>' +
                         '</td>' +
 

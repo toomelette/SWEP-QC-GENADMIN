@@ -40,7 +40,8 @@ class PRFormRequest extends FormRequest{
             foreach($rows as $key => $value){
                 $rules['row.'.$key.'.pp_stock_no'] = 'nullable|string|max:45';
                 $rules['row.'.$key.'.pp_unit'] = 'nullable|string|max:45';
-                $rules['row.'.$key.'.pp_description'] = 'nullable|string|max:255';
+                $rules['row.'.$key.'.pp_item_name'] = 'nullable|string|max:255';
+                $rules['row.'.$key.'.pp_item_description'] = 'nullable|string|max:255';
                 $rules['row.'.$key.'.pp_qty'] = 'nullable|string|max:21';
                 $rules['row.'.$key.'.pp_unit_cost'] = 'nullable|string|max:21';
                 $rules['row.'.$key.'.pp_total_cost'] = 'nullable|string|max:21';

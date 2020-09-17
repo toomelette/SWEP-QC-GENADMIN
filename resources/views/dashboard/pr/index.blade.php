@@ -39,6 +39,7 @@
         <table class="table table-hover">
           <tr>
             <th>@sortablelink('pr_no', 'PR No.')</th>
+            <th>@sortablelink('', 'Item')</th>
             <th>@sortablelink('department.name', 'Department')</th>
             <th>@sortablelink('division.name', 'Division')</th>
             <th>@sortablelink('created_at', 'Date Encoded')</th>
@@ -47,9 +48,14 @@
           @foreach($pr_list as $data) 
             <tr {!! __html::table_highlighter($data->slug, $table_sessions) !!} >
               <td id="mid-vert">{{ $data->pr_no }}</td>
-              <td id="mid-vert">{{ optional($data->department)->name }}</td>
+              <td id="mid-vert">
+                @foreach ($data->prParameter as $key => $data_pp)
+                  {{ $key + 1}}. {{ $data_pp->item_name }}<br>
+                @endforeach
+              </td>
+              <td id="mid-vert">{{ optional($data->department)->acronym }}</td>
               <td id="mid-vert">{{ optional($data->division)->name }}</td>
-              <td id="mid-vert">{{ __dataType::date_parse($data->created_at, 'F d, Y') }}</td>
+              <td id="mid-vert">{{ __dataType::date_parse($data->created_at, 'm/d/Y') }}</td>
               
               <td id="mid-vert">
                 <div class="btn-group">
