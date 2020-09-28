@@ -44,7 +44,7 @@ class PRRepository extends BaseRepository implements PRInterface {
             return $pr->select('pr_id', 'dept_id', 'div_id', 'pr_no', 'created_at', 'slug')
                       ->with('department', 'division', 'prParameter')
                       ->sortable()
-                      ->orderBy('updated_at', 'asc')
+                      ->orderBy('updated_at', 'desc')
                       ->paginate($entries);
 
         });

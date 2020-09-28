@@ -39,6 +39,10 @@ class RepositoryServiceProvider extends ServiceProvider {
 		$this->app->bind('App\Core\Interfaces\PRInterface', 'App\Core\Repositories\PRRepository');
 
 		$this->app->bind('App\Core\Interfaces\PRParameterInterface', 'App\Core\Repositories\PRParameterRepository');
+
+		$this->app->bind('App\Core\Interfaces\JRInterface', 'App\Core\Repositories\JRRepository');
+
+		$this->app->bind('App\Core\Interfaces\JRParameterInterface', 'App\Core\Repositories\JRParameterRepository');
 		
 	}
 
