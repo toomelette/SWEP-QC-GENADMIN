@@ -47,7 +47,9 @@ class ViewComposerServiceProvider extends ServiceProvider{
                         'dashboard.pr.create', 
                         'dashboard.pr.edit',
                         'dashboard.jr.create', 
-                        'dashboard.jr.edit'], 'App\Core\ViewComposers\DepartmentComposer');
+                        'dashboard.jr.edit',
+                        'dashboard.po.create', 
+                        'dashboard.po.edit'], 'App\Core\ViewComposers\DepartmentComposer');
         
 
         // Divisions
@@ -56,7 +58,9 @@ class ViewComposerServiceProvider extends ServiceProvider{
                         'dashboard.pr.create', 
                         'dashboard.pr.edit',
                         'dashboard.jr.create', 
-                        'dashboard.jr.edit'], 'App\Core\ViewComposers\DivisionComposer');
+                        'dashboard.jr.edit',
+                        'dashboard.po.create', 
+                        'dashboard.po.edit'], 'App\Core\ViewComposers\DivisionComposer');
          
     }
 

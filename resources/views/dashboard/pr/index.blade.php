@@ -39,7 +39,7 @@
         <table class="table table-hover">
           <tr>
             <th>@sortablelink('pr_no', 'PR No.')</th>
-            <th>@sortablelink('', 'Item')</th>
+            <th>Items</th>
             <th>@sortablelink('department.name', 'Department')</th>
             <th>@sortablelink('division.name', 'Division')</th>
             <th>@sortablelink('created_at', 'Date Encoded')</th>

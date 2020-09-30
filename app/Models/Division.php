@@ -39,13 +39,23 @@ class Division extends Model{
    	}
 
 
-    public function user() {
-        return $this->hasMany('App\Models\User','div_id','div_id');
+    public function pr() {
+        return $this->hasMany('App\Models\PR','div_id','div_id');
     }
 
 
-    public function pr() {
-        return $this->hasMany('App\Models\PR','div_id','div_id');
+    public function jr() {
+        return $this->hasMany('App\Models\JR','div_id','div_id');
+    }
+
+
+    public function po() {
+        return $this->hasMany('App\Models\PO','div_id','div_id');
+    }
+
+
+    public function user() {
+        return $this->hasMany('App\Models\User','div_id','div_id');
     }
 
 

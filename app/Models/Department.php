@@ -43,6 +43,16 @@ class Department extends Model{
     }
 
 
+    public function jr() {
+        return $this->hasMany('App\Models\JR','dept_id','dept_id');
+    }
+
+
+    public function po() {
+        return $this->hasMany('App\Models\PO','dept_id','dept_id');
+    }
+
+
     public function user() {
         return $this->hasMany('App\Models\User','dept_id','dept_id');
     }
