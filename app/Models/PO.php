@@ -44,9 +44,9 @@ class PO extends Model{
     ];
 
 
-    // public function prParameter() {
-    //     return $this->hasMany('App\Models\PRParameter','pr_id','pr_id');
-    // }
+    public function poParameter() {
+        return $this->hasMany('App\Models\POParameter','po_id','po_id');
+    }
 
 
     public function department() {

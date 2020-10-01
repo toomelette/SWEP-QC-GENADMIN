@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Core\Interfaces\POInterface;
 use App\Core\Interfaces\POParameterInterface;
 use App\Http\Requests\PO\POFormRequest;
-// use App\Http\Requests\PO\POFilterRequest;
+use App\Http\Requests\PO\POFilterRequest;
 
 
 class POController extends Controller{
@@ -25,13 +25,13 @@ class POController extends Controller{
 
 
     
-    // public function index(POFilterRequest $request){
+    public function index(POFilterRequest $request){
 
-    //     $po_list = $this->po_repo->fetch($request);
-    //     $request->flash();
-    //     return view('dashboard.po.index')->with('po_list', $po_list);
+        $po_list = $this->po_repo->fetch($request);
+        $request->flash();
+        return view('dashboard.po.index')->with('po_list', $po_list);
 
-    // }
+    }
 
     
 
@@ -61,66 +61,66 @@ class POController extends Controller{
 
 
 
-    // public function edit($slug){
+    public function edit($slug){
 
-    //     $po = $this->po_repo->findbySlug($slug);
-    //     return view('dashboard.po.edit')->with('po', $po);
+        $po = $this->po_repo->findbySlug($slug);
+        return view('dashboard.po.edit')->with('po', $po);
 
-    // }
+    }
  
 
 
 
-    // public function show($slug){
+    public function show($slug){
 
-    //     $po = $this->po_repo->findbySlug($slug);
-    //     return view('dashboard.po.show')->with('po', $po);
+        $po = $this->po_repo->findbySlug($slug);
+        return view('dashboard.po.show')->with('po', $po);
 
-    // }
+    }
  
 
 
 
-    // public function point($slug, $page){
+    public function print($slug, $page){
 
-    //     $po = $this->po_repo->findbySlug($slug);
+        $po = $this->po_repo->findbySlug($slug);
 
-    //     if ($page == 'FRONT') {
-    //         return view('pointables.po.po_form_front')->with('po', $po);
-    //     }elseif ($page == 'BACK') {
-    //         return view('pointables.po.po_form_back');
-    //     }
+        if ($page == 'FRONT') {
+            return view('printables.po.po_form_front')->with('po', $po);
+        }else{
+            abort(404);
+        }
 
-    // }
-
-
+    }
 
 
-    // public function update(POFormRequest $request, $slug){
 
-    //     $po = $this->po_repo->update($request, $slug);
 
-    //     if(!empty($request->row)){
-    //         foreach ($request->row as $row) {
-    //             $po_parameter = $this->po_parameter_repo->store($row, $po);
-    //         }
-    //     }
+    public function update(POFormRequest $request, $slug){
+
+        $po = $this->po_repo->update($request, $slug);
+
+        if(!empty($request->row)){
+            foreach ($request->row as $row) {
+                $po_parameter = $this->po_parameter_repo->store($row, $po);
+            }
+        }
         
-    //     $this->event->fire('po.update', $po);
-    //     return redirect()->route('dashboard.po.index');
+        $this->event->fire('po.update', $po);
+        return redirect()->route('dashboard.po.index');
 
-    // }
+    }
 
     
 
 
-    // public function destroy($slug){
+    public function destroy($slug){
 
-    //     $po = $this->po_repo->destroy($slug);
-    //     $this->event->fire('po.destroy', $po);
-    //     return redirect()->back();
+        $po = $this->po_repo->destroy($slug);
+        $this->event->fire('po.destroy', $po);
+        return redirect()->back();
 
-    // }
+    }
 
 
 

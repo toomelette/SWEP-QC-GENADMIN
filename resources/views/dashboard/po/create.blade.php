@@ -277,6 +277,30 @@
         clearOnEmpty: true,
         allowNegative: false
     });
+        
+    $('.pp_qty').priceFormat({
+        centsLimit: 0,
+        prefix: "",
+        thousandsSeparator: ",",
+        clearOnEmpty: true,
+        allowNegative: false
+    });
+    
+    $('.pp_unit_cost').priceFormat({
+        centsLimit: 2,
+        prefix: "",
+        thousandsSeparator: ",",
+        clearOnEmpty: true,
+        allowNegative: false
+    });
+    
+    $('.pp_total_cost').priceFormat({
+        centsLimit: 2,
+        prefix: "",
+        thousandsSeparator: ",",
+        clearOnEmpty: true,
+        allowNegative: false
+    });
 
     {{-- ADD ITEM --}}
     $(document).ready(function() {
@@ -342,7 +366,7 @@
         });
         
         $('.pp_unit_cost').priceFormat({
-            centsLimit: 3,
+            centsLimit: 2,
             prefix: "",
             thousandsSeparator: ",",
             clearOnEmpty: true,
@@ -350,7 +374,7 @@
         });
         
         $('.pp_total_cost').priceFormat({
-            centsLimit: 3,
+            centsLimit: 2,
             prefix: "",
             thousandsSeparator: ",",
             clearOnEmpty: true,
