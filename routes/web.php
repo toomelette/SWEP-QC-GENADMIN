@@ -81,6 +81,11 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 	/** Purchase Order **/
 	Route::get('/po/print/{slug}/{page}', 'POController@print')->name('po.print');
 	Route::resource('po', 'POController');
+
+
+	/** Job Order **/
+	Route::get('/jo/print/{slug}/{page}', 'JOController@print')->name('jo.print');
+	Route::resource('jo', 'JOController');
 	
 	
 });

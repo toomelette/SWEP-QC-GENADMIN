@@ -47,6 +47,8 @@ class RepositoryServiceProvider extends ServiceProvider {
 		$this->app->bind('App\Core\Interfaces\POInterface', 'App\Core\Repositories\PORepository');
 
 		$this->app->bind('App\Core\Interfaces\POParameterInterface', 'App\Core\Repositories\POParameterRepository');
+
+		$this->app->bind('App\Core\Interfaces\JOInterface', 'App\Core\Repositories\JORepository');
 		
 	}
 

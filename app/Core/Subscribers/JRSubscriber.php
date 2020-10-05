@@ -30,6 +30,7 @@ class JRSubscriber extends BaseSubscriber{
     public function onStore($jr){
         
         $this->__cache->deletePattern(''. config('app.name') .'_cache:jr:fetch:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:jr:getAll');
 
         $this->session->flash('JR_CREATE_SUCCESS', 'The JR has been successfully created!');
         $this->session->flash('JR_CREATE_SUCCESS_SLUG', $jr->slug);
@@ -42,6 +43,7 @@ class JRSubscriber extends BaseSubscriber{
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:jr:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:jr:findBySlug:'. $jr->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:jr:getAll');
 
         $this->session->flash('JR_UPDATE_SUCCESS', 'The JR has been successfully updated!');
         $this->session->flash('JR_UPDATE_SUCCESS_SLUG', $jr->slug);
@@ -54,7 +56,8 @@ class JRSubscriber extends BaseSubscriber{
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:jr:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:jr:findBySlug:'. $jr->slug .'');
-
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:jr:getAll');
+        
         $this->session->flash('JR_DELETE_SUCCESS', 'The JR has been successfully deleted!');
         $this->session->flash('JR_DELETE_SUCCESS_SLUG', $jr->slug);
 

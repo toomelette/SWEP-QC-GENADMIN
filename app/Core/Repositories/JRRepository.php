@@ -161,4 +161,17 @@ class JRRepository extends BaseRepository implements JRInterface {
 
 
 
+    public function getAll(){
+
+        $jr = $this->cache->remember('jr:getAll', 240, function(){
+            return $this->jr->select('jr_id', 'jr_no')->get();
+        });
+        
+        return $jr;
+
+    }
+
+
+
+
 }

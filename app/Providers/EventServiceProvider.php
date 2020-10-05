@@ -40,6 +40,7 @@ class EventServiceProvider extends ServiceProvider{
         'App\Core\Subscribers\PRSubscriber',
         'App\Core\Subscribers\JRSubscriber',
         'App\Core\Subscribers\POSubscriber',
+        'App\Core\Subscribers\JOSubscriber',
         
     ];
 

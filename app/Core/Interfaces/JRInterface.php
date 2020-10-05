@@ -15,5 +15,7 @@ interface JRInterface {
 	public function destroy($slug);
 
 	public function findBySlug($menu_id);
+
+	public function getAll();
 		
 }
