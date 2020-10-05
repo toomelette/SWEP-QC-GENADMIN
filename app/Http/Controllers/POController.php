@@ -87,6 +87,8 @@ class POController extends Controller{
 
         if ($page == 'FRONT') {
             return view('printables.po.po_form_front')->with('po', $po);
+        }elseif ($page == 'BACK') {
+            return view('printables.po.po_form_back');
         }else{
             abort(404);
         }

@@ -18,12 +18,15 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial">
 
   <style type="text/css">
-      
-    .div-height{
 
-      margin-bottom: -50px; 
-      padding-bottom: 50px; 
-      overflow: hidden;
+    @media print {
+
+      html, body {
+        margin-top:15px;
+        padding: 0 !important;
+        height:100%; 
+        overflow: hidden;
+      }
 
     }
 
@@ -31,7 +34,7 @@
 
 </head>
 
-<body onload="window.print();" onafterprint="window.close()" style="margin-top:70px;">
+<body onload="window.print();" onafterprint="window.close()">
 
   <div style="border:solid;">
 
@@ -208,7 +211,7 @@
         
         {{-- COL --}}
         <div class="col-sm-5" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; text-align: center;">
-          <span>Item Description</span><br>
+          <span>Description</span><br>
           &nbsp;
         </div>
         
@@ -242,27 +245,27 @@
         <div class="col-sm-12 no-padding">
 
           {{-- COL --}}
-          <div class="col-sm-1" style="border-right:solid 1.4px; padding-top:9px; padding-bottom:9px; height: 50em;">
+          <div class="col-sm-1" style="border-right:solid 1.4px; padding-top:9px; padding-bottom:9px; height: 40em;">
           </div>
           
           {{-- COL --}}
-          <div class="col-sm-1" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 50em;">
+          <div class="col-sm-1" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 40em;">
           </div>
           
           {{-- COL --}}
-          <div class="col-sm-5" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 50em;">
+          <div class="col-sm-5" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 40em;">
           </div>
           
           {{-- COL --}}
-          <div class="col-sm-1" style="border-right:solid 1.4px; padding-top:9px; padding-bottom:9px; height: 50em;">
+          <div class="col-sm-1" style="border-right:solid 1.4px; padding-top:9px; padding-bottom:9px; height: 40em;">
           </div>
           
           {{-- COL --}}
-          <div class="col-sm-2" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 50em;">
+          <div class="col-sm-2" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 40em;">
           </div>
           
           {{-- COL --}}
-          <div class="col-sm-2" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 50em;">
+          <div class="col-sm-2" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 40em;">
           </div>
             
         </div>
@@ -314,6 +317,104 @@
       {{-- 4th Box --}}
       <div class="row" style="border-top:solid 1.4px; font-size:10px; padding-left: 20px; padding-top: 5px; padding-bottom: 5px;">
         (Total Amount in Words) : <span style="font-weight: bold;">{{ __dataType::num_to_words($total, 2) }}</span>
+      </div>
+
+
+
+      {{-- 5th Box --}}
+      <div class="row" style="border-top:solid 1.4px; font-size:10px; padding-left: 20px;">
+        
+        <div class="col-sm-12 no-padding" style="margin-bottom: 10px;">
+          <p>In case of failure to make delivery/services within the time specified above, a penalty of one tenth (1/10)<br>
+            of one percent for every day of delay shall be imposed.
+          </p>  
+        </div>
+       
+        <div class="col-sm-7">&nbsp;</div>
+        <div class="col-sm-5">
+          <p>Very truly yours,</p>
+        </div>
+
+        <div class="col-sm-12" style="margin-bottom: 35px;"></div>
+
+        <div class="col-sm-8">&nbsp;</div>
+        <div class="col-sm-3" style="border-top:solid 1px; text-align:center;">
+          <p>(Authorized Official)</p>
+        </div>
+        <div class="col-sm-1">&nbsp;</div>
+
+        <div class="col-sm-12"></div>
+
+        <div class="col-sm-1 no-padding">
+          <p>Conforme:</p>
+        </div>
+        <div class="col-sm-11"></div>
+
+        <div class="col-sm-12"></div>
+
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5" style="border-top:solid 1px; text-align:center;">
+          <p>(Signature over printed Name of Supplier)</p>
+        </div>
+        <div class="col-sm-6"></div>
+
+        <div class="col-sm-12" style="margin-bottom: 10px;"></div>
+
+        <div class="col-sm-2"></div>
+        <div class="col-sm-3" style="border-top:solid 1px; text-align:center;">
+          <p>(Date)</p>
+        </div>
+
+      </div>
+
+
+
+
+      {{-- 6th Box --}}
+      <div class="row" style="border-top:solid 1.4px; font-size:10px;">
+        
+
+        {{-- COL --}}
+        <div class="col-sm-7" style="padding-top:5px; border-right:solid 1.4px; padding-left:20px;">
+
+          <div class="col-sm-12 no-padding" style="margin-bottom: 20px;">
+            <p>Funds Available:</p>
+          </div>
+
+          <div class="col-sm-4">&nbsp;</div>
+          <div class="col-sm-4" style="border-bottom:solid 1px; text-align: center;">
+            ERLINDA J. ABACAN
+          </div>
+          <div class="col-sm-4">&nbsp;</div>
+
+          <div class="col-sm-12"></div>
+
+          <div class="col-sm-4">&nbsp;</div>
+          <div class="col-sm-4" style="text-align: center;">
+            Chief Accountant
+          </div>
+          <div class="col-sm-4">&nbsp;</div>
+
+          <div class="col-sm-12" style="margin-bottom:10px;"></div>
+
+        </div>
+
+
+        {{-- COL --}}
+        <div class="col-sm-5" style="padding-top:5px; padding-left:5px;">
+
+          <div class="col-sm-12 no-padding"><span>BUR No.:</span></div>
+          <div class="col-sm-12 no-padding" style="margin-bottom:10px;">
+            <p>{{ $po->bur_no }}</p>
+          </div>
+
+          <div class="col-sm-12 no-padding"><span>Amount:</span></div>
+          <div class="col-sm-12 no-padding">
+            <p>{{ number_format($po->amount, 2) }}</p>
+          </div>
+
+        </div>
+
       </div>
 
 

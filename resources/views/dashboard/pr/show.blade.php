@@ -23,13 +23,13 @@
     <div class="box-header with-border">
       <h2 class="box-title" style="padding-top: 5px;">Purchase Request Details</h2>
       <div class="pull-right">
-          {!! __html::back_button(['dashboard.pr.index', 'dashboard.pr.edit']) !!}
           <a href="{{ route('dashboard.pr.print', [$pr->slug, 'FRONT']) }}" target="_blank" class="btn btn-sm btn-default">
           	<i class="fa fa-print"></i> Print Front
           </a>
           <a href="{{ route('dashboard.pr.print', [$pr->slug, 'BACK']) }}" target="_blank" class="btn btn-sm btn-default">
             <i class="fa fa-print"></i> Print Back
           </a>
+          {!! __html::back_button(['dashboard.pr.index', 'dashboard.pr.edit']) !!}
       </div> 
     </div>
 

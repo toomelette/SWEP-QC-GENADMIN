@@ -21,12 +21,15 @@
   <div class="box box-solid">
       
     <div class="box-header with-border">
-      <h2 class="box-title" style="padding-top: 5px;">Purchase Request Details</h2>
+      <h2 class="box-title" style="padding-top: 5px;">Purchase Order Details</h2>
       <div class="pull-right">
-          {!! __html::back_button(['dashboard.pr.index', 'dashboard.pr.edit']) !!}
           <a href="{{ route('dashboard.po.print', [$po->slug, 'FRONT']) }}" target="_blank" class="btn btn-sm btn-default">
-          	<i class="fa fa-print"></i> Print
+          	<i class="fa fa-print"></i> Print Front
           </a>
+          <a href="{{ route('dashboard.po.print', [$po->slug, 'BACK']) }}" target="_blank" class="btn btn-sm btn-default">
+            <i class="fa fa-print"></i> Print Back
+          </a>
+          {!! __html::back_button(['dashboard.po.index', 'dashboard.po.edit']) !!}
       </div> 
     </div>
 

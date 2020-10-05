@@ -23,10 +23,10 @@
     <div class="box-header with-border">
       <h2 class="box-title" style="padding-top: 5px;">Job Request Details</h2>
       <div class="pull-right">
-          {!! __html::back_button(['dashboard.jr.index', 'dashboard.jr.edit']) !!}
           <a href="{{ route('dashboard.jr.print', [$jr->slug, 'FRONT']) }}" target="_blank" class="btn btn-sm btn-default">
           	<i class="fa fa-print"></i> Print
           </a>
+          {!! __html::back_button(['dashboard.jr.index', 'dashboard.jr.edit']) !!}
       </div> 
     </div>
 
