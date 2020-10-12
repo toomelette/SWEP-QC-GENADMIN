@@ -106,7 +106,11 @@
             </div>
 
             {!! __form::textbox(
-              '12', 'to', 'text', 'To', 'To', old('to'), $errors->has('to'), $errors->first('to'), ''
+              '12', 'description', 'text', 'Description', 'Description', old('description'), $errors->has('description'), $errors->first('description'), ''
+            ) !!}
+
+            {!! __form::textarea(
+              '12', 'scope_of_works', 'Scope of Works', old('scope_of_works'), $errors->has('scope_of_works'), $errors->first('scope_of_works'), ''
             ) !!}
 
             <div class="col-md-12"></div>
@@ -120,8 +124,7 @@
               '6', 'amount', 'text', 'Amount', 'Amount', old('amount'), $errors->has('amount'), $errors->first('amount'), ''
             ) !!}
             
-
-
+            
           </div>
 
 
@@ -145,9 +148,9 @@
 
 @section('modals')
 
-  @if(Session::has('PO_CREATE_SUCCESS'))
+  @if(Session::has('JO_CREATE_SUCCESS'))
     {!! __html::modal_print(
-    'po_create', '<i class="fa fa-fw fa-check"></i> Saved!', Session::get('PO_CREATE_SUCCESS'), route('dashboard.po.show', Session::get('PO_CREATE_SUCCESS_SLUG'))
+    'jo_create', '<i class="fa fa-fw fa-check"></i> Saved!', Session::get('JO_CREATE_SUCCESS'), route('dashboard.jo.show', Session::get('JO_CREATE_SUCCESS_SLUG'))
     ) !!}
   @endif
 
@@ -160,9 +163,13 @@
 
   <script type="text/javascript">
   
-    @if(Session::has('PO_CREATE_SUCCESS'))
-      $('#po_create').modal('show');
+    @if(Session::has('JO_CREATE_SUCCESS'))
+      $('#jo_create').modal('show');
     @endif
+
+    $(function () {
+      CKEDITOR.replace('editor');
+    });
         
     $('#amount').priceFormat({
         centsLimit: 2,
