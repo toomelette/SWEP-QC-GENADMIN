@@ -69,11 +69,21 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 
 	/** Purchase Request **/
+	Route::get('/pr/eu_create', 'PRController@euCreate')->name('pr.eu_create');
+	Route::get('/pr/{slug}/eu_edit', 'PRController@euEdit')->name('pr.eu_edit');
+	Route::get('/pr/eu_list', 'PRController@euIndex')->name('pr.eu_index');
+	Route::post('/pr/set_pr_no/{slug}', 'PRController@setPRNO')->name('pr.set_pr_no');
+
 	Route::get('/pr/print/{slug}/{page}', 'PRController@print')->name('pr.print');
 	Route::resource('pr', 'PRController');
 
 
 	/** Job Request **/
+	Route::get('/jr/eu_create', 'JRController@euCreate')->name('jr.eu_create');
+	Route::get('/jr/{slug}/eu_edit', 'JRController@euEdit')->name('jr.eu_edit');
+	Route::get('/jr/eu_list', 'JRController@euIndex')->name('jr.eu_index');
+	Route::post('/jr/set_jr_no/{slug}', 'JRController@setJRNO')->name('jr.set_jr_no');
+
 	Route::get('/jr/print/{slug}/{page}', 'JRController@print')->name('jr.print');
 	Route::resource('jr', 'JRController');
 

@@ -7,13 +7,16 @@ use App\Core\Interfaces\PRInterface;
 use App\Core\Interfaces\PRParameterInterface;
 use App\Http\Requests\PR\PRFormRequest;
 use App\Http\Requests\PR\PRFilterRequest;
+use App\Http\Requests\PR\PRSetPRNoFormRequest;
 
 
 class PRController extends Controller{
 
 
+
     protected $pr_repo;
     protected $pr_parameter_repo;
+
 
 
     public function __construct(PRInterface $pr_repo, PRParameterInterface $pr_parameter_repo){
@@ -33,11 +36,29 @@ class PRController extends Controller{
 
     }
 
+
+
+    
+    public function euIndex(PRFilterRequest $request){
+
+        $pr_list = $this->pr_repo->fetchByDeptId($this->auth->user()->dept_id, $request);
+        $request->flash();
+        return view('dashboard.pr.eu_index')->with('pr_list', $pr_list);
+
+    }
+
     
 
 
     public function create(){
         return view('dashboard.pr.create');
+    }
+
+    
+
+
+    public function euCreate(){
+        return view('dashboard.pr.eu_create');
     }
 
 
@@ -65,6 +86,16 @@ class PRController extends Controller{
 
         $pr = $this->pr_repo->findbySlug($slug);
         return view('dashboard.pr.edit')->with('pr', $pr);
+
+    }
+ 
+
+
+
+    public function euEdit($slug){
+
+        $pr = $this->pr_repo->findbySlug($slug);
+        return view('dashboard.pr.eu_edit')->with('pr', $pr);
 
     }
  
@@ -107,7 +138,13 @@ class PRController extends Controller{
         }
         
         $this->event->fire('pr.update', $pr);
-        return redirect()->route('dashboard.pr.index');
+
+        if ($request->type == 'M') {
+            return redirect()->route('dashboard.pr.index');
+        }elseif ($request->type == 'EU') {
+            return redirect()->route('dashboard.pr.eu_index');
+        }
+        
 
     }
 
@@ -118,6 +155,17 @@ class PRController extends Controller{
 
         $pr = $this->pr_repo->destroy($slug);
         $this->event->fire('pr.destroy', $pr);
+        return redirect()->back();
+
+    }
+
+    
+
+
+    public function setPRNO(PRSetPRNoFormRequest $request, $slug){
+
+        $pr = $this->pr_repo->updatePRNo($request, $slug);
+        $this->event->fire('pr.set_pr_no', $pr);
         return redirect()->back();
 
     }

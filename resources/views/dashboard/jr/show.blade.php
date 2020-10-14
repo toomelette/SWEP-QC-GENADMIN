@@ -26,7 +26,7 @@
           <a href="{{ route('dashboard.jr.print', [$jr->slug, 'FRONT']) }}" target="_blank" class="btn btn-sm btn-default">
           	<i class="fa fa-print"></i> Print
           </a>
-          {!! __html::back_button(['dashboard.jr.index', 'dashboard.jr.edit']) !!}
+          {!! __html::back_button(['dashboard.jr.eu_index', 'dashboard.jr.index', 'dashboard.jr.edit']) !!}
       </div> 
     </div>
 

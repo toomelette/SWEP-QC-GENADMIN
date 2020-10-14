@@ -19,15 +19,15 @@
 
           <div class="col-md-12">
                   
+
+            {!! __form::select_dynamic(
+              '6', 'dept_id', 'Department', old('dept_id'), $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
+            ) !!}
+
+            {!! __form::select_dynamic(
+              '6', 'div_id', 'Division', old('div_id'), $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
+            ) !!}
             @csrf
-
-            {!! __form::select_dynamic(
-              '6', 'dept_id', 'Department', Auth::user()->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
-            ) !!}
-
-            {!! __form::select_dynamic(
-              '6', 'div_id', 'Division', Auth::user()->div_id, $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
-            ) !!}
 
             <div class="col-md-12"></div>
 
@@ -223,15 +223,6 @@
     @if(Session::has('JR_CREATE_SUCCESS'))
       $('#jr_create').modal('show');
     @endif
-
-    $(document).ready(function(){
-      $("#dept_id").prop('disabled', true);
-    });
-
-    $(document).ready(function(){
-      $("#div_id").prop('disabled', true);
-    });
-
 
     {{-- ADD ITEM --}}
     $(document).ready(function() {

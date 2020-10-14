@@ -23,7 +23,17 @@
 
             <input name="_method" value="PUT" type="hidden">
             
-            @csrf    
+            @csrf 
+
+            <input type="hidden" name="type" value="M">
+
+            {!! __form::select_dynamic(
+              '6', 'dept_id', 'Department *', old('dept_id') ? old('dept_id') : $pr->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
+            ) !!}
+
+            {!! __form::select_dynamic(
+              '6', 'div_id', 'Division *', old('div_id') ? old('div_id') : $pr->div_id, $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
+            ) !!}   
 
             {!! __form::textbox(
               '3', 'pr_no', 'text', 'PR No.', 'PR No.', old('pr_no') ? old('pr_no') : $pr->pr_no, $errors->has('pr_no'), $errors->first('pr_no'), ''

@@ -6,6 +6,8 @@
                         'q'=> Request::get('q'),
                         'sort' => Request::get('sort'),
                         'direction' => Request::get('direction'),
+                        'page' => Request::get('page'),
+                        'e' => Request::get('e'),
                       ];
 
 ?>

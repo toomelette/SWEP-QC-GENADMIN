@@ -29,7 +29,7 @@
           <a href="{{ route('dashboard.pr.print', [$pr->slug, 'BACK']) }}" target="_blank" class="btn btn-sm btn-default">
             <i class="fa fa-print"></i> Print Back
           </a>
-          {!! __html::back_button(['dashboard.pr.index', 'dashboard.pr.edit']) !!}
+          {!! __html::back_button(['dashboard.pr.index', 'dashboard.pr.eu_index','dashboard.pr.edit']) !!}
       </div> 
     </div>
 

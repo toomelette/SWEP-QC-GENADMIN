@@ -56,4 +56,20 @@ class PR extends Model{
 
 
 
+    public function displayPRNoSpan(){
+
+        $span = '';
+
+        if (isset($this->pr_no)) {
+            $span = '<span class="badge bg-green">'. $this->pr_no .'</span>';
+        }else{
+            $span = '<span class="badge bg-red">Not Set</span>';
+        }
+
+        return $span;
+
+    }
+
+
+
 }

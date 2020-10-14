@@ -54,4 +54,20 @@ class JR extends Model{
 
 
 
+    public function displayJRNoSpan(){
+
+        $span = '';
+
+        if (isset($this->jr_no)) {
+            $span = '<span class="badge bg-green">'. $this->jr_no .'</span>';
+        }else{
+            $span = '<span class="badge bg-red">Not Set</span>';
+        }
+
+        return $span;
+
+    }
+
+
+
 }

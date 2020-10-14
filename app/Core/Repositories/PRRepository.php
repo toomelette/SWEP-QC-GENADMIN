@@ -41,8 +41,41 @@ class PRRepository extends BaseRepository implements PRInterface {
                    });
             }
 
-            return $pr->select('pr_id', 'dept_id', 'div_id', 'pr_no', 'created_at', 'slug')
+            return $pr->select('pr_id', 'dept_id', 'div_id', 'pr_no', 'pr_no_date', 'sai_no', 'sai_no_date', 'created_at', 'slug')
                       ->with('department', 'division', 'prParameter')
+                      ->sortable()
+                      ->orderBy('updated_at', 'desc')
+                      ->paginate($entries);
+
+        });
+
+        return $pr_list;
+
+    }
+
+
+
+
+    public function fetchByDeptId($dept_id, $request){
+
+        $key = str_slug($request->fullUrl(), '_');
+        $entries = isset($request->e) ? $request->e : 20;
+
+        $pr_list = $this->cache->remember('pr:fetchByDeptId:'.$dept_id.':' . $key, 240, function() use ($dept_id, $request, $entries){
+
+            $pr = $this->pr->newQuery();
+            
+            if(isset($request->q)){
+                $pr->where('pr_no', 'LIKE', '%'. $request->q .'%')
+                   ->orWhere('sai_no', 'LIKE', '%'. $request->q .'%')
+                   ->orwhereHas('prParameter', function ($model) use ($request) {
+                        $model->where('item_name', 'LIKE', '%'. $request->q .'%');
+                   });
+            }
+
+            return $pr->select('pr_id', 'div_id', 'pr_no', 'created_at', 'slug')
+                      ->where('dept_id', $dept_id)
+                      ->with('division', 'prParameter')
                       ->sortable()
                       ->orderBy('updated_at', 'desc')
                       ->paginate($entries);
@@ -61,8 +94,8 @@ class PRRepository extends BaseRepository implements PRInterface {
         $pr = new PR;
         $pr->slug = $this->str->random(16);
         $pr->pr_id = $this->getPRIdInc();
-        $pr->dept_id = $this->auth->user()->dept_id;
-        $pr->div_id = $this->auth->user()->div_id;
+        $pr->dept_id = $request->dept_id;
+        $pr->div_id = $request->div_id;
         $pr->pr_no = $request->pr_no;
         $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
         $pr->sai_no = $request->sai_no;
@@ -90,6 +123,8 @@ class PRRepository extends BaseRepository implements PRInterface {
     public function update($request, $slug){
 
         $pr = $this->findBySlug($slug);
+        $pr->dept_id = $request->dept_id;
+        $pr->div_id = $request->div_id;
         $pr->pr_no = $request->pr_no;
         $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
         $pr->sai_no = $request->sai_no;
@@ -105,6 +140,25 @@ class PRRepository extends BaseRepository implements PRInterface {
         $pr->save();
 
         $pr->prParameter()->delete();
+        
+        return $pr;
+
+    }
+
+
+
+
+    public function updatePRNo($request, $slug){
+
+        $pr = $this->findBySlug($slug);
+        $pr->pr_no = $request->pr_no;
+        $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
+        $pr->sai_no = $request->sai_no;
+        $pr->sai_no_date = $this->__dataType->date_parse($request->sai_no_date);
+        $pr->updated_at = $this->carbon->now();
+        $pr->ip_updated = request()->ip();
+        $pr->user_updated = $this->auth->user()->user_id;
+        $pr->save();
         
         return $pr;
 

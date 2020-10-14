@@ -1,11 +1,16 @@
 <?php
 
-  $table_sessions = [ Session::get('PR_UPDATE_SUCCESS_SLUG') ];
+  $table_sessions = [ 
+                      Session::get('PR_UPDATE_SUCCESS_SLUG'), 
+                      Session::get('PR_SET_PR_NO_SUCCESS_SLUG')
+                    ];
 
   $appended_requests = [
                         'q'=> Request::get('q'),
                         'sort' => Request::get('sort'),
                         'direction' => Request::get('direction'),
+                        'page' => Request::get('page'),
+                        'e' => Request::get('e'),
                       ];
 
 ?>
@@ -43,11 +48,11 @@
             <th>@sortablelink('department.name', 'Department')</th>
             <th>@sortablelink('division.name', 'Division')</th>
             <th>@sortablelink('created_at', 'Date Encoded')</th>
-            <th style="width: 150px">Action</th>
+            <th style="width: 280px">Action</th>
           </tr>
           @foreach($pr_list as $data) 
             <tr {!! __html::table_highlighter($data->slug, $table_sessions) !!} >
-              <td id="mid-vert">{{ $data->pr_no }}</td>
+              <td id="mid-vert">{!! $data->displayPRNoSpan() !!}</td>
               <td id="mid-vert">
                 @foreach ($data->prParameter as $key => $data_pp)
                   {{ $key + 1}}. {{ $data_pp->item_name }}<br>
@@ -58,6 +63,21 @@
               <td id="mid-vert">{{ __dataType::date_parse($data->created_at, 'm/d/Y') }}</td>
               
               <td id="mid-vert">
+
+                <div class="btn-group">
+                  <a type="button" 
+                     class="btn btn-default" 
+                     href="#" 
+                     id="set_pr_no_btn" 
+                     data-pr_no="{{ $data->pr_no }}" 
+                     data-pr_no_date="{{ __dataType::date_parse($data->pr_no_date, 'm/d/Y') }}" 
+                     data-sai_no="{{ $data->sai_no }}" 
+                     data-sai_no_date="{{ __dataType::date_parse($data->sai_no_date, 'm/d/Y') }}" 
+                     data-url="{{ route('dashboard.pr.set_pr_no', $data->slug) }}">
+                    {{ isset($data->pr_no) ? 'Update PR No.' : 'Set PR No' }}<b></b>
+                  </a>
+                </div>
+
                 <div class="btn-group">
                   <a type="button" class="btn btn-default" id="show_button" href="{{ route('dashboard.pr.show', $data->slug) }}">
                     <i class="fa fa-print"></i>
@@ -69,6 +89,7 @@
                     <i class="fa fa-trash"></i>
                   </a>
                 </div>
+
               </td>
 
             </tr>
@@ -95,6 +116,8 @@
 
 
 
+
+
 @section('modals')
 
   {!! __html::modal_delete('pr_delete') !!}
@@ -105,7 +128,59 @@
     ) !!}
   @endif
 
+
+
+  {{-- SET PR NO --}}
+  <div class="modal fade" id="set_pr_no_modal" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <i class="fa fa-certificate"></i> &nbsp;Set PR No
+            <div class="pull-right">
+              <code>Fields with asterisks(*) are required</code>
+            </div> 
+          </h4>
+        </div>
+        <div class="modal-body">
+          
+          <form method="POST" id="set_pr_no_form" autocomplete="off">
+            
+            @csrf
+
+            <div class="row">
+
+              {!! __form::textbox(
+                '6', 'pr_no', 'text', 'PR No.', 'PR No.', '', $errors->has('pr_no'), $errors->first('pr_no'), ''
+              ) !!}
+
+              {!! __form::datepicker(
+                '6', 'pr_no_date',  'PR No. Date', '', $errors->has('pr_no_date'), $errors->first('pr_no_date')
+              ) !!}
+
+              {!! __form::textbox(
+                '6', 'sai_no', 'text', 'SAI No.', 'SAI No.', '', $errors->has('sai_no'), $errors->first('sai_no'), ''
+              ) !!}
+
+              {!! __form::datepicker(
+                '6', 'sai_no_date',  'SAI No. Date', '', $errors->has('sai_no_date'), $errors->first('sai_no_date')
+              ) !!}
+
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success">Save <i class="fa fa-fw fa-save"></i></button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection 
+
+
 
 
 
@@ -122,6 +197,33 @@
     @if(Session::has('PR_DELETE_SUCCESS'))
       {!! __js::toast(Session::get('PR_DELETE_SUCCESS')) !!}
     @endif
+
+    @if(Session::has('PR_SET_PR_NO_SUCCESS'))
+      {!! __js::toast(Session::get('PR_SET_PR_NO_SUCCESS')) !!}
+    @endif
+
+
+    {{-- CALL PR SET PO NO MODAL --}}
+    $(document).on("click", "#set_pr_no_btn", function () {
+
+        $("#set_pr_no_modal").modal("show");
+        $("#set_pr_no_form").attr("action", $(this).data("url"));
+
+        $("#set_pr_no_form #pr_no").val($(this).data("pr_no"));
+        $("#set_pr_no_form #pr_no_date").val($(this).data("pr_no_date"));
+        $("#set_pr_no_form #sai_no").val($(this).data("sai_no"));
+        $("#set_pr_no_form #sai_no_date").val($(this).data("sai_no_date"));
+
+        $('.datepicker').each(function(){
+            $(this).datepicker({
+                autoclose: true,
+                dateFormat: "mm/dd/yy",
+                orientation: "bottom"
+            });
+        });
+
+    });
+
 
   </script>
     

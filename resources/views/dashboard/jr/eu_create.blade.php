@@ -7,13 +7,13 @@
     <div class="box box-solid">
         
       <div class="box-header with-border">
-        <h2 class="box-title">New Purchase Request</h2>
+        <h2 class="box-title">New Job Request</h2>
         <div class="pull-right">
             <code>Fields with asterisks(*) are required</code>
         </div> 
       </div>
       
-      <form method="POST" autocomplete="off" action="{{ route('dashboard.pr.store') }}">
+      <form method="POST" autocomplete="off" action="{{ route('dashboard.jr.store') }}">
 
         <div class="box-body">
 
@@ -22,34 +22,15 @@
             @csrf
 
             {!! __form::select_dynamic(
-              '6', 'dept_id', 'Department *', old('dept_id'), $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
+              '6', 'dept_id', 'Department', Auth::user()->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
             ) !!}
 
             {!! __form::select_dynamic(
-              '6', 'div_id', 'Division *', old('div_id'), $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
-            ) !!}
-
-            <div class="col-md-12"></div>
-
-            {!! __form::textbox(
-              '3', 'pr_no', 'text', 'PR No.', 'PR No.', old('pr_no'), $errors->has('pr_no'), $errors->first('pr_no'), ''
-            ) !!}
-
-            {!! __form::datepicker(
-              '3', 'pr_no_date',  'PR Date', old('pr_no_date'), $errors->has('pr_no_date'), $errors->first('pr_no_date')
-            ) !!}
-
-            {!! __form::textbox(
-              '3', 'sai_no', 'text', 'SAI No.', 'SAI No.', old('sai_no'), $errors->has('sai_no'), $errors->first('sai_no'), ''
-            ) !!}
-
-            {!! __form::datepicker(
-              '3', 'sai_no_date',  'SAI Date', old('sai_no_date'), $errors->has('sai_no_date'), $errors->first('sai_no_date')
+              '6', 'div_id', 'Division', Auth::user()->div_id, $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
             ) !!}
 
 
-
-            {{-- Purchase Request Items --}}
+            {{-- Job Request Items --}}
             <div class="col-md-12" style="padding-top:40px;">
               <div class="box box-solid">
                 <div class="box-header with-border">
@@ -68,8 +49,7 @@
                       <th style="width:120px;">Unit</th>
                       <th>Item</th>
                       <th style="width:150px;">Qty</th>
-                      <th style="width:150px;">Unit Cost</th>
-                      <th style="width:150px;">Total Cost</th>
+                      <th style="width:400px;">Nature of Work</th>
                       <th style="width: 40px"></th>
                     </tr>
 
@@ -83,52 +63,44 @@
 
                             <td>
                               <div class="form-group">
-                                <input type="text" name="row[{{ $key }}][pp_stock_no]" class="form-control" placeholder="Stock No." value="{{ $value['pp_stock_no'] }}">
-                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_stock_no') }}</small>
+                                <input type="text" name="row[{{ $key }}][jp_stock_no]" class="form-control" placeholder="Stock No." value="{{ $value['jp_stock_no'] }}">
+                                <small class="text-danger">{{ $errors->first('row.'. $key .'.jp_stock_no') }}</small>
                               </div>
                             </td>
 
 
                             <td>
                               <div class="form-group">
-                                <input type="text" name="row[{{ $key }}][pp_unit]" class="form-control" placeholder="Unit" value="{{ $value['pp_unit'] }}">
-                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_unit') }}</small>
+                                <input type="text" name="row[{{ $key }}][jp_unit]" class="form-control" placeholder="Unit" value="{{ $value['jp_unit'] }}">
+                                <small class="text-danger">{{ $errors->first('row.'. $key .'.jp_unit') }}</small>
                               </div>
                             </td>
 
 
                             <td>
                               <div class="form-group">
-                                <input type="text" name="row[{{ $key }}][pp_item_name]" class="form-control" placeholder="Unit" value="{{ $value['pp_item_name'] }}">
-                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_item_name') }}</small>
+                                <input type="text" name="row[{{ $key }}][jp_item_name]" class="form-control" placeholder="Unit" value="{{ $value['jp_item_name'] }}">
+                                <small class="text-danger">{{ $errors->first('row.'. $key .'.jp_item_name') }}</small>
                               </div>
                               <div class="form-group">
-                                <textarea name="row[{{ $key }}][pp_item_description]" class="form-control" value="{{ $value['pp_item_description'] }}" rows="7">{{ $value['pp_item_description'] }}</textarea>
-                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_item_description') }}</small>
-                              </div>
-                            </td>
-
-
-                            <td>
-                              <div class="form-group">
-                                <input type="text" name="row[{{ $key }}][pp_qty]" class="form-control" placeholder="Qty" value="{{ $value['pp_qty'] }}">
-                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_qty') }}</small>
+                                <textarea name="row[{{ $key }}][jp_item_description]" class="form-control" value="{{ $value['jp_item_description'] }}" rows="7">{{ $value['jp_item_description'] }}</textarea>
+                                <small class="text-danger">{{ $errors->first('row.'. $key .'.jp_item_description') }}</small>
                               </div>
                             </td>
 
 
                             <td>
                               <div class="form-group">
-                                <input type="text" name="row[{{ $key }}][pp_unit_cost]" class="form-control" placeholder="Unit Cost" value="{{ $value['pp_unit_cost'] }}">
-                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_unit_cost') }}</small>
+                                <input type="text" name="row[{{ $key }}][jp_qty]" class="form-control" placeholder="Qty" value="{{ $value['jp_qty'] }}">
+                                <small class="text-danger">{{ $errors->first('row.'. $key .'.jp_qty') }}</small>
                               </div>
                             </td>
 
 
                             <td>
                               <div class="form-group">
-                                <input type="text" name="row[{{ $key }}][pp_total_cost]" class="form-control" placeholder="Total Cost" value="{{ $value['pp_total_cost'] }}">
-                                <small class="text-danger">{{ $errors->first('row.'. $key .'.pp_total_cost') }}</small>
+                                <textarea name="row[{{ $key }}][jp_nature_of_work]" class="form-control" value="{{ $value['jp_nature_of_work'] }}" rows="9">{{ $value['jp_nature_of_work'] }}</textarea>
+                                <small class="text-danger">{{ $errors->first('row.'. $key .'.jp_nature_of_work') }}</small>
                               </div>
                             </td>
 
@@ -182,7 +154,7 @@
 
 
             <div class="col-md-6" style="margin-top:10px;">
-              <div class="box box-solid" style="border:solid 1px;">
+              <div class="box box-solid" style= "border:solid 1px;">
                 <div class="box-body">
 
                   {!! __form::textbox(
@@ -222,9 +194,9 @@
 
 @section('modals')
 
-  @if(Session::has('PR_CREATE_SUCCESS'))
+  @if(Session::has('JR_CREATE_SUCCESS'))
     {!! __html::modal_print(
-    'pr_create', '<i class="fa fa-fw fa-check"></i> Saved!', Session::get('PR_CREATE_SUCCESS'), route('dashboard.pr.show', Session::get('PR_CREATE_SUCCESS_SLUG'))
+    'jr_create', '<i class="fa fa-fw fa-check"></i> Saved!', Session::get('JR_CREATE_SUCCESS'), route('dashboard.jr.show', Session::get('JR_CREATE_SUCCESS_SLUG'))
     ) !!}
   @endif
 
@@ -237,8 +209,8 @@
 
   <script type="text/javascript">
   
-    @if(Session::has('PR_CREATE_SUCCESS'))
-      $('#pr_create').modal('show');
+    @if(Session::has('JR_CREATE_SUCCESS'))
+      $('#jr_create').modal('show');
     @endif
 
 
@@ -252,40 +224,34 @@
 
                         '<td>' +
                           '<div class="form-group">' +
-                            '<input type="text" name="row[' + i + '][pp_stock_no]" class="form-control" placeholder="Stock No.">' +
+                            '<input type="text" name="row[' + i + '][jp_stock_no]" class="form-control" placeholder="Stock No.">' +
                           '</div>' +
                         '</td>' +
 
                         '<td>' +
                           '<div class="form-group">' +
-                            '<input type="text" name="row[' + i + '][pp_unit]" class="form-control" placeholder="Unit">' +
+                            '<input type="text" name="row[' + i + '][jp_unit]" class="form-control" placeholder="Unit">' +
                           '</div>' +
                         '</td>' +
 
                         '<td>' +
                           '<div class="form-group">' +
-                            '<input type="text" name="row[' + i + '][pp_item_name]" class="form-control" placeholder="Item Name">' +
+                            '<input type="text" name="row[' + i + '][jp_item_name]" class="form-control" placeholder="Item Name">' +
                           '</div>' +
                           '<div class="form-group">' +
-                            '<textarea type="text" name="row[' + i + '][pp_item_description]" placeholder="Item Description" class="form-control" rows="7"></textarea>' +
-                          '</div>' +
-                        '</td>' +
-
-                        '<td>' +
-                          '<div class="form-group">' +
-                            '<input type="text" name="row[' + i + '][pp_qty]" class="form-control pp_qty" placeholder="Qty">' +
+                            '<textarea type="text" name="row[' + i + '][jp_item_description]" placeholder="Item Description" class="form-control" rows="7"></textarea>' +
                           '</div>' +
                         '</td>' +
 
                         '<td>' +
                           '<div class="form-group">' +
-                            '<input type="text" name="row[' + i + '][pp_unit_cost]" class="form-control pp_unit_cost" placeholder="Unit Cost">' +
+                            '<input type="text" name="row[' + i + '][jp_qty]" class="form-control jp_qty" placeholder="Qty">' +
                           '</div>' +
                         '</td>' +
 
                         '<td>' +
                           '<div class="form-group">' +
-                            '<input type="text" name="row[' + i + '][pp_total_cost]" class="form-control pp_total_cost" placeholder="Total Cost">' +
+                            '<textarea type="text" name="row[' + i + '][jp_nature_of_work]" placeholder="Nature of Work" class="form-control" rows="9"></textarea>' +
                           '</div>' +
                         '</td>' +
 
@@ -297,24 +263,8 @@
 
         $("#table_body").append($(content));
         
-        $('.pp_qty').priceFormat({
+        $('.jp_qty').priceFormat({
             centsLimit: 0,
-            prefix: "",
-            thousandsSeparator: ",",
-            clearOnEmpty: true,
-            allowNegative: false
-        });
-        
-        $('.pp_unit_cost').priceFormat({
-            centsLimit: 3,
-            prefix: "",
-            thousandsSeparator: ",",
-            clearOnEmpty: true,
-            allowNegative: false
-        });
-        
-        $('.pp_total_cost').priceFormat({
-            centsLimit: 3,
             prefix: "",
             thousandsSeparator: ",",
             clearOnEmpty: true,

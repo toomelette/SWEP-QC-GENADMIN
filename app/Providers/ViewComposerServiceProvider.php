@@ -46,12 +46,16 @@ class ViewComposerServiceProvider extends ServiceProvider{
                         'dashboard.user.edit', 
                         'dashboard.pr.create', 
                         'dashboard.pr.edit',
+                        'dashboard.pr.eu_create',
+                        'dashboard.pr.eu_edit',
                         'dashboard.jr.create', 
                         'dashboard.jr.edit',
+                        'dashboard.jr.eu_create',
+                        'dashboard.jr.eu_edit',
                         'dashboard.po.create', 
                         'dashboard.po.edit',
                         'dashboard.jo.create', 
-                        'dashboard.jo.edit'], 'App\Core\ViewComposers\DepartmentComposer');
+                        'dashboard.jo.edit', ], 'App\Core\ViewComposers\DepartmentComposer');
         
 
         // Divisions
@@ -59,8 +63,12 @@ class ViewComposerServiceProvider extends ServiceProvider{
                         'dashboard.user.edit', 
                         'dashboard.pr.create', 
                         'dashboard.pr.edit',
+                        'dashboard.pr.eu_create',
+                        'dashboard.pr.eu_edit',
                         'dashboard.jr.create', 
                         'dashboard.jr.edit',
+                        'dashboard.jr.eu_create',
+                        'dashboard.jr.eu_edit',
                         'dashboard.po.create', 
                         'dashboard.po.edit',
                         'dashboard.jo.create', 

@@ -11,7 +11,7 @@
         <div class="pull-right">
           <code>Fields with asterisks(*) are required</code>
           &nbsp;
-          {!! __html::back_button(['dashboard.jr.index']) !!}
+          {!! __html::back_button(['dashboard.jr.eu_index']) !!}
         </div> 
       </div>
       
@@ -25,7 +25,7 @@
             
             @csrf  
 
-            <input type="hidden" name="type" value="M">
+            <input type="hidden" name="type" value="EU">
 
             {!! __form::select_dynamic(
               '6', 'dept_id', 'Department', old('dept_id') ? old('dept_id') : $jr->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
@@ -34,14 +34,6 @@
             {!! __form::select_dynamic(
               '6', 'div_id', 'Division', old('div_id') ? old('div_id') : $jr->div_id, $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
             ) !!}  
-
-            {!! __form::textbox(
-              '6', 'jr_no', 'text', 'PR No.', 'PR No.', old('jr_no') ? old('jr_no') : $jr->jr_no, $errors->has('jr_no'), $errors->first('jr_no'), ''
-            ) !!}
-
-            {!! __form::datepicker(
-              '6', 'date',  'Date', old('date') ? old('date') : $jr->date, $errors->has('date'), $errors->first('date')
-            ) !!}
 
 
 

@@ -22,31 +22,12 @@
             @csrf
 
             {!! __form::select_dynamic(
-              '6', 'dept_id', 'Department *', old('dept_id'), $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
+              '6', 'dept_id', 'Department', Auth::user()->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
             ) !!}
 
             {!! __form::select_dynamic(
-              '6', 'div_id', 'Division *', old('div_id'), $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
+              '6', 'div_id', 'Division', Auth::user()->div_id, $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
             ) !!}
-
-            <div class="col-md-12"></div>
-
-            {!! __form::textbox(
-              '3', 'pr_no', 'text', 'PR No.', 'PR No.', old('pr_no'), $errors->has('pr_no'), $errors->first('pr_no'), ''
-            ) !!}
-
-            {!! __form::datepicker(
-              '3', 'pr_no_date',  'PR Date', old('pr_no_date'), $errors->has('pr_no_date'), $errors->first('pr_no_date')
-            ) !!}
-
-            {!! __form::textbox(
-              '3', 'sai_no', 'text', 'SAI No.', 'SAI No.', old('sai_no'), $errors->has('sai_no'), $errors->first('sai_no'), ''
-            ) !!}
-
-            {!! __form::datepicker(
-              '3', 'sai_no_date',  'SAI Date', old('sai_no_date'), $errors->has('sai_no_date'), $errors->first('sai_no_date')
-            ) !!}
-
 
 
             {{-- Purchase Request Items --}}
