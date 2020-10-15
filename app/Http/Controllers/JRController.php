@@ -110,12 +110,12 @@ class JRController extends Controller{
 
 
 
-    public function jrint($slug, $page){
+    public function print($slug, $page){
 
         $jr = $this->jr_repo->findbySlug($slug);
 
         if ($page == 'FRONT') {
-            return view('jrintables.jr.jr_form_front')->with('jr', $jr);
+            return view('printables.jr.jr_form_front')->with('jr', $jr);
         }else{
             abort(404);
         }

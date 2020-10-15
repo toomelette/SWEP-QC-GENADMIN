@@ -22,6 +22,7 @@ class POSubscriber extends BaseSubscriber{
         $events->listen('po.store', 'App\Core\Subscribers\POSubscriber@onStore');
         $events->listen('po.update', 'App\Core\Subscribers\POSubscriber@onUpdate');
         $events->listen('po.destroy', 'App\Core\Subscribers\POSubscriber@onDestroy');
+        $events->listen('po.set_po_no', 'App\Core\Subscribers\POSubscriber@onSetPONo');
 
     }
 
@@ -30,6 +31,7 @@ class POSubscriber extends BaseSubscriber{
     public function onStore($po){
         
         $this->__cache->deletePattern(''. config('app.name') .'_cache:po:fetch:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:po:fetchByDeptId:'.$po->dept_id.':*');
 
         $this->session->flash('PO_CREATE_SUCCESS', 'The PO has been successfully created!');
         $this->session->flash('PO_CREATE_SUCCESS_SLUG', $po->slug);
@@ -41,6 +43,7 @@ class POSubscriber extends BaseSubscriber{
     public function onUpdate($po){
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:po:fetch:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:po:fetchByDeptId:'.$po->dept_id.':*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:po:findBySlug:'. $po->slug .'');
 
         $this->session->flash('PO_UPDATE_SUCCESS', 'The PO has been successfully updated!');
@@ -53,10 +56,24 @@ class POSubscriber extends BaseSubscriber{
     public function onDestroy($po){
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:po:fetch:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:po:fetchByDeptId:'.$po->dept_id.':*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:po:findBySlug:'. $po->slug .'');
 
         $this->session->flash('PO_DELETE_SUCCESS', 'The PO has been successfully deleted!');
         $this->session->flash('PO_DELETE_SUCCESS_SLUG', $po->slug);
+
+    }
+
+
+
+    public function onSetPONo($po){
+
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:po:fetch:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:po:fetchByDeptId:'.$po->dept_id.':*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:po:findBySlug:'. $po->slug .'');
+
+        $this->session->flash('PO_SET_PO_NO_SUCCESS', 'PO No. successfully set!');
+        $this->session->flash('PO_SET_PO_NO_SUCCESS_SLUG', $po->slug);
 
     }
 

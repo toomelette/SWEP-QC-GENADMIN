@@ -89,11 +89,21 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 
 	/** Purchase Order **/
+	Route::get('/po/eu_create', 'POController@euCreate')->name('po.eu_create');
+	Route::get('/po/{slug}/eu_edit', 'POController@euEdit')->name('po.eu_edit');
+	Route::get('/po/eu_list', 'POController@euIndex')->name('po.eu_index');
+	Route::post('/po/set_po_no/{slug}', 'POController@setPONO')->name('po.set_po_no');
+
 	Route::get('/po/print/{slug}/{page}', 'POController@print')->name('po.print');
 	Route::resource('po', 'POController');
 
 
 	/** Job Order **/
+	Route::get('/jo/eu_create', 'JOController@euCreate')->name('jo.eu_create');
+	Route::get('/jo/{slug}/eu_edit', 'JOController@euEdit')->name('jo.eu_edit');
+	Route::get('/jo/eu_list', 'JOController@euIndex')->name('jo.eu_index');
+	Route::post('/jo/set_jo_no/{slug}', 'JOController@setJONO')->name('jo.set_jo_no');
+
 	Route::get('/jo/print/{slug}/{page}', 'JOController@print')->name('jo.print');
 	Route::resource('jo', 'JOController');
 	

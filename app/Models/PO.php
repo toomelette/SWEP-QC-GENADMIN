@@ -60,4 +60,20 @@ class PO extends Model{
 
 
 
+    public function displayPONoSpan(){
+
+        $span = '';
+
+        if (isset($this->po_no)) {
+            $span = '<span class="badge bg-green">'. $this->po_no .'</span>';
+        }else{
+            $span = '<span class="badge bg-red">Not Set</span>';
+        }
+
+        return $span;
+
+    }
+
+
+
 }

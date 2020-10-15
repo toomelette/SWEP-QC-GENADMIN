@@ -40,8 +40,40 @@ class PORepository extends BaseRepository implements POInterface {
                    });
             }
 
-            return $po->select('po_id', 'dept_id', 'div_id', 'po_no', 'created_at', 'slug')
+            return $po->select('po_id', 'dept_id', 'div_id', 'po_no', 'date', 'created_at', 'slug')
                       ->with('department', 'division', 'poParameter')
+                      ->sortable()
+                      ->orderBy('updated_at', 'desc')
+                      ->paginate($entries);
+
+        });
+
+        return $po_list;
+
+    }
+
+
+
+
+    public function fetchByDeptId($dept_id, $request){
+
+        $key = str_slug($request->fullUrl(), '_');
+        $entries = isset($request->e) ? $request->e : 20;
+
+        $po_list = $this->cache->remember('po:fetchByDeptId:'.$dept_id.':' . $key, 240, function() use ($dept_id, $request, $entries){
+
+            $po = $this->po->newQuery();
+            
+            if(isset($request->q)){
+                $po->where('po_no', 'LIKE', '%'. $request->q .'%')
+                   ->orwhereHas('poParameter', function ($model) use ($request) {
+                        $model->where('item_name', 'LIKE', '%'. $request->q .'%');
+                   });
+            }
+
+            return $po->select('po_id', 'dept_id', 'div_id', 'po_no', 'created_at', 'slug')
+                      ->where('dept_id', $dept_id)
+                      ->with('division', 'poParameter')
                       ->sortable()
                       ->orderBy('updated_at', 'desc')
                       ->paginate($entries);
@@ -98,8 +130,14 @@ class PORepository extends BaseRepository implements POInterface {
         $po->to = $request->to;
         $po->address = $request->address;
         $po->tin = $request->tin;
-        $po->po_no = $request->po_no;
-        $po->date = $this->__dataType->date_parse($request->date);
+
+        if($request->has('po_no')){
+            $po->po_no = $request->po_no;
+        }
+        if($request->has('date')){
+            $po->date = $this->__dataType->date_parse($request->date);
+        }
+
         $po->mode_of_procurement = $request->mode_of_procurement;
         $po->place_of_delivery = $request->place_of_delivery;
         $po->date_of_delivery = $this->__dataType->date_parse($request->date_of_delivery);
@@ -114,6 +152,23 @@ class PORepository extends BaseRepository implements POInterface {
         $po->save();
 
         $po->poParameter()->delete();
+        
+        return $po;
+
+    }
+
+
+
+
+    public function updatePONo($request, $slug){
+
+        $po = $this->findBySlug($slug);
+        $po->po_no = $request->po_no;
+        $po->date = $this->__dataType->date_parse($request->date);
+        $po->updated_at = $this->carbon->now();
+        $po->ip_updated = request()->ip();
+        $po->user_updated = $this->auth->user()->user_id;
+        $po->save();
         
         return $po;
 

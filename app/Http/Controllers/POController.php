@@ -7,6 +7,7 @@ use App\Core\Interfaces\POInterface;
 use App\Core\Interfaces\POParameterInterface;
 use App\Http\Requests\PO\POFormRequest;
 use App\Http\Requests\PO\POFilterRequest;
+use App\Http\Requests\PO\POSetPONoFormRequest;
 
 
 class POController extends Controller{
@@ -33,11 +34,29 @@ class POController extends Controller{
 
     }
 
+
+
+    
+    public function euIndex(POFilterRequest $request){
+
+        $po_list = $this->po_repo->fetchByDeptId($this->auth->user()->dept_id, $request);
+        $request->flash();
+        return view('dashboard.po.eu_index')->with('po_list', $po_list);
+
+    }
+
     
 
 
     public function create(){
         return view('dashboard.po.create');
+    }
+
+    
+
+
+    public function euCreate(){
+        return view('dashboard.po.eu_create');
     }
 
 
@@ -65,6 +84,16 @@ class POController extends Controller{
 
         $po = $this->po_repo->findbySlug($slug);
         return view('dashboard.po.edit')->with('po', $po);
+
+    }
+ 
+
+
+
+    public function euEdit($slug){
+
+        $po = $this->po_repo->findbySlug($slug);
+        return view('dashboard.po.eu_edit')->with('po', $po);
 
     }
  
@@ -109,7 +138,12 @@ class POController extends Controller{
         }
         
         $this->event->fire('po.update', $po);
-        return redirect()->route('dashboard.po.index');
+
+        if ($request->type == 'M') {
+            return redirect()->route('dashboard.po.index');
+        }elseif ($request->type == 'EU') {
+            return redirect()->route('dashboard.po.eu_index');
+        }
 
     }
 
@@ -120,6 +154,17 @@ class POController extends Controller{
 
         $po = $this->po_repo->destroy($slug);
         $this->event->fire('po.destroy', $po);
+        return redirect()->back();
+
+    }
+
+    
+
+
+    public function setPONO(POSetPONoFormRequest $request, $slug){
+
+        $po = $this->po_repo->updatePONo($request, $slug);
+        $this->event->fire('po.set_po_no', $po);
         return redirect()->back();
 
     }

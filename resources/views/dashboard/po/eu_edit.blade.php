@@ -11,7 +11,7 @@
         <div class="pull-right">
           <code>Fields with asterisks(*) are required</code>
           &nbsp;
-          {!! __html::back_button(['dashboard.po.index']) !!}
+          {!! __html::back_button(['dashboard.po.eu_index']) !!}
         </div> 
       </div>
       
@@ -25,7 +25,7 @@
             
             @csrf    
 
-            <input type="hidden" name="type" value="M">
+            <input type="hidden" name="type" value="EU">
 
             {!! __form::select_dynamic(
               '6', 'dept_id', 'Department *', old('dept_id') ? old('dept_id') : $po->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
@@ -36,43 +36,26 @@
             ) !!}
 
 
-            <div class="col-md-6" style="margin-top:10px;">
+            <div class="col-md-12" style="margin-top:10px;">
               <div class="box box-solid" style="border:solid 1px; border-color:#A9A9A9;">
                 <div class="box-body">
 
                   {!! __form::textbox(
-                    '12', 'to', 'text', 'To', 'To', old('to') ? old('to') : $po->to, $errors->has('to'), $errors->first('to'), ''
+                    '6', 'to', 'text', 'To', 'To', old('to') ? old('to') : $po->to, $errors->has('to'), $errors->first('to'), ''
                   ) !!}
 
                   {!! __form::textbox(
-                    '12', 'address', 'text', 'Address', 'Address', old('address') ? old('address') : $po->address, $errors->has('address'), $errors->first('address'), ''
+                    '6', 'address', 'text', 'Address', 'Address', old('address') ? old('address') : $po->address, $errors->has('address'), $errors->first('address'), ''
                   ) !!}
                     
                   {!! __form::textbox(
-                    '12', 'tin', 'text', 'TIN', 'TIN', old('tin') ? old('tin') : $po->tin, $errors->has('tin'), $errors->first('tin'), ''
+                    '6', 'tin', 'text', 'TIN', 'TIN', old('tin') ? old('tin') : $po->tin, $errors->has('tin'), $errors->first('tin'), ''
+                  ) !!}
+
+                  {!! __form::textbox(
+                    '6', 'mode_of_procurement', 'text', 'Mode of Procurement', 'Mode of Procurement', old('mode_of_procurement') ? old('mode_of_procurement') : $po->mode_of_procurement, $errors->has('mode_of_procurement'), $errors->first('mode_of_procurement'), ''
                   ) !!}
                 
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col-md-6" style="margin-top:10px;">
-              <div class="box box-solid" style="border:solid 1px; border-color:#A9A9A9;">
-                <div class="box-body">
-
-                  {!! __form::textbox(
-                    '12', 'po_no', 'text', 'PO No.', 'PO No.', old('po_no') ? old('po_no') : $po->po_no, $errors->has('po_no'), $errors->first('po_no'), ''
-                  ) !!}
-
-                  {!! __form::datepicker(
-                    '12', 'date',  'Date', old('date') ? old('date') : $po->date, $errors->has('date'), $errors->first('date')
-                  ) !!}
-
-                  {!! __form::textbox(
-                    '12', 'mode_of_procurement', 'text', 'Mode of Procurement', 'Mode of Procurement', old('mode_of_procurement') ? old('mode_of_procurement') : $po->mode_of_procurement, $errors->has('mode_of_procurement'), $errors->first('mode_of_procurement'), ''
-                  ) !!}
-                    
                 </div>
               </div>
             </div>

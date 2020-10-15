@@ -54,6 +54,8 @@ class ViewComposerServiceProvider extends ServiceProvider{
                         'dashboard.jr.eu_edit',
                         'dashboard.po.create', 
                         'dashboard.po.edit',
+                        'dashboard.po.eu_create',
+                        'dashboard.po.eu_edit',
                         'dashboard.jo.create', 
                         'dashboard.jo.edit', ], 'App\Core\ViewComposers\DepartmentComposer');
         
@@ -71,6 +73,8 @@ class ViewComposerServiceProvider extends ServiceProvider{
                         'dashboard.jr.eu_edit',
                         'dashboard.po.create', 
                         'dashboard.po.edit',
+                        'dashboard.po.eu_create',
+                        'dashboard.po.eu_edit',
                         'dashboard.jo.create', 
                         'dashboard.jo.edit'], 'App\Core\ViewComposers\DivisionComposer');
         

@@ -121,8 +121,15 @@ class JRRepository extends BaseRepository implements JRInterface {
         $jr = $this->findBySlug($slug);
         $jr->dept_id = $request->dept_id;
         $jr->div_id = $request->div_id;
-        $jr->jr_no = $request->jr_no;
-        $jr->date = $this->__dataType->date_parse($request->date);
+
+        if($request->has('jr_no')){
+            $jr->jr_no = $request->jr_no;
+        }
+
+        if($request->has('date')){
+            $jr->date = $this->__dataType->date_parse($request->date);
+        }
+
         $jr->purpose = nl2br($request->purpose);
         $jr->req_by_name = $request->req_by_name;
         $jr->req_by_designation = $request->req_by_designation;
