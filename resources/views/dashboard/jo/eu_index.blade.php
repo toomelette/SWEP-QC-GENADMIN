@@ -51,7 +51,7 @@
               <td id="mid-vert">{!! $data->displayJONoSpan() !!}</td>
               <td id="mid-vert">{{ $data->description }}</td>
               <td id="mid-vert">{{ optional($data->division)->name }}</td>
-              <td id="mid-vert">{{ __dataType::date_parse($data->created_at, 'm/d/Y') }}</td>
+              <td id="mid-vert">{{ __dataType::date_parse($data->created_at, 'm/d/Y h:i A') }}</td>
               
               <td id="mid-vert">
                 <div class="btn-group">
