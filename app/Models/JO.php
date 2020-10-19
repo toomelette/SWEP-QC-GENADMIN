@@ -61,5 +61,21 @@ class JO extends Model{
 
 
 
+    public function displayJONoSpan(){
+
+        $span = '';
+
+        if (isset($this->jo_no)) {
+            $span = '<span class="badge bg-green">'. $this->jo_no .'</span>';
+        }else{
+            $span = '<span class="badge bg-red">Not Set</span>';
+        }
+
+        return $span;
+
+    }
+
+
+
 
 }

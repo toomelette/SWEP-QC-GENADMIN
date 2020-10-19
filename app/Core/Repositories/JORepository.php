@@ -38,8 +38,38 @@ class JORepository extends BaseRepository implements JOInterface {
                    ->orWhere('description', 'LIKE', '%'. $request->q .'%');
             }
 
-            return $jo->select('jo_id', 'dept_id', 'div_id', 'jo_no', 'description', 'created_at', 'slug')
+            return $jo->select('jo_id', 'dept_id', 'div_id', 'jo_no', 'description', 'date', 'jr_id', 'created_at', 'slug')
                       ->with('department', 'division')
+                      ->sortable()
+                      ->orderBy('updated_at', 'desc')
+                      ->paginate($entries);
+
+        });
+
+        return $jo_list;
+
+    }
+
+
+
+
+    public function fetchByDeptId($dept_id, $request){
+
+        $key = str_slug($request->fullUrl(), '_');
+        $entries = isset($request->e) ? $request->e : 20;
+
+        $jo_list = $this->cache->remember('jo:fetchByDeptId:'.$dept_id.':' . $key, 240, function() use ($dept_id, $request, $entries){
+
+            $jo = $this->jo->newQuery();
+            
+            if(isset($request->q)){
+                $jo->where('jo_no', 'LIKE', '%'. $request->q .'%')
+                   ->orWhere('description', 'LIKE', '%'. $request->q .'%');
+            }
+
+            return $jo->select('jo_id', 'div_id', 'jo_no', 'description', 'created_at', 'slug')
+                      ->where('dept_id', $dept_id)
+                      ->with('division')
                       ->sortable()
                       ->orderBy('updated_at', 'desc')
                       ->paginate($entries);
@@ -97,8 +127,14 @@ class JORepository extends BaseRepository implements JOInterface {
         $jo->to = $request->to;
         $jo->address = $request->address;
         $jo->tin = $request->tin;
-        $jo->jo_no = $request->jo_no;
-        $jo->date = $this->__dataType->date_parse($request->date);
+
+        if($request->has('jo_no')){
+            $jo->jo_no = $request->jo_no;
+        }
+        if($request->has('date')){
+            $jo->date = $this->__dataType->date_parse($request->date);
+        }
+
         $jo->jr_id = $request->jr_id;
         $jo->place_of_delivery = $request->place_of_delivery;
         $jo->date_of_delivery = $this->__dataType->date_parse($request->date_of_delivery);
@@ -108,6 +144,24 @@ class JORepository extends BaseRepository implements JOInterface {
         $jo->scope_of_works = $request->scope_of_works;
         $jo->bur_no = $request->bur_no;
         $jo->amount = $this->__dataType->string_to_num($request->amount);
+        $jo->updated_at = $this->carbon->now();
+        $jo->ip_updated = request()->ip();
+        $jo->user_updated = $this->auth->user()->user_id;
+        $jo->save();
+        
+        return $jo;
+
+    }
+
+
+
+
+    public function updateJONo($request, $slug){
+
+        $jo = $this->findBySlug($slug);
+        $jo->jo_no = $request->jo_no;
+        $jo->date = $this->__dataType->date_parse($request->date);
+        $jo->jr_id = $request->jr_id;
         $jo->updated_at = $this->carbon->now();
         $jo->ip_updated = request()->ip();
         $jo->user_updated = $this->auth->user()->user_id;

@@ -143,6 +143,8 @@ class POController extends Controller{
             return redirect()->route('dashboard.po.index');
         }elseif ($request->type == 'EU') {
             return redirect()->route('dashboard.po.eu_index');
+        }else{
+            abort(404);
         }
 
     }

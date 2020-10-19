@@ -7,6 +7,7 @@ use App\Core\Interfaces\JOInterface;
 use App\Core\Interfaces\JOParameterInterface;
 use App\Http\Requests\JO\JOFormRequest;
 use App\Http\Requests\JO\JOFilterRequest;
+use App\Http\Requests\JO\JOSetJONoFormRequest;
 
 
 class JOController extends Controller{
@@ -31,11 +32,29 @@ class JOController extends Controller{
 
     }
 
+
+
+    
+    public function euIndex(JOFilterRequest $request){
+
+        $jo_list = $this->jo_repo->fetchByDeptId($this->auth->user()->dept_id, $request);
+        $request->flash();
+        return view('dashboard.jo.eu_index')->with('jo_list', $jo_list);
+
+    }
+
     
 
 
     public function create(){
         return view('dashboard.jo.create');
+    }
+
+    
+
+
+    public function euCreate(){
+        return view('dashboard.jo.eu_create');
     }
 
 
@@ -57,6 +76,16 @@ class JOController extends Controller{
 
         $jo = $this->jo_repo->findbySlug($slug);
         return view('dashboard.jo.edit')->with('jo', $jo);
+
+    }
+ 
+
+
+
+    public function euEdit($slug){
+
+        $jo = $this->jo_repo->findbySlug($slug);
+        return view('dashboard.jo.eu_edit')->with('jo', $jo);
 
     }
  
@@ -95,7 +124,14 @@ class JOController extends Controller{
         $jo = $this->jo_repo->update($request, $slug);
         
         $this->event->fire('jo.update', $jo);
-        return redirect()->route('dashboard.jo.index');
+
+        if ($request->type == 'M') {
+            return redirect()->route('dashboard.jo.index');
+        }elseif ($request->type == 'EU') {
+            return redirect()->route('dashboard.jo.eu_index');
+        }else{
+            abort(404);
+        }
 
     }
 
@@ -106,6 +142,17 @@ class JOController extends Controller{
 
         $jo = $this->jo_repo->destroy($slug);
         $this->event->fire('jo.destroy', $jo);
+        return redirect()->back();
+
+    }
+
+    
+
+
+    public function setJONO(JOSetJONoFormRequest $request, $slug){
+
+        $jo = $this->jo_repo->updateJONo($request, $slug);
+        $this->event->fire('jo.set_jo_no', $jo);
         return redirect()->back();
 
     }

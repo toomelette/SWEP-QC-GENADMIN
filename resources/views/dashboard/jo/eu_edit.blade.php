@@ -11,7 +11,7 @@
         <div class="pull-right">
             <code>Fields with asterisks(*) are required</code>
             &nbsp;
-            {!! __html::back_button(['dashboard.jo.index']) !!}
+            {!! __html::back_button(['dashboard.jo.eu_index']) !!}
         </div> 
       </div>
       
@@ -25,7 +25,7 @@
 
             <input name="_method" value="PUT" type="hidden">
             
-            <input type="hidden" name="type" value="M">
+            <input type="hidden" name="type" value="EU">
 
             {!! __form::select_dynamic(
               '6', 'dept_id', 'Department *', old('dept_id') ? old('dept_id') : $jo->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
@@ -36,7 +36,7 @@
             ) !!}
 
 
-            <div class="col-md-6" style="margin-top:10px;">
+            <div class="col-md-12" style="margin-top:10px;">
               <div class="box box-solid" style="border:solid 1px; border-color:#A9A9A9;">
                 <div class="box-body">
 
@@ -52,27 +52,6 @@
                     '12', 'tin', 'text', 'TIN', 'TIN', old('tin') ? old('tin') : $jo->tin, $errors->has('tin'), $errors->first('tin'), ''
                   ) !!}
                 
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col-md-6" style="margin-top:10px;">
-              <div class="box box-solid" style="border:solid 1px; border-color:#A9A9A9;">
-                <div class="box-body">
-
-                  {!! __form::textbox(
-                    '12', 'jo_no', 'text', 'JO No.', 'JO No.', old('jo_no') ? old('jo_no') : $jo->jo_no, $errors->has('jo_no'), $errors->first('jo_no'), ''
-                  ) !!}
-
-                  {!! __form::datepicker(
-                    '12', 'date',  'Date', old('date') ? old('date') : $jo->date, $errors->has('date'), $errors->first('date')
-                  ) !!}
-
-                  {!! __form::select_dynamic(
-                    '12', 'jr_id', 'Reference J.R No. *', old('jr_id') ? old('jr_id') : $jo->jr_id, $global_jr_all, 'jr_id', 'jr_no', $errors->has('jr_id'), $errors->first('jr_id'), 'select2', ''
-                  ) !!}
-                    
                 </div>
               </div>
             </div>

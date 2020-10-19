@@ -57,7 +57,9 @@ class ViewComposerServiceProvider extends ServiceProvider{
                         'dashboard.po.eu_create',
                         'dashboard.po.eu_edit',
                         'dashboard.jo.create', 
-                        'dashboard.jo.edit', ], 'App\Core\ViewComposers\DepartmentComposer');
+                        'dashboard.jo.edit',
+                        'dashboard.jo.eu_create',
+                        'dashboard.jo.eu_edit', ], 'App\Core\ViewComposers\DepartmentComposer');
         
 
         // Divisions
@@ -76,12 +78,17 @@ class ViewComposerServiceProvider extends ServiceProvider{
                         'dashboard.po.eu_create',
                         'dashboard.po.eu_edit',
                         'dashboard.jo.create', 
-                        'dashboard.jo.edit'], 'App\Core\ViewComposers\DivisionComposer');
+                        'dashboard.jo.edit',
+                        'dashboard.jo.eu_create',
+                        'dashboard.jo.eu_edit',], 'App\Core\ViewComposers\DivisionComposer');
         
 
         // JR
         View::composer(['dashboard.jo.create', 
-                        'dashboard.jo.edit'], 'App\Core\ViewComposers\JRComposer');
+                        'dashboard.jo.edit',
+                        'dashboard.jo.index',
+                        'dashboard.jo.eu_create',
+                        'dashboard.jo.eu_edit', ], 'App\Core\ViewComposers\JRComposer');
          
     }
 
