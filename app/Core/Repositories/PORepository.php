@@ -32,6 +32,14 @@ class PORepository extends BaseRepository implements POInterface {
         $po_list = $this->cache->remember('po:fetch:' . $key, 240, function() use ($request, $entries){
 
             $po = $this->po->newQuery();
+
+            if (isset($request->dept)) {
+                $po->where('dept_id', $request->dept);
+            }
+
+            if (isset($request->div)) {
+                $po->where('div_id', $request->div);
+            }
             
             if(isset($request->q)){
                 $po->where('po_no', 'LIKE', '%'. $request->q .'%')

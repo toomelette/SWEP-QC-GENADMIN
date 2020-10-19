@@ -32,6 +32,14 @@ class JORepository extends BaseRepository implements JOInterface {
         $jo_list = $this->cache->remember('jo:fetch:' . $key, 240, function() use ($request, $entries){
 
             $jo = $this->jo->newQuery();
+
+            if (isset($request->dept)) {
+                $jo->where('dept_id', $request->dept);
+            }
+
+            if (isset($request->div)) {
+                $jo->where('div_id', $request->div);
+            }
             
             if(isset($request->q)){
                 $jo->where('jo_no', 'LIKE', '%'. $request->q .'%')

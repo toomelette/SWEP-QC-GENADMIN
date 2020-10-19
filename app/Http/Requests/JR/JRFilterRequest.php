@@ -21,6 +21,8 @@ class JRFilterRequest extends FormRequest{
         return [
 
             'q' => 'nullable|string|max:90',
+            'dept' => 'nullable|string|max:11',
+            'div' => 'nullable|string|max:11',
 
         ];
 

@@ -24,8 +24,8 @@ class JRFormRequest extends FormRequest{
 
         $rules = [
 
-            'dept_id' => 'sometimes|required|string|max:11',
-            'div_id' => 'sometimes|required|string|max:11',
+            'dept_id' => 'required|string|max:11',
+            'div_id' => 'nullable|string|max:11',
             'jr_no' => 'nullable|string|max:45',
             'date' => 'nullable|date_format:"m/d/Y"',
             'purpose'=>'nullable|string|max:250',

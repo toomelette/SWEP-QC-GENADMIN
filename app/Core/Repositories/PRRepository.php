@@ -32,6 +32,14 @@ class PRRepository extends BaseRepository implements PRInterface {
         $pr_list = $this->cache->remember('pr:fetch:' . $key, 240, function() use ($request, $entries){
 
             $pr = $this->pr->newQuery();
+
+            if (isset($request->dept)) {
+                $pr->where('dept_id', $request->dept);
+            }
+
+            if (isset($request->div)) {
+                $pr->where('div_id', $request->div);
+            }
             
             if(isset($request->q)){
                 $pr->where('pr_no', 'LIKE', '%'. $request->q .'%')

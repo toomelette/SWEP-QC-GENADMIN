@@ -32,6 +32,14 @@ class JRRepository extends BaseRepository implements JRInterface {
         $jr_list = $this->cache->remember('jr:fetch:' . $key, 240, function() use ($request, $entries){
 
             $jr = $this->jr->newQuery();
+
+            if (isset($request->dept)) {
+                $jr->where('dept_id', $request->dept);
+            }
+
+            if (isset($request->div)) {
+                $jr->where('div_id', $request->div);
+            }
             
             if(isset($request->q)){
                 $jr->where('jr_no', 'LIKE', '%'. $request->q .'%')

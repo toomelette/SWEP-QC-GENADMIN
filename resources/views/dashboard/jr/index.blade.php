@@ -11,6 +11,8 @@
                         'direction' => Request::get('direction'),
                         'page' => Request::get('page'),
                         'e' => Request::get('e'),
+                        'dept' => Request::get('dept'),
+                        'div' => Request::get('div'),
                       ];
 
 ?>
@@ -28,6 +30,19 @@
     
     {{-- Form Start --}}
     <form data-pjax class="form" id="filter_form" method="GET" autocomplete="off" action="{{ route('dashboard.jr.index') }}">
+
+    {{-- Advance Filters --}}
+    {!! __html::filter_open() !!}
+
+      {!! __form::select_dynamic_for_filter(
+        '4', 'dept', 'Department', old('dept'), $global_departments_all, 'dept_id', 'name', 'submit_jr_filter', 'select2', 'style="width:100%;"'
+      ) !!}
+
+      {!! __form::select_dynamic_for_filter(
+        '4', 'div', 'Division', old('div'), $global_divisions_all, 'div_id', 'name', 'submit_jr_filter', 'select2', 'style="width:100%;"'
+      ) !!}
+
+    {!! __html::filter_close('submit_jr_filter') !!}
 
     <div class="box box-solid" id="pjax-container" style="overflow-x:auto;">
 

@@ -25,8 +25,8 @@ class PRFormRequest extends FormRequest{
         $rules = [
 
             'type' => 'sometimes|required|string|max:2',
-            'dept_id' => 'sometimes|required|string|max:11',
-            'div_id' => 'sometimes|required|string|max:11',
+            'dept_id' => 'required|string|max:11',
+            'div_id' => 'nullable|string|max:11',
             'pr_no' => 'nullable|string|max:45',
             'pr_no_date' => 'nullable|date_format:"m/d/Y"',
             'sai_no' => 'nullable|string|max:45',

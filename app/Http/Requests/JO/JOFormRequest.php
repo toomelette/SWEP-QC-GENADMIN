@@ -23,7 +23,7 @@ class JOFormRequest extends FormRequest{
         return [
 
             'dept_id' => 'required|string|max:11',
-            'div_id' => 'required|string|max:11',
+            'div_id' => 'nullable|string|max:11',
             'to' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
             'tin' => 'nullable|string|max:90',
