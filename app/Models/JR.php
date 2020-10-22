@@ -21,7 +21,7 @@ class JR extends Model{
         'jr_id' => '',
         'dept_id' => '',
         'div_id' => '',
-        'jr_no' => '',
+        'jr_no' => null,
         'date' => null,
         'purpose' => null,
         'req_by_name' => null,

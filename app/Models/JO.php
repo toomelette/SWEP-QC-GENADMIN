@@ -25,7 +25,7 @@ class JO extends Model{
         'to' => '',
         'address' => '',
         'tin' => '',
-        'jo_no' => '',
+        'jo_no' => null,
         'date' => null,
         'place_of_delivery' => '',
         'date_of_delivery' => null,

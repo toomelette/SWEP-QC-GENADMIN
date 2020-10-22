@@ -24,7 +24,7 @@ class PO extends Model{
         'to' => '',
         'address' => '',
         'tin' => '',
-        'po_no' => '',
+        'po_no' => null,
         'date' => null,
         'mode_of_procurement' => '',
         'place_of_delivery' => '',
