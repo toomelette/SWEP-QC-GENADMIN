@@ -161,7 +161,6 @@ class JRRepository extends BaseRepository implements JRInterface {
 
         $jr = $this->findBySlug($slug);
         $jr->jr_no = $request->jr_no;
-        $jr->date = $this->__dataType->date_parse($request->date);
         $jr->updated_at = $this->carbon->now();
         $jr->ip_updated = request()->ip();
         $jr->user_updated = $this->auth->user()->user_id;

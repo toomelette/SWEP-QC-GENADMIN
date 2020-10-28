@@ -28,11 +28,15 @@
             @csrf    
 
             {!! __form::select_dynamic(
-              '6', 'dept_id', 'Department', Auth::user()->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
+              '4', 'dept_id', 'Department', Auth::user()->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
             ) !!}
 
             {!! __form::select_dynamic(
-              '6', 'div_id', 'Division', Auth::user()->div_id, $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
+              '4', 'div_id', 'Division', Auth::user()->div_id, $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
+            ) !!}
+
+            {!! __form::datepicker(
+              '4', 'pr_no_date',  'PR Date', old('pr_no_date') ? old('pr_no_date') : $pr->pr_no_date, $errors->has('pr_no_date'), $errors->first('pr_no_date')
             ) !!}
 
             {{-- Purchase Request Items --}}

@@ -85,7 +85,6 @@
                      href="#" 
                      id="set_jr_no_btn" 
                      data-jr_no="{{ $data->jr_no }}" 
-                     data-date="{{ __dataType::date_parse($data->date, 'm/d/Y') }}" 
                      data-url="{{ route('dashboard.jr.set_jr_no', $data->slug) }}">
                     {{ isset($data->jr_no) ? 'Update JR No.' : 'Set JR No' }}<b></b>
                   </a>
@@ -162,11 +161,7 @@
             <div class="row">
 
               {!! __form::textbox(
-                '6', 'jr_no', 'text', 'JR No.', 'JR No.', '', $errors->has('jr_no'), $errors->first('jr_no'), ''
-              ) !!}
-
-              {!! __form::datepicker(
-                '6', 'date',  'Date', '', $errors->has('date'), $errors->first('date')
+                '12', 'jr_no', 'text', 'JR No.', 'JR No.', '', $errors->has('jr_no'), $errors->first('jr_no'), ''
               ) !!}
 
           </div>
@@ -211,15 +206,6 @@
         $("#set_jr_no_form").attr("action", $(this).data("url"));
 
         $("#set_jr_no_form #jr_no").val($(this).data("jr_no"));
-        $("#set_jr_no_form #date").val($(this).data("date"));
-
-        $('.datepicker').each(function(){
-            $(this).datepicker({
-                autoclose: true,
-                dateFormat: "mm/dd/yy",
-                orientation: "bottom"
-            });
-        });
 
     });
 

@@ -172,7 +172,6 @@ class PORepository extends BaseRepository implements POInterface {
 
         $po = $this->findBySlug($slug);
         $po->po_no = $request->po_no;
-        $po->date = $this->__dataType->date_parse($request->date);
         $po->updated_at = $this->carbon->now();
         $po->ip_updated = request()->ip();
         $po->user_updated = $this->auth->user()->user_id;

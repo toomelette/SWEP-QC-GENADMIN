@@ -85,9 +85,7 @@
                      href="#" 
                      id="set_pr_no_btn" 
                      data-pr_no="{{ $data->pr_no }}" 
-                     data-pr_no_date="{{ __dataType::date_parse($data->pr_no_date, 'm/d/Y') }}" 
                      data-sai_no="{{ $data->sai_no }}" 
-                     data-sai_no_date="{{ __dataType::date_parse($data->sai_no_date, 'm/d/Y') }}" 
                      data-url="{{ route('dashboard.pr.set_pr_no', $data->slug) }}">
                     {{ isset($data->pr_no) ? 'Update PR No.' : 'Set PR No' }}<b></b>
                   </a>
@@ -169,16 +167,8 @@
                 '6', 'pr_no', 'text', 'PR No.', 'PR No.', '', $errors->has('pr_no'), $errors->first('pr_no'), ''
               ) !!}
 
-              {!! __form::datepicker(
-                '6', 'pr_no_date',  'PR No. Date', '', $errors->has('pr_no_date'), $errors->first('pr_no_date')
-              ) !!}
-
               {!! __form::textbox(
                 '6', 'sai_no', 'text', 'SAI No.', 'SAI No.', '', $errors->has('sai_no'), $errors->first('sai_no'), ''
-              ) !!}
-
-              {!! __form::datepicker(
-                '6', 'sai_no_date',  'SAI No. Date', '', $errors->has('sai_no_date'), $errors->first('sai_no_date')
               ) !!}
 
           </div>
@@ -225,17 +215,7 @@
         $("#set_pr_no_form").attr("action", $(this).data("url"));
 
         $("#set_pr_no_form #pr_no").val($(this).data("pr_no"));
-        $("#set_pr_no_form #pr_no_date").val($(this).data("pr_no_date"));
         $("#set_pr_no_form #sai_no").val($(this).data("sai_no"));
-        $("#set_pr_no_form #sai_no_date").val($(this).data("sai_no_date"));
-
-        $('.datepicker').each(function(){
-            $(this).datepicker({
-                autoclose: true,
-                dateFormat: "mm/dd/yy",
-                orientation: "bottom"
-            });
-        });
 
     });
 

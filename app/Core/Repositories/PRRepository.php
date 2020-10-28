@@ -104,23 +104,10 @@ class PRRepository extends BaseRepository implements PRInterface {
         $pr->pr_id = $this->getPRIdInc();
         $pr->dept_id = $request->dept_id;
         $pr->div_id = $request->div_id;
-
-        if($request->has('pr_no')){
-            $pr->pr_no = $request->pr_no;
-        }
-
-        if($request->has('pr_no_date')){
-            $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
-        }
-
-        if($request->has('sai_no')){
-            $pr->sai_no = $request->sai_no;
-        }
-
-        if($request->has('sai_no_date')){
-            $pr->sai_no_date = $this->__dataType->date_parse($request->sai_no_date);
-        }
-
+        $pr->pr_no = $request->pr_no;
+        $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
+        $pr->sai_no = $request->sai_no;
+        $pr->sai_no_date = $this->__dataType->date_parse($request->sai_no_date);
         $pr->purpose = nl2br($request->purpose);
         $pr->req_by_name = $request->req_by_name;
         $pr->req_by_designation = $request->req_by_designation;
@@ -146,10 +133,23 @@ class PRRepository extends BaseRepository implements PRInterface {
         $pr = $this->findBySlug($slug);
         $pr->dept_id = $request->dept_id;
         $pr->div_id = $request->div_id;
-        $pr->pr_no = $request->pr_no;
-        $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
-        $pr->sai_no = $request->sai_no;
-        $pr->sai_no_date = $this->__dataType->date_parse($request->sai_no_date);
+
+        if($request->has('pr_no')){
+            $pr->pr_no = $request->pr_no;
+        }
+
+        if($request->has('pr_no_date')){
+            $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
+        }
+
+        if($request->has('sai_no')){
+            $pr->sai_no = $request->sai_no;
+        }
+
+        if($request->has('sai_no_date')){
+            $pr->sai_no_date = $this->__dataType->date_parse($request->sai_no_date);
+        }
+
         $pr->purpose = nl2br($request->purpose);
         $pr->req_by_name = $request->req_by_name;
         $pr->req_by_designation = $request->req_by_designation;
@@ -173,9 +173,7 @@ class PRRepository extends BaseRepository implements PRInterface {
 
         $pr = $this->findBySlug($slug);
         $pr->pr_no = $request->pr_no;
-        $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
         $pr->sai_no = $request->sai_no;
-        $pr->sai_no_date = $this->__dataType->date_parse($request->sai_no_date);
         $pr->updated_at = $this->carbon->now();
         $pr->ip_updated = request()->ip();
         $pr->user_updated = $this->auth->user()->user_id;

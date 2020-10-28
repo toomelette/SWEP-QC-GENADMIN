@@ -22,11 +22,15 @@
             @csrf
 
             {!! __form::select_dynamic(
-              '6', 'dept_id', 'Department *', Auth::user()->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
+              '4', 'dept_id', 'Department *', Auth::user()->dept_id, $global_departments_all, 'dept_id', 'name', $errors->has('dept_id'), $errors->first('dept_id'), 'select2', ''
             ) !!}
 
             {!! __form::select_dynamic(
-              '6', 'div_id', 'Division *', Auth::user()->div_id, $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
+              '4', 'div_id', 'Division *', Auth::user()->div_id, $global_divisions_all, 'div_id', 'name', $errors->has('div_id'), $errors->first('div_id'), 'select2', ''
+            ) !!}
+
+            {!! __form::datepicker(
+              '4', 'date',  'Date', old('date') ? old('date') : Carbon::now()->format('m/d/Y'), $errors->has('date'), $errors->first('date')
             ) !!}
 
 

@@ -168,7 +168,6 @@ class JORepository extends BaseRepository implements JOInterface {
 
         $jo = $this->findBySlug($slug);
         $jo->jo_no = $request->jo_no;
-        $jo->date = $this->__dataType->date_parse($request->date);
         $jo->jr_id = $request->jr_id;
         $jo->updated_at = $this->carbon->now();
         $jo->ip_updated = request()->ip();

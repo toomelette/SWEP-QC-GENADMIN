@@ -78,7 +78,6 @@
                      href="#" 
                      id="set_jo_no_btn" 
                      data-jo_no="{{ $data->jo_no }}" 
-                     data-date="{{ __dataType::date_parse($data->date, 'm/d/Y') }}" 
                      data-jr_id="{{ $data->jr_id }}" 
                      data-url="{{ route('dashboard.jo.set_jo_no', $data->slug) }}">
                     {{ isset($data->jo_no) ? 'Update JO No.' : 'Set JO No' }}<b></b>
@@ -158,10 +157,6 @@
                 '12', 'jo_no', 'text', 'JO No.', 'JO No.', '', $errors->has('jo_no'), $errors->first('jo_no'), ''
               ) !!}
 
-              {!! __form::datepicker(
-                '12', 'date',  'Date', '', $errors->has('date'), $errors->first('date')
-              ) !!}
-
               {!! __form::select_dynamic(
                 '12', 'jr_id', 'Reference J.R No.', '', $global_jr_all, 'jr_id', 'jr_no', $errors->has('jr_id'), $errors->first('jr_id'), 'select2', 'style="width:100%;"'
               ) !!}
@@ -208,18 +203,9 @@
         $("#set_jo_no_form").attr("action", $(this).data("url"));
 
         $("#set_jo_no_form #jo_no").val($(this).data("jo_no"));
-        $("#set_jo_no_form #date").val($(this).data("date"));
         $("#set_jo_no_form #jr_id").val($(this).data("jr_id")).change();
 
         $('.select2').select2();
-
-        $('.datepicker').each(function(){
-          $(this).datepicker({
-            autoclose: true,
-            dateFormat: "mm/dd/yy",
-            orientation: "bottom"
-          });
-        });
 
     });
 

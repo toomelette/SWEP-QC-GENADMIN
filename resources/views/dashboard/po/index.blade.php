@@ -82,7 +82,6 @@
                      href="#" 
                      id="set_po_no_btn" 
                      data-po_no="{{ $data->po_no }}" 
-                     data-date="{{ __dataType::date_parse($data->date, 'm/d/Y') }}" 
                      data-url="{{ route('dashboard.po.set_po_no', $data->slug) }}">
                     {{ isset($data->po_no) ? 'Update PO No.' : 'Set PO No' }}<b></b>
                   </a>
@@ -159,11 +158,7 @@
             <div class="row">
 
               {!! __form::textbox(
-                '6', 'po_no', 'text', 'PO No.', 'PO No.', '', $errors->has('po_no'), $errors->first('po_no'), ''
-              ) !!}
-
-              {!! __form::datepicker(
-                '6', 'date',  'Date', '', $errors->has('date'), $errors->first('date')
+                '12', 'po_no', 'text', 'PO No.', 'PO No.', '', $errors->has('po_no'), $errors->first('po_no'), ''
               ) !!}
 
           </div>
@@ -208,15 +203,6 @@
         $("#set_po_no_form").attr("action", $(this).data("url"));
 
         $("#set_po_no_form #po_no").val($(this).data("po_no"));
-        $("#set_po_no_form #date").val($(this).data("date"));
-
-        $('.datepicker').each(function(){
-            $(this).datepicker({
-                autoclose: true,
-                dateFormat: "mm/dd/yy",
-                orientation: "bottom"
-            });
-        });
 
     });
 
