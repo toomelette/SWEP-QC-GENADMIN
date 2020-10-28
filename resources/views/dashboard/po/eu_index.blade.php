@@ -62,12 +62,14 @@
                   <a type="button" class="btn btn-default" id="show_button" href="{{ route('dashboard.po.show', $data->slug) }}">
                     <i class="fa fa-print"></i>
                   </a>
-                  <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.po.eu_edit', $data->slug) }}">
-                    <i class="fa fa-pencil"></i>
-                  </a>
-                  <a type="button" class="btn btn-default" id="delete_button" data-action="delete" data-url="{{ route('dashboard.po.destroy', $data->slug) }}">
-                    <i class="fa fa-trash"></i>
-                  </a>
+                  @if(!isset($data->po_no))
+                    <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.po.eu_edit', $data->slug) }}">
+                      <i class="fa fa-pencil"></i>
+                    </a>
+                    <a type="button" class="btn btn-default" id="delete_button" data-action="delete" data-url="{{ route('dashboard.po.destroy', $data->slug) }}">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                  @endif
                 </div>
               </td>
 

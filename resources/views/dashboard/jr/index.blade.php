@@ -58,7 +58,7 @@
       <div class="box-body no-padding">
         <table class="table table-hover">
           <tr>
-            <th>@sortablelink('jr_no', 'PR No.')</th>
+            <th>@sortablelink('jr_no', 'JR No.')</th>
             <th>Items</th>
             <th>@sortablelink('department.name', 'Department')</th>
             <th>@sortablelink('division.name', 'Division')</th>

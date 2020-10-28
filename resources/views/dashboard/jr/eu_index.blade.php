@@ -40,7 +40,7 @@
       <div class="box-body no-padding">
         <table class="table table-hover">
           <tr>
-            <th>@sortablelink('jr_no', 'PR No.')</th>
+            <th>@sortablelink('jr_no', 'JR No.')</th>
             <th>Items</th>
             <th>@sortablelink('division.name', 'Division')</th>
             <th>@sortablelink('created_at', 'Date Encoded')</th>
@@ -62,12 +62,14 @@
                   <a type="button" class="btn btn-default" id="show_button" href="{{ route('dashboard.jr.show', $data->slug) }}">
                     <i class="fa fa-print"></i>
                   </a>
-                  <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.jr.eu_edit', $data->slug) }}">
-                    <i class="fa fa-pencil"></i>
-                  </a>
-                  <a type="button" class="btn btn-default" id="delete_button" data-action="delete" data-url="{{ route('dashboard.jr.destroy', $data->slug) }}">
-                    <i class="fa fa-trash"></i>
-                  </a>
+                  @if (!isset($data->jr_no))
+                    <a type="button" class="btn btn-default" id="edit_button" href="{{ route('dashboard.jr.eu_edit', $data->slug) }}">
+                      <i class="fa fa-pencil"></i>
+                    </a>
+                    <a type="button" class="btn btn-default" id="delete_button" data-action="delete" data-url="{{ route('dashboard.jr.destroy', $data->slug) }}">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                  @endif
                 </div>
               </td>
 
