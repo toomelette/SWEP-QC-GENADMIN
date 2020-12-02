@@ -210,26 +210,39 @@
             $total = 0;
           @endphp
 
-          @foreach ($pr->prParameter as $data)
+          @foreach ($pr->prParameter as $key => $data)
 
-            @php
-              $total += $data->total_cost;
-            @endphp
+            @if($key <= 9)
 
-            <div class="col-sm-1"><p>{{ $data->stock_no }}</p></div>
-            <div class="col-sm-1 no-padding"><p>{{ $data->unit }}</p></div>
-            <div class="col-sm-5 no-padding">
-              <p>
-                <b>{{ $data->item_name }}</b><br>
-                {!! strip_tags($data->item_description, '<br>') !!}
-              </p>
-            </div>
-            <div class="col-sm-1 no-padding"><p>{{ number_format($data->qty) }}</p></div>
-            <div class="col-sm-2 no-padding" style="text-align:center;"><p>{{ number_format($data->unit_cost, 2) }}</p></div>
-            <div class="col-sm-2 no-padding" style="text-align:center;"><p>{{ number_format($data->total_cost, 2) }}</p></div>
-            <div class="col-sm-12"></div>
+              @php
+                $total += $data->total_cost;
+              @endphp
+
+              <div class="col-sm-1"><p>{{ $data->stock_no }}</p></div>
+              <div class="col-sm-1 no-padding"><p>{{ $data->unit }}</p></div>
+              <div class="col-sm-5 no-padding">
+                <p>
+                  <b>{{ $data->item_name }}</b><br>
+                  {!! strip_tags($data->item_description, '<br>') !!}
+                </p>
+              </div>
+              <div class="col-sm-1 no-padding">
+                <p>{{ $data->qty != 0 ? number_format($data->qty) : '' }}</p>
+              </div>
+              <div class="col-sm-2 no-padding" style="text-align:center;">
+                <p>{{ $data->unit_cost != 0 ? number_format($data->unit_cost, 2) : '' }}</p>
+              </div>
+              <div class="col-sm-2 no-padding" style="text-align:center;">
+                <p>{{ $data->total_cost != 0 ? number_format($data->total_cost, 2) : '' }}</p>
+              </div>
+              <div class="col-sm-12"></div>
+
+
+            @endif
 
           @endforeach
+              
+          @if($pr->prParameter->count() <= 10)
 
             <div class="col-sm-1">&nbsp;</div>
             <div class="col-sm-1 no-padding">&nbsp;</div>
@@ -238,7 +251,11 @@
             </div>
             <div class="col-sm-1 no-padding">&nbsp;</div>
             <div class="col-sm-2 no-padding">&nbsp;</div>
-            <div class="col-sm-2 no-padding" style="font-weight:bold; text-align:center;">{{ number_format($total, 2) }}</div>
+            <div class="col-sm-2 no-padding" style="font-weight:bold; text-align:center;">
+              {{ $data->total_cost != 0 ? number_format($total, 2) : '' }}
+            </div>
+
+          @endif
             
         </div>
 
@@ -356,7 +373,7 @@
 
 
   {{-- SUFFIX --}}
-  <div class="row">
+  <div class="row" style="page-break-after:always;">
     
     <div class="col-sm-8 div-height">&nbsp;</div>
 
@@ -366,6 +383,168 @@
     </div>
 
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  {{-- Extra page for ITEM --}}
+  @if($pr->prParameter->count() > 10)
+
+  <div class="wrapper">
+
+    <div style="border:solid 1px;">
+
+      {{-- Items Header --}}
+      <div class="row" style="border-top:solid 1.4px; font-size:10px;">
+          
+        {{-- COL --}}
+        <div class="col-sm-1" style="border-right:solid 1.4px; padding-top:9px; padding-bottom:9px; text-align: center;">
+          <span>Stock No.</span>
+        </div>
+        
+        {{-- COL --}}
+        <div class="col-sm-1" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; text-align: center;">
+          <span>Unit</span><br>
+          &nbsp;
+        </div>
+        
+        {{-- COL --}}
+        <div class="col-sm-5" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; text-align: center;">
+          <span>Item Description</span><br>
+          &nbsp;
+        </div>
+        
+        {{-- COL --}}
+        <div class="col-sm-1" style="border-right:solid 1.4px; padding-top:9px; padding-bottom:9px; text-align: center;">
+          <span>Qty</span><br>
+          &nbsp;
+        </div>
+        
+        {{-- COL --}}
+        <div class="col-sm-2" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; text-align: center;">
+          <span>Unit Cost</span><br>
+          &nbsp;
+        </div>
+        
+        {{-- COL --}}
+        <div class="col-sm-2" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; text-align: center;">
+          <span>Total Cost</span><br>
+          &nbsp;
+        </div>
+
+      </div>
+
+
+      {{-- Items Body --}}
+      <div class="row" style="border-top:solid 1.4px; font-size:10px; position: relative;">
+        
+        {{-- Overlay --}}
+        <div class="col-sm-12 no-padding">
+
+          {{-- COL --}}
+          <div class="col-sm-1" style="border-right:solid 1.4px; padding-top:9px; padding-bottom:9px; height: 80em;">
+          </div>
+          
+          {{-- COL --}}
+          <div class="col-sm-1" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 80em;">
+          </div>
+          
+          {{-- COL --}}
+          <div class="col-sm-5" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 80em;">
+          </div>
+          
+          {{-- COL --}}
+          <div class="col-sm-1" style="border-right:solid 1.4px; padding-top:9px; padding-bottom:9px; height: 80em;">
+          </div>
+          
+          {{-- COL --}}
+          <div class="col-sm-2" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 80em;">
+          </div>
+          
+          {{-- COL --}}
+          <div class="col-sm-2" style="border-right:solid 1.4px;padding-top:9px; padding-bottom:9px; height: 80em;">
+          </div>
+            
+        </div>
+
+
+        {{-- Content --}}
+        <div class="col-sm-12 no-padding" style="position: absolute; margin-left: 4px; margin-top: 10px; word-wrap: break-word;">
+
+          @foreach ($pr->prParameter as $key => $data)
+
+            @if($key > 9)
+
+              @php
+                $total += $data->total_cost;
+              @endphp
+
+              <div class="col-sm-1"><p>{{ $data->stock_no }}</p></div>
+              <div class="col-sm-1 no-padding"><p>{{ $data->unit }}</p></div>
+              <div class="col-sm-5 no-padding">
+                <p>
+                  <b>{{ $data->item_name }}</b><br>
+                  {!! strip_tags($data->item_description, '<br>') !!}
+                </p>
+              </div>
+              <div class="col-sm-1 no-padding">
+                <p>{{ $data->qty != 0 ? number_format($data->qty) : '' }}</p>
+              </div>
+              <div class="col-sm-2 no-padding" style="text-align:center;">
+                <p>{{ $data->unit_cost != 0 ? number_format($data->unit_cost, 2) : '' }}</p>
+              </div>
+              <div class="col-sm-2 no-padding" style="text-align:center;">
+                <p>{{ $data->total_cost != 0 ? number_format($data->total_cost, 2) : '' }}</p>
+              </div>
+              <div class="col-sm-12"></div>
+
+            @endif
+
+          @endforeach
+
+          <div class="col-sm-1">&nbsp;</div>
+          <div class="col-sm-1 no-padding">&nbsp;</div>
+          <div class="col-sm-5 no-padding">
+            <p>*************** Nothing Follows ***************</p>
+          </div>
+          <div class="col-sm-1 no-padding">&nbsp;</div>
+          <div class="col-sm-2 no-padding">&nbsp;</div>
+          <div class="col-sm-2 no-padding" style="font-weight:bold; text-align:center;">
+            {{ $data->total_cost != 0 ? number_format($total, 2) : '' }}
+          </div>
+            
+        </div>
+
+      </div>
+    
+    </div>
+
+  </div>
+
+
+  @endif
+
 
 
 </body>
