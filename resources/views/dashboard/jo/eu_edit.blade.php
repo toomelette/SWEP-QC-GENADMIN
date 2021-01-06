@@ -36,7 +36,7 @@
             ) !!}
 
             {!! __form::datepicker(
-              '4', 'date',  'Date', old('date') ? old('date') : $jp->date, $errors->has('date'), $errors->first('date')
+              '4', 'date',  'Date', old('date') ? old('date') : $jo->date, $errors->has('date'), $errors->first('date')
             ) !!}
 
 
