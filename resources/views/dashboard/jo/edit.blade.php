@@ -118,6 +118,12 @@
             {!! __form::textarea(
               '12', 'scope_of_works', 'Scope of Works', old('scope_of_works') ? old('scope_of_works') : $jo->scope_of_works, $errors->has('scope_of_works'), $errors->first('scope_of_works'), ''
             ) !!}
+
+            <div class="col-md-12"></div>
+
+            {!! __form::textbox(
+              '12', 'amount', 'text', 'Amount', 'Amount', old('amount') ? old('amount') : number_format($jo->amount, 2), $errors->has('amount'), $errors->first('amount'), ''
+            ) !!}
             
             
           </div>

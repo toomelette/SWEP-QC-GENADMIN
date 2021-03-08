@@ -286,7 +286,11 @@
 
 
             {!! __form::textbox(
-              '12', 'name_of_supplier', 'text', 'Name of Supplier', 'Name of Supplier', old('name_of_supplier') ? old('name_of_supplier') : $po->name_of_supplier, $errors->has('name_of_supplier'), $errors->first('name_of_supplier'), ''
+              '6', 'name_of_supplier', 'text', 'Name of Supplier', 'Name of Supplier', old('name_of_supplier') ? old('name_of_supplier') : $po->name_of_supplier, $errors->has('name_of_supplier'), $errors->first('name_of_supplier'), ''
+            ) !!}
+
+            {!! __form::textbox(
+              '6', 'amount', 'text', 'Amount', 'Amount', old('amount') ? old('amount') : $po->amount, $errors->has('amount'), $errors->first('amount'), ''
             ) !!}
 
 

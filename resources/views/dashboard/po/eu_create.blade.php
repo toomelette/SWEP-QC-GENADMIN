@@ -200,17 +200,12 @@
 
 
           {!! __form::textbox(
-            '4', 'name_of_supplier', 'text', 'Name of Supplier', 'Name of Supplier', old('name_of_supplier'), $errors->has('name_of_supplier'), $errors->first('name_of_supplier'), ''
+            '6', 'name_of_supplier', 'text', 'Name of Supplier', 'Name of Supplier', old('name_of_supplier'), $errors->has('name_of_supplier'), $errors->first('name_of_supplier'), ''
           ) !!}
 
 
           {!! __form::textbox(
-            '4', 'bur_no', 'text', 'BUR No.', 'BUR No.', old('bur_no'), $errors->has('bur_no'), $errors->first('bur_no'), ''
-          ) !!}
-
-
-          {!! __form::textbox(
-            '4', 'amount', 'text', 'Amount', 'Amount', old('amount'), $errors->has('amount'), $errors->first('amount'), ''
+            '6', 'amount', 'text', 'Amount', 'Amount', old('amount'), $errors->has('amount'), $errors->first('amount'), ''
           ) !!}
           
 

@@ -113,6 +113,7 @@ class PORepository extends BaseRepository implements POInterface {
         $po->delivery_term = $request->delivery_term;
         $po->payment_term = $request->payment_term;
         $po->name_of_supplier = $request->name_of_supplier;
+        $po->amount = $this->__dataType->string_to_num($request->amount);
         $po->created_at = $this->carbon->now();
         $po->updated_at = $this->carbon->now();
         $po->ip_created = request()->ip();
@@ -150,6 +151,7 @@ class PORepository extends BaseRepository implements POInterface {
         $po->delivery_term = $request->delivery_term;
         $po->payment_term = $request->payment_term;
         $po->name_of_supplier = $request->name_of_supplier;
+        $po->amount = $this->__dataType->string_to_num($request->amount);
         $po->updated_at = $this->carbon->now();
         $po->ip_updated = request()->ip();
         $po->user_updated = $this->auth->user()->user_id;
