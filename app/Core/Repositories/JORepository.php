@@ -110,8 +110,6 @@ class JORepository extends BaseRepository implements JOInterface {
         $jo->payment_term = $request->payment_term;
         $jo->description = $request->description;
         $jo->scope_of_works = $request->scope_of_works;
-        $jo->bur_no = $request->bur_no;
-        $jo->amount = $this->__dataType->string_to_num($request->amount);
         $jo->created_at = $this->carbon->now();
         $jo->updated_at = $this->carbon->now();
         $jo->ip_created = request()->ip();
@@ -150,8 +148,6 @@ class JORepository extends BaseRepository implements JOInterface {
         $jo->payment_term = $request->payment_term;
         $jo->description = $request->description;
         $jo->scope_of_works = $request->scope_of_works;
-        $jo->bur_no = $request->bur_no;
-        $jo->amount = $this->__dataType->string_to_num($request->amount);
         $jo->updated_at = $this->carbon->now();
         $jo->ip_updated = request()->ip();
         $jo->user_updated = $this->auth->user()->user_id;

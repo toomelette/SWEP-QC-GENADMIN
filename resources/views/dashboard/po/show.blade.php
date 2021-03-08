@@ -99,16 +99,8 @@
             
           </div>
 
-          <div class="col-md-4 border">
+          <div class="col-md-12 border">
             <span>Name of Supplier: {{ $po->name_of_supplier }}</span>
-          </div>
-
-          <div class="col-md-4 border">
-            <span>BUR No.: {{ $po->bur_no }}</span>
-          </div>
-
-          <div class="col-md-4 border">
-            <span>Amount: {{ number_format($po->amount, 2) }}</span>
           </div>
 
         </div>

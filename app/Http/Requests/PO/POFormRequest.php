@@ -37,8 +37,6 @@ class POFormRequest extends FormRequest{
             'delivery_term' => 'nullable|string|max:255',
             'payment_term' => 'nullable|string|max:255',
             'name_of_supplier' => 'nullable|string|max:255',
-            'bur_no' => 'nullable|string|max:45',
-            'amount' => 'nullable|string|max:21',
 
         ];
 

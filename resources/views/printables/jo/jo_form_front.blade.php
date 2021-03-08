@@ -298,12 +298,12 @@
 
           <div class="col-sm-12 no-padding"><span>BUR No.:</span></div>
           <div class="col-sm-12 no-padding" style="margin-bottom:10px;">
-            <p>{{ $jo->bur_no }}</p>
+            <p></p>
           </div>
 
           <div class="col-sm-12 no-padding"><span>Amount:</span></div>
           <div class="col-sm-12 no-padding">
-            <p>{{ number_format($jo->amount, 2) }}</p>
+            <p></p>
           </div>
 
         </div>

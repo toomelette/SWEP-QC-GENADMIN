@@ -76,14 +76,6 @@
             <span>{!! $jo->scope_of_works !!}</span>
           </div>
 
-          <div class="col-md-6 border">
-            <span>BUR No.: {{ $jo->bur_no }}</span>
-          </div>
-
-          <div class="col-md-6 border">
-            <span>Amount: {{ number_format($jo->amount, 2) }}</span>
-          </div>
-
         </div>
 
       </div>

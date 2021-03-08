@@ -405,12 +405,12 @@
 
           <div class="col-sm-12 no-padding"><span>BUR No.:</span></div>
           <div class="col-sm-12 no-padding" style="margin-bottom:10px;">
-            <p>{{ $po->bur_no }}</p>
+            <p></p>
           </div>
 
           <div class="col-sm-12 no-padding"><span>Amount:</span></div>
           <div class="col-sm-12 no-padding">
-            <p>{{ number_format($po->amount, 2) }}</p>
+            <p></p>
           </div>
 
         </div>

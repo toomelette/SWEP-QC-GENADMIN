@@ -36,8 +36,6 @@ class JOFormRequest extends FormRequest{
             'payment_term' => 'nullable|string|max:255',
             'description' => 'nullable|string|max:255',
             'scope_of_works' => 'nullable',
-            'bur_no' => 'nullable|string|max:45',
-            'amount' => 'nullable|string|max:21',
 
         ];
 
