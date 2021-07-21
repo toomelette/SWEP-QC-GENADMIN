@@ -20,6 +20,6 @@ interface PRInterface {
 
 	public function findBySlug($menu_id);
 
-	public function getList($req);
+	public function getList($request);
 		
 }
