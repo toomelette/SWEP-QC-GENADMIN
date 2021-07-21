@@ -95,6 +95,30 @@ class JRRepository extends BaseRepository implements JRInterface {
 
 
 
+    public function getList($request){
+
+        $jr = $this->jr->newQuery();
+        
+        if(isset($request->dept)){
+            $jr->where('dept_id', $request->dept);
+        }
+
+        if(isset($request->df) && isset($request->dt)){
+            $df = $this->__dataType->date_parse($request->df, 'Y-m-d');
+            $dt = $this->__dataType->date_parse($request->dt, 'Y-m-d');
+            $jr->whereBetween('created_at', [$df,$dt]);
+        }
+
+        return $jr->select('jr_id', 'dept_id', 'jr_no', 'updated_at', 'created_at')
+                  ->with('department', 'jrParameter')
+                  ->orderBy('updated_at', 'desc')
+                  ->get();
+
+    }
+
+
+
+
     public function store($request){
 
         $jr = new JR;

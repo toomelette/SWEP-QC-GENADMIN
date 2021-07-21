@@ -17,5 +17,7 @@ interface DepartmentInterface {
 	public function findBySlug($menu_id);
 
 	public function getAll();
+	
+	public function findByDeptId($dept_id);
 		
 }

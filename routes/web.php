@@ -106,6 +106,11 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 	Route::get('/jo/print/{slug}/{page}', 'JOController@print')->name('jo.print');
 	Route::resource('jo', 'JOController');
+
+
+	/** Reports **/
+	Route::get('/reports/prjr', 'ReportsController@prjr')->name('reports.prjr');
+	Route::get('/reports/prjr/output', 'ReportsController@prjrOutput')->name('reports.prjr_output');
 	
 	
 });

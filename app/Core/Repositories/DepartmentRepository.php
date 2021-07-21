@@ -103,6 +103,21 @@ class DepartmentRepository extends BaseRepository implements DepartmentInterface
 
 
 
+    public function findByDeptId($dept_id){
+
+        $department = $this->department->where('dept_id', $dept_id)->first();
+        
+        if(empty($department)){
+            abort(404);
+        }
+
+        return $department;
+
+    }
+
+
+
+
     public function findBySlug($slug){
 
         $department = $this->cache->remember('departments:findBySlug:' . $slug, 240, function() use ($slug){
