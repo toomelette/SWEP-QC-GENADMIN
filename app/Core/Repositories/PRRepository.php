@@ -129,7 +129,6 @@ class PRRepository extends BaseRepository implements PRInterface {
         $pr->dept_id = $request->dept_id;
         $pr->div_id = $request->div_id;
         $pr->pr_no = $request->pr_no;
-        $pr->pr_no_date = $this->__dataType->date_parse($request->pr_no_date);
         $pr->sai_no = $request->sai_no;
         $pr->sai_no_date = $this->__dataType->date_parse($request->sai_no_date);
         $pr->purpose = nl2br($request->purpose);
@@ -197,6 +196,7 @@ class PRRepository extends BaseRepository implements PRInterface {
 
         $pr = $this->findBySlug($slug);
         $pr->pr_no = $request->pr_no;
+        $pr->pr_no_date = $this->carbon->now();
         $pr->sai_no = $request->sai_no;
         $pr->updated_at = $this->carbon->now();
         $pr->ip_updated = request()->ip();
@@ -254,6 +254,36 @@ class PRRepository extends BaseRepository implements PRInterface {
         }
         
         return $id;
+        
+    }
+
+
+
+
+    public function getList($req){
+
+        $pr = $this->pr->newQuery();
+        
+        if(isset($req->dept)){
+            $pr->where('dept_id', $req->dept);
+        }
+        
+        if(isset($req->div)){
+            $pr->where('div_id', $req->div);
+        }
+
+        if (isset($req->df) && isset($req->dt)) {
+            $df = $this->__dataType->date_parse($req->df, 'Y-m-d');
+            $dt = $this->__dataType->date_parse($req->dt, 'Y-m-d');
+            $pr->whereBetween('created_at',[$df, $dt]);
+        }
+
+        return $pr->select('pr_id', 'div_id', 'dept_id', 'pr_no', 'updated_at', 'created_at')
+                  ->with('prParameter', 'division', 'department')
+                  ->whereNotNull('pr_no')
+                  ->whereNotNull('pr_no_date')
+                  ->orderBy('created_at', 'desc')
+                  ->get();
         
     }
 

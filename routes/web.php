@@ -73,8 +73,9 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 	Route::get('/pr/{slug}/eu_edit', 'PRController@euEdit')->name('pr.eu_edit');
 	Route::get('/pr/eu_list', 'PRController@euIndex')->name('pr.eu_index');
 	Route::post('/pr/set_pr_no/{slug}', 'PRController@setPRNO')->name('pr.set_pr_no');
-
 	Route::get('/pr/print/{slug}/{page}', 'PRController@print')->name('pr.print');
+	Route::get('/pr/reports', 'PRController@reports')->name('pr.reports');
+	Route::get('/pr/reports_output', 'PRController@reportsOutput')->name('pr.reports_output');
 	Route::resource('pr', 'PRController');
 
 
