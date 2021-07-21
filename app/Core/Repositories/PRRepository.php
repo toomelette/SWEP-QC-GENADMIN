@@ -259,35 +259,4 @@ class PRRepository extends BaseRepository implements PRInterface {
 
 
 
-
-    public function getList($req){
-
-        $pr = $this->pr->newQuery();
-        
-        if(isset($req->dept)){
-            $pr->where('dept_id', $req->dept);
-        }
-        
-        if(isset($req->div)){
-            $pr->where('div_id', $req->div);
-        }
-
-        if (isset($req->df) && isset($req->dt)) {
-            $df = $this->__dataType->date_parse($req->df, 'Y-m-d');
-            $dt = $this->__dataType->date_parse($req->dt, 'Y-m-d');
-            $pr->whereBetween('created_at',[$df, $dt]);
-        }
-
-        return $pr->select('pr_id', 'div_id', 'dept_id', 'pr_no', 'updated_at', 'created_at')
-                  ->with('prParameter', 'division', 'department')
-                  ->whereNotNull('pr_no')
-                  ->whereNotNull('pr_no_date')
-                  ->orderBy('created_at', 'desc')
-                  ->get();
-        
-    }
-
-
-
-
 }

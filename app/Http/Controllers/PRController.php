@@ -8,7 +8,6 @@ use App\Core\Interfaces\PRParameterInterface;
 use App\Http\Requests\PR\PRFormRequest;
 use App\Http\Requests\PR\PRFilterRequest;
 use App\Http\Requests\PR\PRSetPRNoFormRequest;
-use App\Http\Requests\PR\PRReportsRequest;
 
 
 class PRController extends Controller{
@@ -168,22 +167,6 @@ class PRController extends Controller{
         $pr = $this->pr_repo->updatePRNo($request, $slug);
         $this->event->fire('pr.set_pr_no', $pr);
         return redirect()->back();
-
-    }
-
-    
-
-
-    public function reports(){
-        return view('dashboard.pr.reports');
-    }
-
-    
-
-
-    public function reportsOutput(PRReportsRequest $request){
-        $pr_list = $this->pr_repo->getList($request);
-        return view('printables.pr.report')->with('pr_list', $pr_list);
 
     }
 
